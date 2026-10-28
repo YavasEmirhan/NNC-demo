@@ -978,9 +978,14 @@ if(!reduce&&"IntersectionObserver" in window){document.documentElement.classList
 /* ================= hero video (phones and devices without WebGL) ================= */
 const VID={on:false,intro:"assets/video/voyage-intro.mp4",loop:"assets/video/voyage-loop.mp4",raf:0};
 /* VP9 WebM where supported (Chrome, Firefox, Android: about half the size); H.264 MP4 elsewhere (Safari). */
-try{if(document.createElement("video").canPlayType('video/webm; codecs="vp9"')){VID.intro=VID.intro.replace(/\.mp4$/,".webm");VID.loop=VID.loop.replace(/\.mp4$/,".webm")}}catch(e){}
+/* MP4 (H.264) plays almost everywhere, Safari and iPhone included; WebM is only used where MP4 cannot play */
+try{const tv=document.createElement("video");if(!tv.canPlayType('video/mp4; codecs="avc1.640028"')&&tv.canPlayType('video/webm; codecs="vp9"')){VID.intro=VID.intro.replace(/\.mp4$/,".webm");VID.loop=VID.loop.replace(/\.mp4$/,".webm")}}catch(e){}
+/* if a file will not play, try the other format once, then rest on the poster instead of showing an error */
+function vidFail(){const v=$("#heroVid");const alt=s=>/\.webm$/.test(s)?s.replace(/\.webm$/,".mp4"):s.replace(/\.mp4$/,".webm");
+  if(!VID.swapped){VID.swapped=true;VID.intro=alt(VID.intro);VID.loop=alt(VID.loop);const wasLoop=v.loop;v.src=wasLoop?VID.loop:VID.intro;v.play().catch(()=>{});return}
+  v.removeAttribute("src");v.load();setIntro(false)}
 function vidTick(){const v=$("#heroVid");if(!VID.on)return;{const vt=V.introActive?v.currentTime:INTRO+30;sndUpdate(vt,voyageState(vt),performance.now()/1000)}if(!VID.warm&&v.currentTime>4){VID.warm=1;try{fetch(VID.loop).catch(()=>{})}catch(e){}}if(V.introActive){updateLog(v.currentTime);if(v.currentTime>=INTRO-.6)setIntro(false)}VID.raf=requestAnimationFrame(vidTick)}
-function vidIntro(){const v=$("#heroVid");v.loop=false;v.src=VID.intro;logIdx=-1;setIntro(true);v.currentTime=0;v.play().catch(()=>{setIntro(false)});cancelAnimationFrame(VID.raf);VID.raf=requestAnimationFrame(vidTick);v.onended=()=>vidLoop()}
+function vidIntro(){const v=$("#heroVid");v.onerror=vidFail;v.loop=false;v.src=VID.intro;logIdx=-1;setIntro(true);v.currentTime=0;v.play().catch(()=>{setIntro(false)});cancelAnimationFrame(VID.raf);VID.raf=requestAnimationFrame(vidTick);v.onended=()=>vidLoop()}
 function vidLoop(){const v=$("#heroVid");setIntro(false);v.onended=null;v.loop=true;v.src=VID.loop;v.play().catch(()=>{})}
 function startVideoMode(deep){VID.on=true;root.classList.add("video-mode");const v=$("#heroVid");v.hidden=false;v.preload="auto";
   if(reduce){v.removeAttribute("src");setIntro(false);return}if(deep)vidLoop();else vidIntro()}
