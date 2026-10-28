@@ -94,6 +94,10 @@ Yayından sonra https://pagespeed.web.dev adresine sitenin canlı adresini gir. 
 
 "En iyi uygulamalar" 96, çünkü ölçüm ortamı Google Fonts'u engelledi ve konsola hata düştü. Ekran kartlı masaüstünde 3D sahne yüklendiği için masaüstü performans puanı bundan düşük çıkabilir; bu beklenen bir durum.
 
+## Color Atelier (`color-atelier/`)
+
+Sanzo Wada'nın 348 renk kombinasyonunu bir işletmenin işleri üzerinde deneten ücretsiz araç. Tek dosya: `color-atelier/index.html`, veri içine gömülü (dictionary-of-colour-combinations, MIT). Firmaya uyarlamak için sadece dosyanın en üstündeki `CONFIG` bloğu değişir: firma adı, iletişim linki, renkler, alt bandın eşiği, başlangıç kombinasyonu, örnek işletmeler. "Contact us" butonları sitenin formunu açar; form Branding seçili ve mesajında seçilen kombinasyon numarası ile renk kodları yazılı gelir (`?combination=271&colors=...`). Siteden bağlantılar: Work bölümü, Branding ve Creative hizmet sayfaları, altbilgi.
+
 ## Bilinmesi gerekenler
 
 - **Form:** GitHub Pages statik olduğu için form gönderim yapmıyor; ziyaretçiye bu söyleniyor ve özet kopyalanabiliyor. Gerçek gönderim için Formspree gibi bir servise bağlanması gerekir (hesap gerekir). Canlı sitedeki Netlify formu burada çalışmaz.

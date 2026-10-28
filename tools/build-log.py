@@ -125,7 +125,7 @@ s = open(app, encoding="utf-8").read()
 s, n = re.subn(r"const ARTICLES=\[.*?\];\n", "const ARTICLES=" + json.dumps(A, ensure_ascii=False) + ";\n", s, count=1, flags=re.S)
 if n: open(app, "w", encoding="utf-8").write(s)
 
-urls = [SITE, f"{SITE}log/"] + [f"{SITE}log/{a['slug']}.html" for a in A]
+urls = [SITE, f"{SITE}color-atelier/", f"{SITE}log/"] + [f"{SITE}log/{a['slug']}.html" for a in A]
 open(os.path.join(ROOT, "sitemap.xml"), "w").write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     "".join(f"  <url><loc>{u}</loc></url>\n" for u in urls) + "</urlset>\n")
 open(os.path.join(ROOT, "robots.txt"), "w").write(f"User-agent: *\nAllow: /\n\nSitemap: {SITE}sitemap.xml\n")

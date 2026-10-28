@@ -698,7 +698,7 @@ function loop(now){if(!V.visible||!onHome()){V.raf=0;return}
 
 /* ================= static content ================= */
 $("#workGrid").innerHTML=CASES.map(c=>`<a class="wcard" href="#case-${c.id}"><div class="frame"><img src="${c.imgs[0].src}"${ss(c.imgs[0].src,"(max-width: 760px) 100vw, 45vw")} alt="${esc(c.imgs[0].alt)}" width="1000" height="1250" loading="lazy" decoding="async"><img src="${c.imgs[1].src}"${ss(c.imgs[1].src,"(max-width: 760px) 100vw, 45vw")} alt="" width="1000" height="1250" loading="lazy" decoding="async"></div>
-  <div class="meta"><div style="display:grid;gap:10px"><span class="label gold">${c.n} · ${esc(c.client)}</span><h3 class="big">${esc(c.name)}</h3><ul class="tags">${c.tags.map(t=>`<li>${esc(t)}</li>`).join("")}</ul></div><span class="label muted"${c.year?"":` data-note="Yıl bilgisi işletmeye sorulacak."`}>${c.year||"Ongoing"}</span></div></a>`).join("");
+  <div class="meta"><div style="display:grid;gap:10px"><span class="label gold">${c.n} · ${esc(c.client)}</span><h3 class="big">${esc(c.name)}</h3><ul class="tags">${c.tags.map(t=>`<li>${esc(t)}</li>`).join("")}</ul></div><span class="label muted"${c.year?"":` data-note="Yıl bilgisi işletmeye sorulacak."`}>${c.year||""}</span></div></a>`).join("");
 $("#svcList").innerHTML=SERVICES.map((s,i)=>`
   <div class="svc${i===0?" open":""}" id="service-${s.id}">
     <h3 style="margin:0"><button class="svc-btn" type="button" aria-expanded="${i===0}" aria-controls="sp-${s.id}"><span class="n">${s.n}</span><span class="t">${esc(s.name)}</span><span class="k">${esc(s.kicker)}</span><span class="pm" aria-hidden="true"></span></button></h3>
@@ -790,6 +790,7 @@ function renderSvc(s){const i=SERVICES.indexOf(s),nx=SERVICES[(i+1)%SERVICES.len
   <section class="cream inc"><div class="wrap"><div class="inc-head"><span class="label eyebrow">What’s included</span><h2 class="big">${esc(s.kicker)}</h2></div>
    <div class="inc-grid">${s.groups.map((g,gi)=>`<div class="inc-col"><h3 class="h3"><span class="label">${"AB"[gi]||""}</span>${esc(g.t)}</h3><ol>${g.i.map((x,k)=>`<li><span class="label">${String(k+1).padStart(2,"0")}</span><p>${esc(x)}</p></li>`).join("")}</ol></div>`).join("")}</div>
    ${s.note?`<p class="inc-note"><span class="label">Note</span><span>${esc(s.note)}</span></p>`:""}</div></section>
+  ${["branding","creative"].includes(s.id)?`<div class="wrap" style="padding-top:clamp(48px,8vh,96px)"><a class="atelier-band" href="color-atelier/"><span class="ab-sw" aria-hidden="true"><i style="background:#b71f57"></i><i style="background:#96d1aa"></i><i style="background:#099197"></i><i style="background:#112f2c"></i></span><span><span class="label gold">Free tool · Color Atelier</span><span class="h3" style="display:block">Try 348 color combinations on a real business</span><p>Inspired by Sanzo Wada’s color combinations. Pick a set and see it on a website, business card, Instagram post, storefront sign and booking screen.</p></span><span class="arw" aria-hidden="true">→</span></a></div>`:""}
   ${rel.length?`<section class="related wrap"><span class="label gold eyebrow">Selected work</span><div class="rel-grid">${rel.map(caseCard).join("")}</div></section>`:""}
   ${howWeWork()}<a class="next-svc" href="#svc-${nx.id}"><span><span class="label muted">Next capability · ${nx.n}</span><span class="big">${esc(nx.name)}</span></span><span class="arw" aria-hidden="true">→</span></a></div></section>
  <a class="btn svc-float" href="#contact" data-service="${s.id}">Let’s talk about ${esc(s.name)} ↗</a></article>${ctaBand("Let’s talk about<br>your project.",s.id)}`;
@@ -1049,5 +1050,11 @@ if(!V.ok){startVideoMode(deepLink);return}
   requestAnimationFrame(()=>{V.last=0;startVoyage(deepLink?INTRO:0)});
 }}
 if(wantVideo)startVideoMode(deepLink);else loadScripts(THREE_SRC).then(boot3D).catch(()=>startVideoMode(deepLink));
+/* arriving from the Color Atelier: select Branding and write the chosen set into the message */
+(function(){try{const q=new URLSearchParams(location.search),n=q.get("combination");if(!n||!/^\d{1,3}$/.test(n))return;
+  const cols=(q.get("colors")||"").split("-").filter(c=>/^[0-9a-f]{6}$/i.test(c)).map(c=>"#"+c.toUpperCase());
+  const m=$("#f-msg");if(m&&!m.value)m.value=`I tried Color Atelier combination no. ${n}${cols.length?" ("+cols.join(", ")+")":""} and I’d like to talk about using it for my brand.`;
+  pendingService="branding";if(location.hash!=="#contact")location.hash="#contact";
+  history.replaceState(null,"",location.pathname+"#contact")}catch(e){}})();
 fitHero();route();onScroll();
 if(document.fonts)document.fonts.ready.then(()=>fitHero());

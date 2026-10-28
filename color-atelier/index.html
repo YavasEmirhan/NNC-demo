@@ -1,0 +1,866 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Color Atelier · Navy Night Creative</title>
+<meta name="description" content="A free color tool by Navy Night Creative, inspired by Sanzo Wada's combinations. Try 348 color sets on a website, business card, Instagram post, storefront sign and booking screen.">
+<link rel="canonical" href="https://yavasemirhan.github.io/NNC-demo/color-atelier/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Color Atelier · Navy Night Creative">
+<meta property="og:description" content="Try 348 color combinations, inspired by Sanzo Wada, on the everyday work of a real business.">
+<meta name="theme-color" content="#071726">
+<link rel="icon" href="../assets/img/lighthouse.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Latin:wdth,wght@75..125,400..800&family=JetBrains+Mono:wght@500&family=Shippori+Mincho:wght@600&display=swap">
+<style>
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+/* Layout: a navy story band, then the combination book on the left and the selected set with five sample pieces on the right. The interface stays quiet; the combinations carry the color. */
+:root{
+  --navy:#14213D; --coral:#FF6B4A; --on-coral:#14213D; --coral-ink:#C8462B;
+  --bg:#F3F4F6; --panel:#FFFFFF; --ink:#14213D; --muted:#5E6472; --line:#DADDE3; --chip:#E9EBEF;
+  --on-navy:#F7F4EE; --on-navy-muted:#B9C0CF;
+  --f-display:"Anek Latin",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-body:"Anek Latin",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --f-jp:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1424; --panel:#162036; --ink:#EEF0F4; --muted:#A3AABB; --line:#2A3550; --chip:#1F2A44; --coral-ink:#FF8A70; color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0E1424; --panel:#162036; --ink:#EEF0F4; --muted:#A3AABB; --line:#2A3550; --chip:#1F2A44; --coral-ink:#FF8A70; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-weight:500;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);font-weight:800;line-height:1.12;text-wrap:balance;margin:0;letter-spacing:-.01em}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+/* story band */
+.hero{background:var(--navy);color:var(--on-navy)}
+.hero .wrap{padding-block:22px 48px;display:grid;gap:36px}
+.topnav{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.topnav nav{display:flex;gap:18px;flex-wrap:wrap}
+.topnav nav a{color:var(--on-navy-muted);text-decoration:none;font-weight:700;font-size:14px}
+.topnav nav a:hover{color:var(--on-navy)}
+.nnc-logo{width:132px;height:auto;display:block}
+.brand a{display:flex}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:-.02em}
+.brand svg{width:30px;height:30px}
+.brand span{color:var(--on-navy-muted);font-weight:700;font-size:15px;letter-spacing:0;margin-left:6px;padding-left:12px;border-left:1px solid #33416A}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:48px;align-items:end}
+.hero h1{font-size:clamp(34px,5.2vw,58px);max-width:15ch}
+.hero h1 em{font-style:normal;color:var(--coral)}
+.story{color:var(--on-navy-muted);max-width:60ch;margin:22px 0 0;font-size:17px}
+.story strong{color:var(--on-navy);font-weight:700}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:12px 20px;font-weight:700;font-size:15px;text-decoration:none}
+.btn-coral{background:var(--coral);color:var(--on-coral)}
+.btn-ghost{background:transparent;color:var(--on-navy);box-shadow:inset 0 0 0 1.5px #3A4874}
+.btn-ghost:hover{box-shadow:inset 0 0 0 1.5px var(--on-navy-muted)}
+.wada-card{border-left:1px solid #33416A;padding-left:28px;display:grid;gap:14px}
+.kanji{font-family:var(--f-jp);font-size:clamp(44px,6vw,72px);line-height:1;color:var(--on-navy);writing-mode:horizontal-tb;letter-spacing:.06em}
+.wada-meta{color:var(--on-navy-muted);font-size:14px;display:grid;gap:4px}
+.facts{display:flex;gap:28px;flex-wrap:wrap;margin-top:6px}
+.facts div{display:grid}
+.facts b{font-family:var(--f-display);font-weight:800;font-size:28px;color:var(--on-navy);font-variant-numeric:tabular-nums}
+.facts small{color:var(--on-navy-muted);font-size:13px}
+.hero-strip{display:flex;height:10px;border-radius:999px;overflow:hidden}
+.hero-strip i{flex:1}
+
+/* atelier */
+.atelier{padding-block:40px 56px}
+.atelier-grid{display:grid;grid-template-columns:300px minmax(0,1fr);gap:28px;align-items:start}
+.book{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);display:flex;flex-direction:column;max-height:calc(100vh - 32px)}
+.book-head{padding:16px 16px 12px;display:grid;gap:12px;border-bottom:1px solid var(--line)}
+.book-head h2{font-size:18px}
+.seg{display:grid;grid-template-columns:repeat(4,1fr);background:var(--chip);border-radius:8px;padding:3px;gap:3px}
+.seg button{border:0;background:transparent;border-radius:6px;padding:6px 0;font-size:13px;font-weight:700;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--panel);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.jump{display:flex;gap:8px;align-items:center}
+.jump label{font-size:13px;color:var(--muted)}
+.jump input{width:76px;font:inherit;font-family:var(--f-mono);font-size:14px;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+.jump .count{margin-left:auto;font-size:12px;color:var(--muted)}
+.list{list-style:none;margin:0;padding:8px;overflow-y:auto;display:grid;gap:2px;grid-template-columns:1fr 1fr}
+.list button{width:100%;display:grid;grid-template-columns:34px 1fr;align-items:center;gap:8px;border:0;background:transparent;border-radius:6px;padding:6px}
+.list button:hover{background:var(--chip)}
+.list button[aria-pressed="true"]{background:var(--chip);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.list .no{font-family:var(--f-mono);font-size:11px;color:var(--muted);text-align:left}
+.list .sw{display:flex;height:22px;border-radius:4px;overflow:hidden}
+.list .sw i{flex:1}
+
+.main{display:grid;gap:28px;min-width:0}
+.current{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:grid;gap:20px}
+.current-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 16px}
+.current-head h2{font-size:26px}
+.current-head h2 .mono{font-size:.8em;color:var(--muted);font-weight:500}
+.current-head .kind{color:var(--muted);font-size:14px}
+.current-head .tools{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.tbtn{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:700}
+.tbtn:hover{border-color:var(--ink)}
+.swatches{display:grid;gap:10px;grid-template-columns:repeat(var(--n),minmax(0,1fr));perspective:900px}
+.swatch{display:grid;gap:8px;min-width:0}
+.swatch .chip-big{height:120px;border-radius:8px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);transform-origin:top center}
+.swatches.fold .chip-big{animation:fold .5s cubic-bezier(.3,.7,.2,1) both}
+.swatches.fold .swatch:nth-child(2) .chip-big{animation-delay:.05s}
+.swatches.fold .swatch:nth-child(3) .chip-big{animation-delay:.1s}
+.swatches.fold .swatch:nth-child(4) .chip-big{animation-delay:.15s}
+@keyframes fold{from{transform:rotateX(-70deg);opacity:.4}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.swatches.fold .chip-big{animation:none}}
+.swatch .nm{font-weight:700;font-size:14px;line-height:1.3;overflow-wrap:anywhere}
+.swatch .row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.swatch .hex{border:0;background:var(--chip);border-radius:6px;padding:4px 8px;font-family:var(--f-mono);font-size:13px}
+.swatch .hex:hover{box-shadow:inset 0 0 0 1px var(--ink)}
+.role{font-size:12px;font-weight:700;color:var(--muted)}
+
+.checks{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:20px;border-top:1px solid var(--line);padding-top:18px}
+.checks h3{font-size:15px;margin-bottom:10px}
+.pairs{display:grid;gap:6px}
+.pair{display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:center;font-size:14px}
+.pair .aa{height:32px;border-radius:6px;display:grid;place-items:center;font-weight:800;font-size:15px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+.pair .ratio{font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+.verdict{font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.v-good{background:#DCF0E3;color:#145A32}
+.v-ok{background:#FFF0C7;color:#6B4E00}
+.v-deco{background:var(--chip);color:var(--muted)}
+.ratio-bar{display:flex;height:40px;border-radius:6px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+.ratio-bar i{display:block}
+.ratio-legend{display:grid;gap:4px;margin-top:10px;font-size:13px;color:var(--muted)}
+.ratio-legend b{color:var(--ink);font-weight:700}
+.note{font-size:13px;color:var(--muted);margin:10px 0 0}
+
+/* sample work */
+.examples-head{display:flex;flex-wrap:wrap;align-items:end;gap:12px 20px}
+.examples-head h2{font-size:24px}
+.examples-head p{margin:4px 0 0;color:var(--muted);font-size:14px}
+.sector{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+.sector button{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:700}
+.sector button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.mocks{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:20px}
+.mock{display:grid;gap:8px;min-width:0}
+.mock figcaption{font-size:13px;font-weight:700;color:var(--muted)}
+.m-web{grid-column:span 6}
+.m-card,.m-post{grid-column:span 3}
+.m-sign{grid-column:span 4}
+.m-phone{grid-column:span 2}
+
+/* sample work takes its colors from the set variables */
+.p{--b:#fff;--t:#111;--a:#f60;--s:#eee;--at:#fff;--ts:#111;font-family:var(--f-display)}
+.frame{border-radius:12px;overflow:hidden;background:var(--chip);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.browser-bar{height:30px;display:flex;align-items:center;gap:6px;padding:0 12px;background:var(--chip)}
+.browser-bar i{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.browser-bar span{margin-left:12px;flex:1;max-width:280px;height:16px;border-radius:999px;background:var(--panel)}
+.web{background:var(--b);color:var(--t);padding:18px 28px 32px;display:grid;gap:30px}
+.web nav{display:flex;align-items:center;gap:20px;font-size:13px;font-weight:700}
+.web nav .logo{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:800;margin-right:auto}
+.mark{width:22px;height:22px;display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.mark i{background:var(--a);border-radius:3px 0 0 3px}
+.mark i+i{border-radius:0 3px 3px 0;opacity:.6}
+.web nav .navlinks{display:flex;gap:18px}
+.web-hero{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:28px;align-items:center}
+.web-hero h4{margin:0;font-weight:800;font-size:clamp(24px,3.2vw,38px);line-height:1.1;letter-spacing:-.02em;text-wrap:balance}
+.web-hero p{margin:14px 0 20px;font-size:15px;font-weight:500;max-width:42ch;font-family:var(--f-body)}
+.pbtn{display:inline-block;background:var(--a);color:var(--at);border-radius:999px;padding:11px 20px;font-weight:800;font-size:14px}
+.pbtn-o{display:inline-block;margin-left:8px;color:var(--t);border-radius:999px;padding:10px 18px;font-weight:700;font-size:14px;box-shadow:inset 0 0 0 1.5px var(--t)}
+.web-art{aspect-ratio:4/3;max-width:100%;background:var(--s);border-radius:14px;position:relative;overflow:hidden}
+.web-art::before{content:"";position:absolute;width:46%;aspect-ratio:1;border-radius:50%;background:var(--a);right:12%;top:16%}
+.web-art::after{content:"";position:absolute;left:10%;bottom:14%;width:52%;height:22%;border-radius:8px;background:var(--b)}
+.web-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.web-row div{background:var(--s);color:var(--ts);border-radius:10px;padding:14px;font-size:13px;font-weight:700}
+.web-row div small{display:block;font-weight:500;margin-top:4px;font-family:var(--f-body)}
+
+.card-stage{background:var(--chip);border-radius:12px;padding:28px;display:grid;place-items:center}
+.bcard{width:100%;max-width:360px;aspect-ratio:85/55;background:var(--b);color:var(--t);border-radius:10px;box-shadow:0 10px 24px rgba(0,0,0,.18);display:grid;grid-template-columns:1fr auto;padding:22px;position:relative;overflow:hidden}
+.bcard::after{content:"";position:absolute;left:0;bottom:0;height:7px;width:100%;background:var(--a)}
+.bcard .who{display:grid;align-content:space-between}
+.bcard .biz{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px}
+.bcard .name{font-weight:800;font-size:17px}
+.bcard .title{font-size:12px;font-weight:500;font-family:var(--f-body)}
+.bcard .contact{font-size:11px;font-family:var(--f-mono);margin-top:6px}
+.bcard .side{width:64px;border-radius:6px;background:var(--s);margin:-22px -22px -22px 0}
+
+.post-stage{background:var(--chip);border-radius:12px;padding:20px;display:grid;place-items:center}
+.ig{width:100%;max-width:320px;background:var(--panel);border-radius:10px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.12)}
+.ig-top{display:flex;align-items:center;gap:8px;padding:9px 12px;font-size:12px;font-weight:700;color:var(--ink);font-family:var(--f-body)}
+.ig-top .av{width:24px;height:24px;border-radius:50%;background:var(--a)}
+.ig-img{aspect-ratio:1;background:var(--s);color:var(--ts);padding:22px;display:grid;align-content:space-between;position:relative;overflow:hidden}
+.ig-img .tag{justify-self:start;background:var(--a);color:var(--at);font-size:12px;font-weight:800;padding:5px 10px;border-radius:999px}
+.ig-img h4{margin:0;font-size:24px;line-height:1.15;font-weight:800;letter-spacing:-.01em;position:relative}
+.ig-img .corner{position:absolute;right:-56px;top:-56px;width:140px;height:140px;border-radius:50%;background:var(--b)}
+.ig-img .sig{position:relative;font-size:11px;font-weight:700}
+.ig-bot{height:30px;display:flex;gap:10px;align-items:center;padding:0 12px}
+.ig-bot i{width:16px;height:16px;border-radius:4px;background:var(--line)}
+
+.sign-stage{background:var(--chip);border-radius:12px;padding:24px 24px 0;display:grid;place-items:end center;min-height:300px}
+.shop{width:100%;max-width:440px;background:var(--s);border-radius:8px 8px 0 0;padding:16px 16px 0;display:grid;gap:0}
+.shop .board{background:var(--a);color:var(--at);border-radius:6px;padding:12px 16px;display:flex;align-items:baseline;justify-content:center;gap:10px}
+.shop .board b{font-size:26px;letter-spacing:.12em;font-weight:800}
+.shop .board span{font-size:13px;font-weight:700;font-family:var(--f-body)}
+.awning{height:30px;margin:10px -8px 0;background:repeating-linear-gradient(90deg,var(--b) 0 28px,var(--a) 28px 56px);border-radius:0 0 12px 12px;clip-path:polygon(0 0,100% 0,100% 70%,96% 100%,92% 70%,88% 100%,84% 70%,80% 100%,76% 70%,72% 100%,68% 70%,64% 100%,60% 70%,56% 100%,52% 70%,48% 100%,44% 70%,40% 100%,36% 70%,32% 100%,28% 70%,24% 100%,20% 70%,16% 100%,12% 70%,8% 100%,4% 70%,0 100%)}
+.facade{display:grid;grid-template-columns:1fr 92px;gap:14px;padding-top:14px}
+.window{height:120px;border-radius:4px 4px 0 0;background:linear-gradient(160deg,rgba(255,255,255,.55),rgba(255,255,255,.15) 60%),var(--b);position:relative}
+.window::after{content:"";position:absolute;left:14px;bottom:14px;padding:0;width:70px;height:22px;border-radius:4px;background:var(--t);opacity:.85}
+.door{height:150px;margin-top:-30px;background:var(--t);border-radius:4px 4px 0 0;position:relative}
+.door::after{content:"";position:absolute;right:12px;top:50%;width:6px;height:18px;border-radius:3px;background:var(--a)}
+
+.phone-stage{background:var(--chip);border-radius:12px;padding:20px 12px;display:grid;place-items:center;min-height:300px}
+.phone{width:100%;max-width:220px;background:#0B0F19;border-radius:30px;padding:8px}
+.screen{background:var(--b);color:var(--t);border-radius:23px;padding:22px 14px 16px;display:grid;gap:12px;min-height:380px;align-content:start}
+.screen .sbiz{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:800}
+.screen h5{margin:0;font-size:18px;font-weight:800;line-height:1.15}
+.screen .q{font-size:11px;font-weight:700;font-family:var(--f-body)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-size:11px;font-weight:700;padding:6px 9px;border-radius:999px;box-shadow:inset 0 0 0 1.2px var(--t)}
+.chips span.on{background:var(--a);color:var(--at);box-shadow:none}
+.screen .go{margin-top:6px;text-align:center;background:var(--t);color:var(--b);border-radius:12px;padding:11px;font-size:12px;font-weight:800}
+.screen .info{background:var(--s);color:var(--ts);border-radius:10px;padding:10px;font-size:11px;font-weight:600;font-family:var(--f-body)}
+
+/* call to action */
+.cta{background:var(--navy);color:var(--on-navy)}
+.cta .wrap{padding-block:52px;display:flex;flex-wrap:wrap;gap:24px 40px;align-items:center;justify-content:space-between}
+.cta h2{font-size:clamp(26px,3.4vw,38px);max-width:22ch}
+.cta p{color:var(--on-navy-muted);margin:10px 0 0;max-width:52ch}
+footer{color:var(--muted);font-size:13px}
+footer .wrap{padding-block:24px 36px;display:grid;gap:8px}
+footer p{margin:0;max-width:90ch}
+footer a{color:inherit}
+
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--navy);color:var(--on-navy);padding:10px 18px;border-radius:999px;font-weight:700;font-size:14px;opacity:0;pointer-events:none;transition:.2s;z-index:20}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media (max-width:980px){
+  .atelier-grid{grid-template-columns:minmax(0,1fr)}
+  .book{position:static;max-height:none;order:2}
+  .list{max-height:360px;grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+  .hero-grid{grid-template-columns:minmax(0,1fr);gap:28px}
+  .wada-card{border-left:0;padding-left:0;border-top:1px solid #33416A;padding-top:22px}
+  .m-sign,.m-phone{grid-column:span 3}
+}
+@media (max-width:680px){
+  .mocks{grid-template-columns:minmax(0,1fr)}
+  .m-web,.m-card,.m-post,.m-sign,.m-phone{grid-column:auto}
+  .web-hero{grid-template-columns:minmax(0,1fr)}
+  .web nav .navlinks{display:none}
+  .web-row{grid-template-columns:minmax(0,1fr)}
+  .checks{grid-template-columns:minmax(0,1fr)}
+  .swatches{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .swatch .chip-big{height:80px}
+  .current{padding:16px}
+  .current-head .tools{margin-left:0}
+}
+
+/* brand and hook */
+.brand b{font-weight:800}
+.brandmark{width:26px;height:26px;display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.brandmark i{background:var(--on-navy);border-radius:4px 0 0 4px}
+.brandmark i+i{background:var(--coral);border-radius:0 4px 4px 0}
+.hook{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px;border-top:1px solid var(--line);padding-top:18px}
+.hook p{margin:0;max-width:56ch;font-size:15px}
+.hookbar{position:fixed;left:0;right:0;bottom:0;z-index:15;background:var(--navy);color:var(--on-navy);box-shadow:0 -8px 24px rgba(0,0,0,.18);padding-bottom:env(safe-area-inset-bottom,0px);animation:rise .35s cubic-bezier(.3,.7,.2,1)}
+.hookbar-in{max-width:1200px;margin:0 auto;padding-block:14px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px}
+.hookbar p{margin:0;flex:1 1 280px;color:var(--on-navy-muted)}
+.hookbar p b{color:var(--on-navy)}
+.hookbar-in{position:relative;padding-right:max(52px,env(safe-area-inset-right,0px))}
+.hook-close{position:absolute;top:8px;right:max(8px,env(safe-area-inset-right,0px));border:0;background:transparent;color:var(--on-navy-muted);font-size:24px;line-height:1;padding:4px 8px;border-radius:6px}
+.hook-close:hover{color:var(--on-navy)}
+@keyframes rise{from{transform:translateY(100%)}to{transform:none}}
+@media (prefers-reduced-motion:reduce){.hookbar{animation:none}}
+.hookbar:not([hidden]) ~ .toast{bottom:calc(120px + env(safe-area-inset-bottom,0px))}
+body.has-hook footer .wrap{padding-bottom:140px}
+</style>
+
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="topnav">
+      <div class="brand"><a href="../index.html" aria-label="Navy Night Creative, home"><svg class="nnc-logo" role="img" aria-label="Navy Night Creative" id="katman_2" data-name="katman 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 528.54 106.37">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f0ba31;
+      }
+
+      .cls-2 {
+        font-family: AnekLatinExpanded-Regular, 'Anek Latin Expanded';
+        font-size: 10.73px;
+      }
+
+      .cls-2, .cls-3 {
+        fill: #f7f5ef;
+      }
+
+      .cls-4 {
+        letter-spacing: .18em;
+      }
+
+      .cls-5 {
+        letter-spacing: .2em;
+      }
+
+      .cls-6 {
+        letter-spacing: .19em;
+      }
+
+      .cls-7 {
+        letter-spacing: .2em;
+      }
+
+      .cls-8 {
+        letter-spacing: .2em;
+      }
+
+      .cls-9 {
+        letter-spacing: .18em;
+      }
+
+      .cls-10 {
+        fill: #f7f5ef;
+      }
+    </style>
+  </defs>
+  <g id="katman_1" data-name="katman 1">
+    <g>
+      <g>
+        <path class="cls-3" d="M204.49,83.99l-16.44-41.01-15.8,43.52-31.31.03-17.69-48.14,20.75-.04c4.38,11.97,7.52,23.83,12.65,36.57,5.1-12.51,8.01-24.33,12.4-36.55l37.98-.03,11.86,33.82,13.24-33.81h20.61s-27.74,65.06-27.74,65.06h-20.35s7.9-19.36,7.9-19.36l-8.06-.07Z"/>
+        <path class="cls-3" d="M406.09,80.16c3.91,3.84,4.11,9.95,2.04,15.17-5.58,14.09-39.22,11.81-52.81,8.7-3.69-.84-6.72-3.56-7.79-6.16-1.47-3.59-1.06-7.53,1.48-10.16,2.66-2.75,6.34-2.95,10.12-3.72-2.95-1.06-5.92-1.3-8.04-3.46-2.55-2.6-2.27-7.36.37-9.79,2.41-2.23,5.44-2.11,8.7-2.76-5.61-1.68-10.51-5.02-11.93-9.84-1.73-5.85-.59-12.14,4.16-15.64,4.42-3.26,9.8-4.63,15.35-4.94l43.1-2.42v12.68s-15.06.1-15.06.1c3.55,1.52,6.83,1.24,9.25,4.01s2.5,6.72.97,10.23c-4.08,9.33-27.68,8.06-38.04,7.43-.67-.04-1.21,1.28-1.02,1.81.21.56,1.15,1.39,1.95,1.45l23.51,1.98c4.91.41,10.01,1.71,13.71,5.33ZM389.23,53.15c-.74-5.06-14.23-4.4-20.13-3.09-2.04.45-3.28,2.01-3.25,3.78s1.38,3.22,3.42,3.61c6.6,1.24,20.89,2.06,19.97-4.3ZM390.86,88.79c-.17-1.11-1.53-1.89-2.91-1.98l-21.65-1.43c-1.33.82-1.69,3.13-1.22,4.22.41.96,1.69,2.14,3.11,2.43,6.75,1.41,23.52,2.27,22.67-3.24Z"/>
+        <polygon class="cls-1" points="328.06 18.45 328.07 21.63 .09 28.5 .09 16.47 328.06 18.45"/>
+        <path class="cls-3" d="M454.16,86.52l-.08-25.34c-.47-5.1-3.85-8.11-8.76-8.26-4.98-.15-9.45,1.5-12.13,6.09l-.02,27.5-19.88.02V26.79s19.7.7,19.7.7l.12,23.48c2.43-9.6,10.31-14.84,20.07-14.19,11.45-.89,20.18,6.4,20.65,18.1l.14,31.63h-19.81Z"/>
+        <path class="cls-3" d="M71.25,85.06c-7.77-4.42-8.38-16.79-1.86-22.29,4.18-3.53,9.71-4.67,14.87-5.11l20.73-1.76c-1.06-3.34-4.25-4.6-7.55-4.98-9.94-1.3-19.38.96-29.29,4.05l1.95-14.03c12.24-4.28,25.49-5.88,37.97-3.03,9.6,2.19,15.67,9.31,16.11,19.13l.22,29.48h-19.7s.31-12.19.31-12.19c-1.9,5.85-4.79,10.47-10.65,12.25-7.32,2.23-15.98,2.54-23.11-1.52ZM105.21,65.77l-17.46,1.76c-1.97.2-3.41,1.65-3.47,3.24-.29,7.29,22.75,3.53,20.94-4.99Z"/>
+        <path class="cls-3" d="M287.07,52.95c-5.22-.29-10.02,1.4-12.5,5.88v27.68s-19.83,0-19.83,0v-48.16s19.85.06,19.85.06c-.18,4.85-.71,8.53-.33,12.96,1.92-7.45,6.47-12.49,13.79-13.98,6.22-1.27,12.83-1.09,18.49,1.97,5.62,3.04,7.93,8.77,8.78,15.07l.07,32.08h-19.83s-.06-25.46-.06-25.46c-.52-4.85-3.49-7.83-8.42-8.1Z"/>
+        <path class="cls-3" d="M32.21,52.93c-5.18-.24-9.67,1.47-12.32,5.86v27.72s-19.82,0-19.82,0v-48.14s19.8-.01,19.8-.01l-.33,12.8c1.95-6.4,5.41-11.37,11.92-13.27,6.14-1.79,12.9-1.8,18.86.68,6.43,2.68,9.35,8.7,10.29,15.57l.09,32.37h-19.83s-.05-25.33-.05-25.33c-.5-4.93-3.61-8.03-8.6-8.26Z"/>
+        <path class="cls-3" d="M526.06,69.28l-1.9,15.45c-8.89,3.44-18.68,4.13-27.91,1.99-14.9-3.46-12.71-20.15-12.79-33.25l-8.01-.03v-15.07s8.48-.02,8.48-.02l-.05-9.05,19.27.71-.27,8.31,22.97.03-1.99,15.09h-20.71s.14,11.72.14,11.72c.04,3.26,2.22,5.75,5.31,6.11,5.87.96,11.21.05,17.46-2Z"/>
+        <polygon class="cls-1" points="337.11 21.55 337.17 17.99 528.54 16.47 527.03 28.39 337.11 21.55"/>
+        <g>
+          <path class="cls-10" d="M344.25,85.28v1.16h-23.36v-.08s.11-.18.11-.18c.02-.04-.16-.08-.16-.09l2.84-33.58,1.36-15.61c4.95-1,10.03-1.01,14.98.01l4.23,48.36Z"/>
+          <path class="cls-10" d="M320.88,86.37l-.06.08h-.06v-.29l.07-.06s.18.06.16.09l-.11.18Z"/>
+          <polygon class="cls-10" points="320.89 86.45 320.83 86.45 320.88 86.37 320.89 86.45"/>
+          <path class="cls-10" d="M335.79,31.09c-4.09-.28-8.37-.18-12.4.92v-5.85c0-.17.18-.35.31-.35s.27.15.36.32c.74-.2,1.45-.4,2.22-.47l.08-1.32c.45-.21.97-.25,1.52-.35.16-2.54.08-5.04.05-7.56l.04-.84c-.47.06-.85.14-1.31.33-.32-.58,0-1.37-.23-1.68-.09-.12-.35-.18-.56-.27-.17-.4-.19-.97.01-1.35l5.46-4.69c.12-.31.12-.67.13-.98.27-.04.43-.13.46-.4s-.03-.43-.35-.49c-.19-.87-.08-1.81.7-2.3l.18-2.82h.14s.16,2.79.16,2.79c.84.53.93,1.48.72,2.39-.33-.02-.33.22-.35.43-.02.27.16.31.42.38.12.27.13.61.11.93l5.45,4.66c.32.27.28,1.18,0,1.44-.2.15-.48.12-.54.25-.2.5.16,1.02-.16,1.69-.42-.15-.79-.25-1.32-.32v8.15c.27.59,1.57.19,1.59.71l.06,1.18c.78.09,1.5.24,2.24.46.1-.11.22-.26.32-.27s.28.13.37.24v5.9c-2.04-.5-3.9-.77-5.91-.88Z"/>
+          <path class="cls-10" d="M334.54,35.62c-1.34-.09-2.67-.09-4.01,0-1.84.16-3.64.22-5.51.75-.11-1.45-.68-2.66-1.73-3.75,1.64-.6,3.26-.69,4.93-.92,2.84-.23,5.74-.24,8.58,0,1.67.23,3.29.33,5,.91-1.01,1.07-1.7,2.28-1.75,3.77-1.83-.49-3.64-.61-5.5-.76Z"/>
+        </g>
+      </g>
+      <g fill="#f7f5ef" transform="translate(0 103.34) scale(1 -1)"><path d="M3.69112 -0.16095Q2.17283 -0.16095 1.37612 0.53650Q0.57942 1.23395 0.57942 2.53764L0.57942 2.64494Q0.57942 3.92718 1.37612 4.61658Q2.17283 5.30598 3.68039 5.30598Q4.22762 5.30598 4.65950 5.22014Q5.09138 5.13431 5.41329 5.00286Q5.73518 4.87142 5.95515 4.73729L6.04636 3.88963Q5.66544 4.14178 5.11821 4.32956Q4.57098 4.51733 3.80915 4.51733Q2.70396 4.51733 2.12722 4.03448Q1.55048 3.55163 1.55048 2.63958L1.55048 2.54301Q1.55048 1.62559 2.13795 1.13201Q2.72542 0.63843 3.84671 0.63843Q4.61390 0.63843 5.16113 0.82889Q5.70836 1.01935 6.11610 1.27150L6.01953 0.41310Q5.67080 0.20387 5.09675 0.02146Q4.52269 -0.16095 3.69112 -0.16095Z"/><path d="M10.58410 2.83272L10.39632 3.51408L10.62166 3.53017Q10.86308 4.32419 11.46664 4.78290Q12.07020 5.24160 12.96080 5.24160Q13.27196 5.24160 13.49998 5.19064Q13.72799 5.13967 13.89430 5.07529L13.97478 4.19006Q13.76554 4.26518 13.49729 4.31614Q13.22904 4.36711 12.92324 4.36711Q12.11313 4.36711 11.50151 3.97546Q10.88990 3.58382 10.58410 2.83272ZM9.66668 0.00000L9.66668 5.13431L10.62702 5.13431L10.58410 3.34239L10.62702 3.29948L10.62702 0.00000Z"/><path d="M19.94842 -0.16095Q18.34428 -0.16095 17.53685 0.53382Q16.72942 1.22859 16.72942 2.50545L16.72942 2.63422Q16.72942 3.88963 17.50734 4.59244Q18.28527 5.29526 19.74991 5.29526Q20.74780 5.29526 21.41843 4.98140Q22.08905 4.66755 22.42973 4.09886Q22.77041 3.53017 22.77041 2.77371L22.77041 2.74152Q22.77041 2.61812 22.75700 2.48400Q22.74358 2.34987 22.71676 2.24257L21.82081 2.24257Q21.83690 2.36597 21.84226 2.51619Q21.84763 2.66641 21.84763 2.80590Q21.84763 3.33703 21.61157 3.72599Q21.37551 4.11496 20.90875 4.32687Q20.44200 4.53879 19.74991 4.53879Q18.72520 4.53879 18.20748 4.06130Q17.68975 3.58382 17.68975 2.75761L17.68975 2.67713L17.68975 2.57520L17.68975 2.40352Q17.68975 2.01187 17.82120 1.68461Q17.95264 1.35735 18.23698 1.11860Q18.52133 0.87986 18.98004 0.75378Q19.43874 0.62770 20.09327 0.62770Q20.82291 0.62770 21.45330 0.80207Q22.08369 0.97643 22.65238 1.30906L22.54508 0.49358Q22.04613 0.18241 21.40234 0.01073Q20.75853 -0.16095 19.94842 -0.16095ZM17.16935 2.24257L17.16935 2.96148L22.52898 2.96148L22.52898 2.24257Z"/><path d="M30.74280 0.00000L30.78572 1.53975L30.75890 1.73826L30.75890 2.93465L30.75890 3.08487Q30.75890 3.77160 30.28946 4.13642Q29.82002 4.50124 28.83286 4.50124Q28.00665 4.50124 27.36017 4.29200Q26.71369 4.08277 26.22547 3.83061L26.33277 4.63536Q26.59566 4.78022 26.97657 4.93312Q27.35749 5.08602 27.85375 5.18795Q28.35001 5.28989 28.96699 5.28989Q29.71809 5.28989 30.24385 5.12089Q30.76963 4.95190 31.09153 4.64609Q31.41343 4.34028 31.55828 3.92718Q31.70313 3.51408 31.70313 3.02049L31.70313 0.00000ZM28.09785 -0.15022Q27.07850 -0.15022 26.50445 0.24143Q25.93040 0.63307 25.93040 1.36807L25.93040 1.42172Q25.93040 2.22111 26.56615 2.58593Q27.20190 2.95075 28.53778 3.04732L30.86620 3.21364L30.88229 2.55911L28.60753 2.38742Q27.65256 2.31231 27.27433 2.12454Q26.89609 1.93677 26.89609 1.50220L26.89609 1.45928Q26.89609 1.06227 27.27164 0.85035Q27.64719 0.63843 28.35001 0.63843Q29.04746 0.63843 29.55714 0.84230Q30.06681 1.04618 30.38066 1.39222Q30.69452 1.73826 30.79109 2.14064L30.94130 1.45392L30.75353 1.45392Q30.65160 1.03544 30.34579 0.67063Q30.03999 0.30580 29.49276 0.07779Q28.94552 -0.15022 28.09785 -0.15022Z"/><path d="M38.05969 -0.14486Q37.22812 -0.14486 36.73454 0.08584Q36.24096 0.31654 36.02099 0.78061Q35.80103 1.24468 35.80103 1.94749L35.80103 4.56562L36.75600 4.56562L36.75600 2.04406Q36.75600 1.33588 37.09668 0.99789Q37.43735 0.65990 38.27966 0.65990Q38.75178 0.65990 39.20781 0.76451Q39.66383 0.86913 40.06084 1.06763L39.95891 0.24143Q39.58872 0.06438 39.09782 -0.04024Q38.60692 -0.14486 38.05969 -0.14486ZM34.65828 4.28664L34.65828 5.02700L40.05011 5.02700L39.94817 4.28664ZM35.81176 4.93580L35.81176 6.50238L36.76673 6.60431L36.72917 4.93580Z"/><path d="M43.53736 0.00000L43.53736 5.13431L44.49770 5.13431L44.49770 0.00000ZM44.01485 6.11610Q43.70368 6.11610 43.54809 6.25559Q43.39250 6.39508 43.39250 6.64187L43.39250 6.66333Q43.39250 6.91012 43.54809 7.04693Q43.70368 7.18373 44.01485 7.18373Q44.33138 7.18373 44.48965 7.04425Q44.64791 6.90475 44.64791 6.66333L44.64791 6.64187Q44.64791 6.39508 44.48965 6.25559Q44.33138 6.11610 44.01485 6.11610Z"/><path d="M51.17528 0.67063L53.31592 5.13431L54.34063 5.13431L51.85127 0.00000L50.32225 0.00000L47.81142 5.13431L48.84687 5.13431L51.00360 0.67063Z"/><path d="M60.26842 -0.16095Q58.66428 -0.16095 57.85685 0.53382Q57.04942 1.22859 57.04942 2.50545L57.04942 2.63422Q57.04942 3.88963 57.82735 4.59244Q58.60527 5.29526 60.06992 5.29526Q61.06780 5.29526 61.73843 4.98140Q62.40905 4.66755 62.74973 4.09886Q63.09041 3.53017 63.09041 2.77371L63.09041 2.74152Q63.09041 2.61812 63.07700 2.48400Q63.06358 2.34987 63.03676 2.24257L62.14081 2.24257Q62.15690 2.36597 62.16226 2.51619Q62.16763 2.66641 62.16763 2.80590Q62.16763 3.33703 61.93157 3.72599Q61.69551 4.11496 61.22875 4.32687Q60.76200 4.53879 60.06992 4.53879Q59.04520 4.53879 58.52748 4.06130Q58.00975 3.58382 58.00975 2.75761L58.00975 2.67713L58.00975 2.57520L58.00975 2.40352Q58.00975 2.01187 58.14120 1.68461Q58.27264 1.35735 58.55698 1.11860Q58.84133 0.87986 59.30004 0.75378Q59.75874 0.62770 60.41327 0.62770Q61.14292 0.62770 61.77330 0.80207Q62.40369 0.97643 62.97238 1.30906L62.86508 0.49358Q62.36613 0.18241 61.72234 0.01073Q61.07854 -0.16095 60.26842 -0.16095ZM57.48935 2.24257L57.48935 2.96148L62.84898 2.96148L62.84898 2.24257Z"/><path d="M76.23672 0.00000L76.27963 1.53975L76.25281 1.73826L76.25281 2.93465L76.25281 3.08487Q76.25281 3.77160 75.78337 4.13642Q75.31394 4.50124 74.32677 4.50124Q73.50056 4.50124 72.85408 4.29200Q72.20760 4.08277 71.71939 3.83061L71.82668 4.63536Q72.08957 4.78022 72.47048 4.93312Q72.85140 5.08602 73.34766 5.18795Q73.84392 5.28989 74.46090 5.28989Q75.21200 5.28989 75.73777 5.12089Q76.26354 4.95190 76.58544 4.64609Q76.90734 4.34028 77.05219 3.92718Q77.19705 3.51408 77.19705 3.02049L77.19705 0.00000ZM73.59177 -0.15022Q72.57242 -0.15022 71.99837 0.24143Q71.42431 0.63307 71.42431 1.36807L71.42431 1.42172Q71.42431 2.22111 72.06006 2.58593Q72.69581 2.95075 74.03170 3.04732L76.36011 3.21364L76.37620 2.55911L74.10144 2.38742Q73.14647 2.31231 72.76824 2.12454Q72.39001 1.93677 72.39001 1.50220L72.39001 1.45928Q72.39001 1.06227 72.76556 0.85035Q73.14111 0.63843 73.84392 0.63843Q74.54138 0.63843 75.05105 0.84230Q75.56073 1.04618 75.87458 1.39222Q76.18843 1.73826 76.28500 2.14064L76.43522 1.45392L76.24744 1.45392Q76.14551 1.03544 75.83970 0.67063Q75.53390 0.30580 74.98667 0.07779Q74.43944 -0.15022 73.59177 -0.15022Z"/><path d="M83.80576 1.78655Q82.30892 1.78655 81.54977 2.23184Q80.79063 2.67713 80.79063 3.49798L80.79063 3.55163Q80.79063 4.10959 81.09107 4.47441Q81.39151 4.83923 82.00043 5.02700Q82.60936 5.21478 83.52141 5.24160L87.35202 5.36500L87.35202 4.62463L85.38307 4.65682L85.38843 4.61927Q85.87128 4.54952 86.17440 4.38589Q86.47752 4.22225 86.61702 3.97278Q86.75651 3.72331 86.75651 3.41214L86.75651 3.36386Q86.75651 2.58056 86.02150 2.18356Q85.28650 1.78655 83.80576 1.78655ZM83.75211 -1.30370L83.85404 -1.30370Q84.53540 -1.30370 85.03970 -1.23395Q85.54402 -1.16420 85.82031 -0.98716Q86.09661 -0.81012 86.09661 -0.50431L86.09661 -0.48285Q86.09661 -0.14486 85.79617 0.01341Q85.49573 0.17168 84.82511 0.21460L82.55571 0.34336L82.91517 0.37555Q82.52352 0.33799 82.20967 0.24947Q81.89581 0.16095 81.71072 -0.00805Q81.52563 -0.17705 81.52563 -0.45603L81.52563 -0.46675Q81.52563 -0.78865 81.79924 -0.97106Q82.07286 -1.15348 82.57180 -1.22859Q83.07075 -1.30370 83.75211 -1.30370ZM83.68773 -2.06016Q82.74349 -2.06016 82.04604 -1.93408Q81.34858 -1.80801 80.97304 -1.50757Q80.59749 -1.20713 80.59749 -0.67599L80.59749 -0.65990Q80.59749 -0.30580 80.77990 -0.07511Q80.96231 0.15559 81.26811 0.28435Q81.57391 0.41310 81.94410 0.44529L81.93337 0.47212Q81.45589 0.53650 81.21446 0.72964Q80.97304 0.92278 80.97304 1.25005L80.97304 1.25541Q80.97304 1.48074 81.07229 1.64169Q81.17154 1.80264 81.39419 1.89653Q81.61684 1.99042 81.98166 2.01187L81.98166 2.16209L83.22634 1.85629L82.74349 1.86702Q82.24990 1.86166 82.05945 1.76509Q81.86899 1.66851 81.86899 1.48611L81.86899 1.48611Q81.86899 1.27687 82.13992 1.17494Q82.41085 1.07300 83.11904 1.03008L84.94850 0.91741Q86.02150 0.85303 86.52849 0.52041Q87.03549 0.18777 87.03549 -0.51504L87.03549 -0.53114Q87.03549 -1.10519 86.63847 -1.44318Q86.24147 -1.78118 85.52524 -1.92067Q84.80901 -2.06016 83.84331 -2.06016ZM83.78966 2.48400Q84.51394 2.48400 84.96728 2.60202Q85.42062 2.72005 85.63790 2.95075Q85.85519 3.18145 85.85519 3.50871L85.85519 3.56236Q85.85519 3.87889 85.64059 4.10691Q85.42598 4.33492 84.98069 4.45563Q84.53540 4.57634 83.83795 4.57634L83.78430 4.57634Q83.07612 4.57634 82.62009 4.45831Q82.16407 4.34028 81.94678 4.11764Q81.72950 3.89499 81.72950 3.57309L81.72950 3.51408Q81.72950 3.19754 81.94678 2.96416Q82.16407 2.73079 82.62009 2.60739Q83.07612 2.48400 83.78966 2.48400Z"/><path d="M93.36842 -0.16095Q91.76428 -0.16095 90.95685 0.53382Q90.14942 1.22859 90.14942 2.50545L90.14942 2.63422Q90.14942 3.88963 90.92734 4.59244Q91.70527 5.29526 93.16991 5.29526Q94.16780 5.29526 94.83843 4.98140Q95.50905 4.66755 95.84973 4.09886Q96.19041 3.53017 96.19041 2.77371L96.19041 2.74152Q96.19041 2.61812 96.17700 2.48400Q96.16358 2.34987 96.13676 2.24257L95.24080 2.24257Q95.25690 2.36597 95.26226 2.51619Q95.26763 2.66641 95.26763 2.80590Q95.26763 3.33703 95.03157 3.72599Q94.79551 4.11496 94.32875 4.32687Q93.86200 4.53879 93.16991 4.53879Q92.14520 4.53879 91.62748 4.06130Q91.10975 3.58382 91.10975 2.75761L91.10975 2.67713L91.10975 2.57520L91.10975 2.40352Q91.10975 2.01187 91.24120 1.68461Q91.37264 1.35735 91.65698 1.11860Q91.94133 0.87986 92.40004 0.75378Q92.85874 0.62770 93.51327 0.62770Q94.24291 0.62770 94.87330 0.80207Q95.50369 0.97643 96.07238 1.30906L95.96508 0.49358Q95.46613 0.18241 94.82233 0.01073Q94.17853 -0.16095 93.36842 -0.16095ZM90.58935 2.24257L90.58935 2.96148L95.94898 2.96148L95.94898 2.24257Z"/><path d="M104.65638 0.00000L104.65638 2.72005Q104.65638 3.24046 104.48738 3.63747Q104.31838 4.03448 103.92942 4.25981Q103.54046 4.48514 102.87520 4.48514Q102.26895 4.48514 101.81829 4.28127Q101.36763 4.07740 101.08597 3.73136Q100.80431 3.38531 100.70237 2.95612L100.55215 3.68039L100.73993 3.68039Q100.84723 4.10422 101.15035 4.46905Q101.45347 4.83387 101.96851 5.05919Q102.48355 5.28453 103.21319 5.28453Q104.08232 5.28453 104.61078 4.98945Q105.13923 4.69437 105.37797 4.14446Q105.61671 3.59455 105.61671 2.82735L105.61671 0.00000ZM99.79032 0.00000L99.79032 5.13431L100.75066 5.13431L100.70774 3.58919L100.75066 3.47652L100.75066 0.00000Z"/><path d="M112.28112 -0.16095Q110.76283 -0.16095 109.96612 0.53650Q109.16942 1.23395 109.16942 2.53764L109.16942 2.64494Q109.16942 3.92718 109.96612 4.61658Q110.76283 5.30598 112.27039 5.30598Q112.81762 5.30598 113.24950 5.22014Q113.68139 5.13431 114.00329 5.00286Q114.32519 4.87142 114.54515 4.73729L114.63636 3.88963Q114.25544 4.14178 113.70821 4.32956Q113.16098 4.51733 112.39915 4.51733Q111.29396 4.51733 110.71722 4.03448Q110.14048 3.55163 110.14048 2.63958L110.14048 2.54301Q110.14048 1.62559 110.72795 1.13201Q111.31542 0.63843 112.43671 0.63843Q113.20390 0.63843 113.75113 0.82889Q114.29836 1.01935 114.70610 1.27150L114.60953 0.41310Q114.26081 0.20387 113.68675 0.02146Q113.11270 -0.16095 112.28112 -0.16095Z"/><path d="M121.29083 0.84767L120.72751 0.51504L123.05055 5.13431L124.09673 5.13431L120.51827 -1.81337L119.48819 -1.81337L120.72751 0.60088L121.09233 0.19314L120.06761 0.19314L117.55143 5.13431L118.59760 5.13431L120.72214 0.84767Z"/></g>
+    </g>
+  </g>
+</svg></a><span>Color Atelier</span></div>
+      <nav aria-label="Navy Night Creative"><a href="../index.html#work">Work</a><a href="../index.html#services">Services</a><a href="../index.html#contact">Contact</a></nav>
+    </div>
+    <div class="hero-grid">
+      <div>
+        <h1>A painter’s color notebook, <em>on your business.</em></h1>
+        <p class="story"><strong>Sanzo Wada</strong> (1883–1967) was a Japanese painter and costume designer. In 1933–1934 he published <em>Haishoku Soukan</em>, a six-volume study that grouped colors not one by one but in sets of two, three and four; today it is printed as <em>A Dictionary of Color Combinations</em>. His costumes for <em>Gate of Hell</em> won the Academy Award for Best Costume Design (Color) in 1955. Inspired by his combinations, we put them to work on the everyday pieces of a business, from a business card to a storefront sign.</p>
+        <div class="hero-actions">
+          <button class="btn btn-coral" id="heroRandom" type="button">Show me a random set</button>
+          <a class="btn btn-ghost" href="#atelier">Browse the combinations</a>
+        </div>
+      </div>
+      <div class="wada-card">
+        <div class="kanji" lang="ja">和田三造</div>
+        <div class="wada-meta"><span>Sanzo Wada, 1883–1967</span><span>Haishoku Soukan, 1933–1934</span></div>
+        <div class="facts">
+          <div><b>348</b><small>combinations</small></div>
+          <div><b>159</b><small>colors</small></div>
+          <div><b>6</b><small>volumes</small></div>
+        </div>
+        <div class="hero-strip" id="heroStrip" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="atelier" id="atelier">
+  <div class="wrap atelier-grid">
+    <aside class="book" aria-label="Combination book">
+      <div class="book-head">
+        <h2>Combination book</h2>
+        <div class="seg" role="group" aria-label="Number of colors">
+          <button type="button" data-n="0" aria-pressed="true">All</button>
+          <button type="button" data-n="2" aria-pressed="false">Pairs</button>
+          <button type="button" data-n="3" aria-pressed="false">Trios</button>
+          <button type="button" data-n="4" aria-pressed="false">Quartets</button>
+        </div>
+        <div class="jump">
+          <label for="jumpInput">Go to no.</label>
+          <input id="jumpInput" type="number" min="1" max="348" inputmode="numeric" placeholder="1–348">
+          <span class="count" id="count"></span>
+        </div>
+      </div>
+      <ul class="list" id="list"></ul>
+    </aside>
+
+    <div class="main">
+      <section class="current" aria-live="polite">
+        <div class="current-head">
+          <h2>Combination <span class="mono" id="curNo"></span></h2>
+          <span class="kind" id="curKind"></span>
+          <div class="tools">
+            <button class="tbtn" type="button" id="prevBtn" aria-label="Previous combination">Previous</button>
+            <button class="tbtn" type="button" id="nextBtn" aria-label="Next combination">Next</button>
+            <button class="tbtn" type="button" id="randBtn">Random</button>
+            <button class="tbtn" type="button" id="rotBtn">Change background</button>
+            <button class="tbtn" type="button" id="copyAll">Copy codes</button>
+            <button class="tbtn" type="button" id="copyLink">Copy link</button>
+          </div>
+        </div>
+        <div class="swatches" id="swatches"></div>
+        <div class="checks">
+          <div>
+            <h3>Readability check</h3>
+            <div class="pairs" id="pairs"></div>
+            <p class="note" id="contrastNote"></p>
+          </div>
+          <div>
+            <h3>Suggested proportion</h3>
+            <div class="ratio-bar" id="ratioBar"></div>
+            <div class="ratio-legend" id="ratioLegend"></div>
+            <p class="note">In Wada’s sets one color leads and the others make room for it. Keep the accent to small areas: buttons, links, a line.</p>
+          </div>
+        </div>
+        <div class="hook">
+          <p><b>Does this combination fit your brand?</b> From the logo to the sign on your door, we’ll choose your colors with you and apply them everywhere.</p>
+          <a class="btn btn-coral js-contact" href="#talk" data-cfg="ctaButon"></a>
+        </div>
+      </section>
+
+      <section aria-labelledby="exTitle">
+        <div class="examples-head">
+          <div>
+            <h2 id="exTitle">A business in these colors</h2>
+            <p id="exSub"></p>
+          </div>
+          <div class="sector" role="group" aria-label="Sample business" id="sectorBtns"></div>
+        </div>
+        <div class="mocks p" id="mocks" style="margin-top:18px">
+          <figure class="mock m-web" style="margin:0">
+            <div class="frame">
+              <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span></span></div>
+              <div class="web">
+                <nav><span class="logo"><span class="mark"><i></i><i></i></span><span data-t="biz"></span></span><span class="navlinks" data-t="nav"></span></nav>
+                <div class="web-hero">
+                  <div><h4 data-t="webH"></h4><p data-t="webP"></p><span class="pbtn" data-t="btn"></span><span class="pbtn-o" data-t="btn2"></span></div>
+                  <div class="web-art" aria-hidden="true"></div>
+                </div>
+                <div class="web-row" data-t="row"></div>
+              </div>
+            </div>
+            <figcaption>Website home page</figcaption>
+          </figure>
+          <figure class="mock m-card" style="margin:0">
+            <div class="card-stage">
+              <div class="bcard">
+                <div class="who">
+                  <div class="biz"><span class="mark"><i></i><i></i></span><span data-t="biz"></span></div>
+                  <div><div class="name" data-t="person"></div><div class="title" data-t="role"></div><div class="contact" data-t="phone"></div></div>
+                </div>
+                <div class="side" aria-hidden="true"></div>
+              </div>
+            </div>
+            <figcaption>Business card</figcaption>
+          </figure>
+          <figure class="mock m-post" style="margin:0">
+            <div class="post-stage">
+              <div class="ig">
+                <div class="ig-top"><span class="av"></span><span data-t="handle"></span></div>
+                <div class="ig-img"><span class="corner" aria-hidden="true"></span><span class="tag" data-t="tag"></span><h4 data-t="post"></h4><span class="sig" data-t="biz"></span></div>
+                <div class="ig-bot" aria-hidden="true"><i></i><i></i><i></i></div>
+              </div>
+            </div>
+            <figcaption>Instagram post</figcaption>
+          </figure>
+          <figure class="mock m-sign" style="margin:0">
+            <div class="sign-stage">
+              <div class="shop">
+                <div class="board"><b data-t="sign"></b><span data-t="signSub"></span></div>
+                <div class="awning" aria-hidden="true"></div>
+                <div class="facade" aria-hidden="true"><div class="window"></div><div class="door"></div></div>
+              </div>
+            </div>
+            <figcaption>Storefront sign</figcaption>
+          </figure>
+          <figure class="mock m-phone" style="margin:0">
+            <div class="phone-stage">
+              <div class="phone"><div class="screen">
+                <div class="sbiz"><span class="mark"><i></i><i></i></span><span data-t="biz"></span></div>
+                <h5 data-t="phTitle"></h5>
+                <div class="q" data-t="q1"></div><div class="chips" data-t="c1"></div>
+                <div class="q" data-t="q2"></div><div class="chips" data-t="c2"></div>
+                <div class="info" data-t="info"></div>
+                <div class="go" data-t="phBtn"></div>
+              </div></div>
+            </div>
+            <figcaption data-t="phCap"></figcaption>
+          </figure>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<section class="cta" id="talk">
+  <div class="wrap">
+    <div>
+      <h2 data-cfg="ctaBaslik"></h2>
+      <p data-cfg="ctaAciklama"></p>
+    </div>
+    <a class="btn btn-coral js-contact" href="#talk" data-cfg="ctaButon"></a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>The Color Atelier is a free tool from <a href="../index.html"><span data-cfg="firma"></span></a>, inspired by Sanzo Wada’s color combinations. <span data-cfg="firma"></span> has no official connection with Sanzo Wada’s family or with the publishers of his book.</p>
+    <p>Color data: <a href="https://github.com/mattdesl/dictionary-of-colour-combinations" target="_blank" rel="noopener">dictionary-of-colour-combinations</a> by Matt DesLauriers (MIT license). The colors were digitized from print, so on screen they can look different from the printed book. The sample businesses are fictional.</p>
+  </div>
+</footer>
+
+<div class="hookbar" id="hookbar" hidden>
+  <div class="hookbar-in">
+    <p><b>You’ve tried <span id="hookCount">3</span> combinations.</b> Let’s pick the one that fits your brand, together.</p>
+    <a class="btn btn-coral js-contact" href="#talk" data-cfg="ctaButon"></a>
+    <button type="button" class="hook-close" id="hookClose" aria-label="Close">×</button>
+  </div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* =====================================================================
+   SETTINGS (CONFIG): to adapt this page for another company, edit only this block.
+   ===================================================================== */
+const CONFIG = {
+  firmaAdi: 'Navy Night Creative',
+
+  // Contact page. Empty = buttons say "Contact link coming soon".
+  // Here it opens the project form on the Navy Night Creative site, with Branding selected.
+  iletisimLinki: '../index.html#contact',
+
+  // true: the chosen combination is added to the link (?combination=271&colors=...),
+  // so the enquiry arrives with the set the visitor liked.
+  kombinasyonuLinkeEkle: true,
+  linkParametresi: 'combination',
+
+  // After how many different combinations the bottom banner appears. 0 = never.
+  hookEsik: 3,
+
+  // koyu: background of the top and bottom bands (must be dark). vurgu: buttons and highlights.
+  renkler: { koyu: '#071726', vurgu: '#F0BA31' },
+
+  cta: {
+    baslik: 'Like these colors? Let’s put them to work for your brand.',
+    aciklama: 'Logo, website, signage, social media. We’ll choose the right combination with you and carry it across everything you make.',
+    buton: 'Contact us for details and our process'
+  },
+
+  // First combination shown (1–348).
+  baslangicKombinasyonu: 271,
+
+  // Fictional sample businesses used in the mock-ups.
+  ornekIsletmeler: {
+    restaurant:{etiket:'Restaurant',biz:'Ember Street Kitchen',handle:'emberstreet.kitchen',nav:['Menu','About','Visit'],
+      webH:'Wood-fired dinners on the corner of Ember Street.',webP:'Seasonal plates, a short wine list and a table that’s ready when you are.',btn:'Book a table',btn2:'See the menu',
+      row:[['Dinner','Tue–Sun, 5–10 pm'],['Brunch','Sat & Sun, 10–2'],['Private dining','Up to 24 guests']],
+      person:'Maya Collins',role:'Owner & chef',phone:'(312) 555-0142',tag:'This week',post:'Brunch is back. Saturdays and Sundays from 10.',
+      sign:'EMBER',signSub:'street kitchen',phTitle:'Book a table',q1:'Guests',c1:['2','3','4','5+'],c1on:1,
+      q2:'Time',c2:['6:00','6:30','7:30','8:15'],c2on:2,info:'Saturday · 3 guests · 7:30 pm',phBtn:'Confirm booking',phCap:'Booking screen'},
+    auto:{etiket:'Auto repair',biz:'Keel & Axle Auto Care',handle:'keelandaxle',nav:['Services','Parts','Contact'],
+      webH:'Honest repairs, done right the first time.',webP:'Book a service online, and we’ll text you when your car is ready.',btn:'Book a service',btn2:'Call the shop',
+      row:[['Oil & filter','Most cars in 30 min'],['Brakes','Free inspection'],['Diagnostics','Same-day results']],
+      person:'Dan Moretti',role:'Service manager',phone:'(312) 555-0187',tag:'Service tip',post:'Squeaky brakes? Book a free check before it gets expensive.',
+      sign:'KEEL & AXLE',signSub:'auto care',phTitle:'Book a service',q1:'Service',c1:['Oil','Brakes','Tires','Check-up'],c1on:1,
+      q2:'Drop-off time',c2:['7:30','9:00','11:30','2:00'],c2on:1,info:'Brakes · Thursday · 9:00 am',phBtn:'Confirm drop-off',phCap:'Booking screen'},
+    shop:{etiket:'Shop',biz:'Lantern Goods Co.',handle:'lanterngoods',nav:['Shop','Our story','Help'],
+      webH:'Everyday goods, made to last.',webP:'Small-batch homeware and gifts, shipped from our shop in two days.',btn:'Shop now',btn2:'Visit the store',
+      row:[['Free shipping','On orders over $50'],['Gift wrap','Add at checkout'],['Pickup','Ready in 2 hours']],
+      person:'Priya Shah',role:'Founder',phone:'(312) 555-0119',tag:'New in',post:'The spring candle collection just landed in store and online.',
+      sign:'LANTERN',signSub:'goods co.',phTitle:'Your order',q1:'Size',c1:['S','M','L','XL'],c1on:1,
+      q2:'Delivery',c2:['Pickup','2-day','Next day'],c2on:1,info:'Linen apron · M · 2-day shipping',phBtn:'Check out',phCap:'Checkout screen'}
+  }
+};
+/* ===================== END OF SETTINGS ===================== */
+
+const DATA = {"c":[["Hermosa Pink","#f9c1ce"],["Corinthian Pink","#f8b6ba"],["Cameo Pink","#e0b3b6"],["Fawn","#d1b0a7"],["Light Brown Drab","#b59392"],["Coral Red","#f58e84"],["Fresh Color","#f6917e"],["Grenadine Pink","#f48067"],["Eosine Pink","#f37f94"],["Spinel Red","#f27291"],["Old Rose","#d46d7a"],["Eugenia Red | A","#e2625e"],["Eugenia Red | B","#da525d"],["Raw Sienna","#bb7125"],["Vinaceous Tawny","#c56127"],["Jasper Red","#eb5324"],["Spectrum Red","#e31f26"],["Red Orange","#dd4027"],["Etruscan Red","#c55347"],["Burnt Sienna","#ae5224"],["Ochre Red","#ab544d"],["Scarlet","#cb2f43"],["Carmine","#cc1236"],["Indian Lake","#c53c69"],["Rosolanc Purple","#b73f74"],["Pomegranite Purple","#b71f57"],["Hydrangea Red","#a94151"],["Brick Red","#a84222"],["Carmine Red","#a62c37"],["Pompeian Red","#ab2439"],["Red","#a72144"],["Brown","#7c4226"],["Hay's Russet","#793327"],["Vandyke Red","#82241f"],["Pansy Purple","#7d133a"],["Pale Burnt Lake","#802626"],["Violet Red","#642d5e"],["Vistoris Lake","#6d4145"],["Sulpher Yellow","#f5ecc2"],["Pale Lemon Yellow","#ffefae"],["Naples Yellow","#fbe6a0"],["Ivory Buff","#ebd3a2"],["Seashell Pink","#fdd4bd"],["Light Pinkish Cinnamon","#fcc79b"],["Pinkish Cinnamon","#eeb480"],["Cinnamon Buff","#fdc57e"],["Cream Yellow","#fdbf68"],["Golden Yellow","#f3a257"],["Vinaceous Cinnamon","#eea78c"],["Ochraceous Salmon","#d8a37b"],["Isabella Color","#c5a56e"],["Maple","#c59f6b"],["Olive Buff","#c1c494"],["Ecru","#c2ae93"],["Yellow","#fff200"],["Lemon Yellow","#f8ed43"],["Apricot Yellow","#ffdd00"],["Pyrite Yellow","#cab356"],["Olive Ocher","#d6b43e"],["Yellow Ocher","#e2b540"],["Orange Yellow","#fcb315"],["Yellow Orange","#f99d1b"],["Apricot Orange","#f68c50"],["Orange","#f37420"],["Peach Red","#f15a30"],["English Red","#d96629"],["Cinnamon Rufous","#c27544"],["Orange Rufous","#c16b27"],["Sulphine Yellow","#c19f2c"],["Khaki","#bc892b"],["Citron Yellow","#b2b73e"],["Citrine","#b09f36"],["Buffy Citrine","#96874d"],["Dark Citrine","#8b835b"],["Light Grayish Olive","#848061"],["Krongbergs Green","#84875e"],["Olive","#837e31"],["Orange Citrine","#986f2d"],["Sudan Brown","#a36752"],["Olive Green","#6b7140"],["Light Brownish Olive","#806e4b"],["Deep Grayish Olive","#635a3a"],["Pale Raw Umber","#71502f"],["Sepia","#644b1e"],["Madder Brown","#762c19"],["Mars Brown Tobacco","#653514"],["Vandyke Brown","#4b3317"],["Turquoise Green","#b5decc"],["Glaucous Green","#b4cdc2"],["Dark Greenish Glaucous","#b7c2a9"],["Yellow Green","#afd472"],["Light Green Yellow","#c7d14f"],["Night Green","#87c540"],["Olive Yellow","#a6a159"],["Artemesia Green","#709390"],["Andover Green","#6d7e77"],["Rainette Green","#8fa071"],["Chromium Green","#719470"],["Pistachio Green","#648f7b"],["Sea Green","#00b49b"],["Benzol Green","#00978d"],["Light Porcelain Green","#00908a"],["Green","#489b6e"],["Dull Viridian Green","#009465"],["Oil Green","#819238"],["Diamine Green","#1a7444"],["Cossack Green","#437742"],["Lincoln Green","#555832"],["Blackish Olive","#42533e"],["Deep Slate Olive","#253122"],["Nile Blue","#bce4e5"],["Pale King's Blue","#a7d4e4"],["Light Glaucous Blue","#a5c8d1"],["Salvia Blue","#97acc8"],["Cobalt Green","#96d1aa"],["Calamine BLue","#78cdd0"],["Venice Green","#62c6bf"],["Cerulian Blue","#0093a5"],["Peacock Blue","#00939b"],["Green Blue","#099197"],["Olympic Blue","#5a82b3"],["Blue","#006eb8"],["Antwarp Blue","#007190"],["Helvetia Blue","#005b8d"],["Dark Medici Blue","#547076"],["Dusky Green","#004f46"],["Deep Lyons Blue","#1c4286"],["Violet Blue","#40456a"],["Vandar Poel's Blue","#064f6e"],["Dark Tyrian Blue","#12354e"],["Dull Violet Black","#1e0e3f"],["Deep Indigo","#051230"],["Deep Slate Green","#112f2c"],["Grayish Lavender - A","#b5b1d8"],["Grayish Lavender - B","#c0a9b3"],["Laelia Pink","#ca92a8"],["Lilac","#b984af"],["Eupatorium Purple","#bf5892"],["Light Mauve","#9a72aa"],["Aconite Violet","#a36aa5"],["Dull Blue Violet","#80719e"],["Dark Soft Violet","#66629c"],["Blue Violet","#6450a1"],["Purple Drab","#84565b"],["Deep Violet / Plumbeous","#70727c"],["Veronia Purple","#8c4c62"],["Dark Slate Purple","#704357"],["Taupe Brown","#7a4456"],["Violet Carmine","#713b4c"],["Violet","#4f4086"],["Red Violet","#59256a"],["Cotinga Purple","#501345"],["Dusky Madder Violet","#4e1d4c"],["White","#ffffff"],["Neutral Gray","#b6bfc1"],["Mineral Gray","#a2b0ad"],["Warm Gray","#a1a39a"],["Slate Color","#34454c"],["Black","#111314"]],"k":[[65,117],[61,129],[13,39],[50,150],[106,128],[7,131],[63,88],[66,133],[36,140],[66,73],[41,155],[50,119],[13,145],[9,40],[100,133],[33,111],[12,99],[3,152],[85,92],[115,135],[7,99],[54,126],[45,138],[83,145],[18,110],[47,82],[1,157],[84,131],[75,113],[29,155],[17,39],[49,92],[13,157],[8,154],[4,28],[68,87],[27,150],[105,126],[22,123],[14,70],[73,115],[59,149],[1,139],[101,120],[42,55],[63,158],[18,134],[24,123],[111,121],[41,152],[28,121],[38,158],[61,152],[100,112],[10,153],[134,149],[147,157],[32,99],[8,71],[39,129],[91,151],[54,158],[37,117],[139,141],[68,115],[58,79],[120,129],[4,54],[156,158],[13,107],[29,49],[38,111],[82,96],[87,119],[111,127],[39,156],[12,128],[44,116],[84,119],[38,138],[47,156],[32,152],[52,127],[42,132],[14,122],[13,99],[1,70],[42,121],[61,127],[8,139],[37,67],[5,100],[71,112],[41,125],[32,130],[59,76],[1,18],[84,127],[39,117],[72,140],[2,126],[41,67],[66,152],[28,38],[2,97],[122,130],[56,74],[8,27],[39,108],[31,86],[39,90],[7,158],[42,86],[60,122],[40,64],[2,142],[22,158],[59,86],[112,129],[2,29],[31,49,107],[22,46,100],[5,55,147],[35,59,93],[3,117,127],[41,59,126],[45,98,141],[1,116,138],[56,69,113],[13,28,149],[13,65,118],[38,47,71],[33,71,99],[8,138,150],[38,106,113],[21,103,150],[18,45,98],[47,55,116],[113,131,154],[47,122,157],[63,90,129],[26,68,113],[121,136,156],[24,63,158],[31,70,130],[69,81,105],[9,33,87],[58,60,117],[58,63,132],[42,70,88],[38,61,128],[18,32,112],[8,60,70],[22,54,121],[15,100,131],[58,114,149],[34,58,120],[55,66,92],[69,115,133],[68,82,124],[31,44,123],[10,96,136],[56,87,122],[17,60,149],[2,9,37],[7,40,132],[53,111,128],[55,128,145],[1,39,156],[24,60,150],[35,61,88],[66,122,150],[55,84,87],[1,134,147],[44,52,142],[0,42,115],[35,72,133],[41,112,119],[17,47,126],[45,138,154],[28,149,151],[13,86,131],[144,145,150],[9,41,74],[4,18,39],[32,49,121],[123,134,139],[96,113,114],[55,109,116],[41,65,158],[4,59,121],[46,86,144],[7,40,101],[15,42,120],[9,39,154],[70,111,142],[8,141,154],[19,56,102],[20,80,126],[28,52,97],[7,76,114],[87,114,157],[39,48,107],[24,66,112],[35,48,149],[1,47,66],[78,88,158],[38,119,122],[41,61,113],[45,55,107],[62,93,131],[29,77,113],[48,56,111],[41,78,149],[46,121,137],[15,102,158],[35,49,105],[123,133,144],[15,97,125],[25,49,139],[28,154,158],[59,61,67],[4,49,87],[9,124,147],[22,125,146],[37,46,149],[0,112,117],[28,39,154],[47,109,154],[7,87,114],[2,32,120],[22,44,131],[28,72,127],[45,82,111],[41,61,134],[69,126,143],[28,84,113],[49,151,156],[4,57,88],[6,54,117],[17,39,50,124],[8,19,105,158],[13,41,79,157],[4,14,95,122],[28,104,129,157],[1,27,38,45],[13,56,100,126],[8,69,133,146],[32,53,58,124],[57,64,99,110],[30,54,105,157],[12,13,68,119],[55,62,151,157],[1,38,76,135],[13,57,115,158],[48,63,103,158],[16,60,121,139],[35,44,76,122],[55,119,123,156],[10,48,88,99],[30,39,115,156],[12,41,71,106],[19,44,87,157],[1,17,89,117],[10,56,93,130],[16,41,96,100],[46,61,100,121],[4,13,109,110],[13,35,139,158],[12,38,79,106],[25,114,119,132],[39,63,87,113],[0,34,78,154],[64,73,120,138],[18,53,84,147],[8,42,90,158],[9,24,76,130],[46,58,106,125],[13,48,53,129],[12,107,135,147],[39,100,114,122],[12,51,114,136],[20,35,97,116],[11,56,99,125],[4,19,64,87],[19,60,118,127],[8,57,111,115],[61,83,147,158],[55,91,127,130],[37,39,107,114],[91,99,114,115],[39,44,50,53],[13,87,94,102],[38,46,106,113],[46,54,121,130],[38,49,82,157],[19,61,79,127],[13,55,64,158],[23,48,104,122],[7,46,87,115],[16,41,96,139],[46,53,110,122],[40,64,109,154],[32,46,73,100],[44,56,70,87],[55,100,103,110],[22,133,139,151],[3,21,65,114],[47,62,127,128],[38,44,76,109],[29,46,89,91],[19,61,94,123],[22,54,105,158],[8,32,126,152],[7,38,47,137],[33,103,149,150],[43,53,55,87],[80,108,125,132],[13,56,61,106],[5,38,104,112],[4,38,109,113],[16,27,137,142],[45,70,84,158],[29,120,139,154],[12,40,59,132],[38,64,90,92],[8,13,53,134],[27,62,86,101],[46,134,151,157],[52,110,113,119],[23,130,138,149],[5,21,109,125],[19,55,114,121],[42,76,90,122],[33,61,149,157],[8,32,39,108],[37,135,148,158],[28,60,125,134],[49,65,112,127],[64,99,154,158],[7,106,109,112],[1,46,77,109],[19,41,81,128],[45,126,139,158],[32,110,116,142],[24,87,91,95],[93,99,123,136],[52,106,109,151]]};
+const COLORS = DATA.c, COMBOS = DATA.k;
+
+/* color math */
+const hexToRgb = h => [1,3,5].map(i => parseInt(h.slice(i,i+2),16));
+const lin = c => { c/=255; return c<=0.04045 ? c/12.92 : Math.pow((c+0.055)/1.055,2.4); };
+function lum(h){ const [r,g,b]=hexToRgb(h).map(lin); return 0.2126*r+0.7152*g+0.0722*b; }
+function contrast(a,b){ const x=lum(a), y=lum(b); return (Math.max(x,y)+0.05)/(Math.min(x,y)+0.05); }
+function chroma(h){
+  const [r,g,b]=hexToRgb(h).map(lin);
+  const X=(0.4124*r+0.3576*g+0.1805*b)/0.95047, Y=0.2126*r+0.7152*g+0.0722*b, Z=(0.0193*r+0.1192*g+0.9505*b)/1.08883;
+  const f=t=>t>0.008856?Math.cbrt(t):7.787*t+16/116;
+  const a=500*(f(X)-f(Y)), bb=200*(f(Y)-f(Z));
+  return Math.hypot(a,bb);
+}
+function mix(h1,h2,t){
+  const a=hexToRgb(h1), b=hexToRgb(h2);
+  return '#'+a.map((v,i)=>Math.round(v+(b[i]-v)*t).toString(16).padStart(2,'0')).join('');
+}
+const DARK='#050505', LIGHT='#FFFFFF';
+
+/* give every color a job: background, text, accent, secondary */
+function assignRoles(cols, bgIdx){
+  const bg = cols[bgIdx];
+  const others = cols.filter((_,i)=>i!==bgIdx);
+  const byContrast = [...others].sort((x,y)=>contrast(y,bg)-contrast(x,bg));
+  const best = byContrast[0];
+  const textFromSet = contrast(best,bg) >= 4.5;
+  /* if no color in the set reads well enough, the best one is darkened or lightened, keeping its hue */
+  let text = best, shiftedFrom = null;
+  if(!textFromSet){
+    const toward = contrast(DARK,bg) >= contrast(LIGHT,bg) ? DARK : LIGHT;
+    for(let t=0.05; t<=1.0001; t+=0.05){ text = mix(best, toward, Math.min(t,1)); if(contrast(text,bg)>=4.5) break; }
+    shiftedFrom = best;
+  }
+  let rest = textFromSet ? others.filter(c=>c!==best) : [...others];
+  rest.sort((x,y)=>chroma(y)-chroma(x));
+  const accent = rest[0] || best;
+  const surface = rest.find(c=>c!==accent) || mix(bg, accent, 0.16);
+  const surfaceFromSet = rest.length > 1;
+  const pool = [...cols, LIGHT, DARK].filter(c=>c!==accent);
+  const setOnAccent = cols.filter(c=>c!==accent).sort((x,y)=>contrast(y,accent)-contrast(x,accent))[0];
+  const onAccent = setOnAccent && contrast(setOnAccent,accent) >= 4.5 ? setOnAccent
+                  : (contrast(DARK,accent) >= contrast(LIGHT,accent) ? DARK : LIGHT);
+  /* text that sits on the secondary color: the best readable color from the set, otherwise a shade of the text color */
+  let textOnSurface = [...cols, text].sort((x,y)=>contrast(y,surface)-contrast(x,surface))[0];
+  if(contrast(textOnSurface,surface) < 4.5){
+    const toward = contrast(DARK,surface) >= contrast(LIGHT,surface) ? DARK : LIGHT;
+    for(let t=0.05; t<=1.0001; t+=0.05){ textOnSurface = mix(text, toward, Math.min(t,1)); if(contrast(textOnSurface,surface)>=4.5) break; }
+  }
+  return {bg,text,accent,surface,onAccent,textOnSurface,textFromSet,surfaceFromSet,shiftedFrom};
+}
+
+const SECTORS = CONFIG.ornekIsletmeler;
+const SECTOR_KEYS = Object.keys(SECTORS);
+
+/* durum */
+const store = { get(k){try{return localStorage.getItem(k)}catch(e){return null}}, set(k,v){try{localStorage.setItem(k,v)}catch(e){}} };
+let state = { idx: 0, bgIdx: null, filter: 0, sector: store.get('atelier-sector') || SECTOR_KEYS[0] };
+if(!SECTORS[state.sector]) state.sector=SECTOR_KEYS[0];
+
+const $ = s => document.querySelector(s);
+const pad = n => String(n).padStart(3,'0');
+const colorsOf = i => COMBOS[i].map(ci=>COLORS[ci]);
+const kindName = n => n===2?'Pair':n===3?'Trio':'Quartet';
+
+function defaultBg(cols){
+  /* background: first one that leaves a readable text color in the set, then the calmest */
+  const h=cols.map(c=>c[1]);
+  let best=0, bestScore=-Infinity;
+  h.forEach((c,i)=>{
+    const maxC=Math.max(...h.filter((_,j)=>j!==i).map(o=>contrast(o,c)));
+    const score=(maxC>=4.5?1000:0)+maxC*2-chroma(c)*0.5;
+    if(score>bestScore){ bestScore=score; best=i; }
+  });
+  return best;
+}
+
+/* the book */
+function renderList(){
+  const ul=$('#list'); ul.innerHTML='';
+  let shown=0;
+  const frag=document.createDocumentFragment();
+  COMBOS.forEach((combo,i)=>{
+    if(state.filter && combo.length!==state.filter) return;
+    shown++;
+    const li=document.createElement('li');
+    const b=document.createElement('button');
+    b.type='button'; b.dataset.i=i;
+    b.setAttribute('aria-pressed', i===state.idx);
+    b.setAttribute('aria-label', 'Combination '+(i+1));
+    b.innerHTML='<span class="no">'+pad(i+1)+'</span><span class="sw">'+combo.map(ci=>'<i style="background:'+COLORS[ci][1]+'"></i>').join('')+'</span>';
+    li.appendChild(b); frag.appendChild(li);
+  });
+  ul.appendChild(frag);
+  $('#count').textContent = shown+' sets';
+}
+function markList(){
+  document.querySelectorAll('#list button').forEach(b=>b.setAttribute('aria-pressed', Number(b.dataset.i)===state.idx));
+}
+
+/* the selected set */
+function verdict(r){
+  if(r>=7) return ['v-good','Great for text'];
+  if(r>=4.5) return ['v-good','Good for text'];
+  if(r>=3) return ['v-ok','Large headings only'];
+  return ['v-deco','Decoration only'];
+}
+function renderCurrent(animate){
+  const cols = colorsOf(state.idx);
+  const hexes = cols.map(c=>c[1]);
+  if(state.bgIdx===null || state.bgIdx>=cols.length) state.bgIdx = defaultBg(cols);
+  const R = assignRoles(hexes, state.bgIdx);
+
+  $('#curNo').textContent = pad(state.idx+1);
+  $('#curKind').textContent = kindName(cols.length);
+
+  const nameOf = h => (cols.find(c=>c[1]===h)||['this'])[0];
+  const roleOf = h => {
+    const r=[]; if(h===R.bg) r.push('Background'); if(h===R.text) r.push('Text'); if(h===R.shiftedFrom) r.push('Text (shade)'); if(h===R.accent) r.push('Accent'); if(h===R.surface) r.push('Secondary');
+    return r.length? r.join(' · ') : 'Support';
+  };
+  const sw=$('#swatches');
+  sw.style.setProperty('--n', cols.length);
+  sw.innerHTML = cols.map(c=>'<div class="swatch"><div class="chip-big" style="background:'+c[1]+'"></div><div class="nm">'+c[0]+'</div><div class="row"><button type="button" class="hex" data-copy="'+c[1].toUpperCase()+'" aria-label="Copy '+c[1].toUpperCase()+'">'+c[1].toUpperCase()+'</button><span class="role">'+roleOf(c[1])+'</span></div></div>').join('');
+  if(animate && !matchMedia('(prefers-reduced-motion: reduce)').matches){ sw.classList.remove('fold'); void sw.offsetWidth; sw.classList.add('fold'); }
+
+  /* readability: every pair in the set */
+  const rows=[];
+  for(let i=0;i<cols.length;i++) for(let j=i+1;j<cols.length;j++){
+    const a=hexes[i], b=hexes[j];
+    const [bgc,fgc] = lum(a)>lum(b)?[a,b]:[b,a];
+    const r=contrast(a,b); const [cls,txt]=verdict(r);
+    rows.push({r,html:'<div class="pair"><span class="aa" style="background:'+bgc+';color:'+fgc+'">Aa</span><span><span class="ratio">'+r.toFixed(2)+' : 1</span><br>'+cols[i][0]+' and '+cols[j][0]+'</span><span class="verdict '+cls+'">'+txt+'</span></div>'});
+  }
+  rows.sort((x,y)=>y.r-x.r);
+  $('#pairs').innerHTML = rows.map(x=>x.html).join('');
+  $('#contrastNote').textContent = R.textFromSet
+    ? 'In the samples the text color comes from the set itself. Body text needs at least 4.5 : 1.'
+    : 'The colors in this set don’t read well enough side by side for body text. In the samples, text uses a '+(lum(R.text)<lum(R.shiftedFrom)?'darker':'lighter')+' shade of '+nameOf(R.shiftedFrom)+' ('+R.text.toUpperCase()+', '+contrast(R.text,R.bg).toFixed(2)+' : 1).';
+
+  /* proportion */
+  const parts=[[R.bg,60,'Background'],[R.surface,30,'Secondary'+(R.surfaceFromSet?'':' (a mix of background and accent)')],[R.accent,10,'Accent']];
+  $('#ratioBar').innerHTML = parts.map(p=>'<i style="background:'+p[0]+';width:'+p[1]+'%"></i>').join('');
+  $('#ratioLegend').innerHTML = parts.map(p=>'<span><b>'+p[1]+'%</b> '+p[2]+' <span class="mono">'+p[0].toUpperCase()+'</span></span>').join('');
+
+  /* sample work */
+  const m=$('#mocks');
+  m.style.setProperty('--b',R.bg); m.style.setProperty('--t',R.text); m.style.setProperty('--a',R.accent);
+  m.style.setProperty('--s',R.surface); m.style.setProperty('--at',R.onAccent); m.style.setProperty('--ts',R.textOnSurface);
+  window.__roles = R;
+
+  $('#heroStrip').innerHTML = hexes.map(h=>'<i style="background:'+h+'"></i>').join('');
+  markList();
+  updateContactLinks();
+}
+
+function renderSector(){
+  const S=SECTORS[state.sector];
+  document.querySelectorAll('.sector button').forEach(b=>b.setAttribute('aria-pressed', b.dataset.s===state.sector));
+  $('#exSub').textContent = 'Sample business: '+S.biz+'. Color jobs are assigned automatically from the check above.';
+  const set=(k,v)=>document.querySelectorAll('[data-t="'+k+'"]').forEach(el=>el.textContent=v);
+  ['biz','webH','webP','btn','btn2','person','role','phone','tag','post','sign','signSub','phTitle','q1','q2','info','phBtn','phCap'].forEach(k=>set(k,S[k]));
+  set('handle', S.handle);
+  document.querySelectorAll('[data-t="nav"]').forEach(el=>el.innerHTML=S.nav.map(n=>'<span>'+n+'</span>').join(''));
+  document.querySelectorAll('[data-t="row"]').forEach(el=>el.innerHTML=S.row.map(r=>'<div>'+r[0]+'<small>'+r[1]+'</small></div>').join(''));
+  const chips=(arr,on)=>arr.map((c,i)=>'<span'+(i===on?' class="on"':'')+'>'+c+'</span>').join('');
+  $('[data-t="c1"]').innerHTML=chips(S.c1,S.c1on);
+  $('[data-t="c2"]').innerHTML=chips(S.c2,S.c2on);
+}
+
+/* navigation */
+function go(i, animate=true, push=true){
+  state.idx = (i+COMBOS.length)%COMBOS.length; state.bgIdx=null;
+  renderCurrent(animate);
+  bumpHook();
+  if(push){ const h='#k-'+(state.idx+1); if(location.hash!==h){ try{ history.replaceState(null,'',h); }catch(e){ location.hash=h; } } }
+}
+function randomIdx(){
+  const pool = COMBOS.map((c,i)=>i).filter(i=>!state.filter || COMBOS[i].length===state.filter);
+  let r; do{ r=pool[Math.floor(Math.random()*pool.length)]; }while(pool.length>1 && r===state.idx);
+  return r;
+}
+function stepFiltered(dir){
+  let i=state.idx;
+  for(let n=0;n<COMBOS.length;n++){ i=(i+dir+COMBOS.length)%COMBOS.length; if(!state.filter || COMBOS[i].length===state.filter) break; }
+  go(i);
+}
+function readHash(){
+  const m=/^#k-(\d{1,3})$/.exec(location.hash);
+  if(m){ const n=Number(m[1]); if(n>=1 && n<=COMBOS.length) return n-1; }
+  return null;
+}
+
+/* copying */
+let toastT;
+function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),1800); }
+function copy(text, okMsg){
+  const fallback=()=>{ const ta=document.createElement('textarea'); ta.value=text; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); let ok=false; try{ ok=document.execCommand('copy'); }catch(e){} ta.remove(); toast(ok?okMsg:'Couldn’t copy: '+text); };
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(()=>toast(okMsg)).catch(fallback); } else fallback();
+}
+
+/* events */
+$('#list').addEventListener('click',e=>{ const b=e.target.closest('button[data-i]'); if(b) go(Number(b.dataset.i)); });
+document.querySelectorAll('.seg button').forEach(b=>b.addEventListener('click',()=>{
+  state.filter=Number(b.dataset.n);
+  document.querySelectorAll('.seg button').forEach(x=>x.setAttribute('aria-pressed', x===b));
+  renderList();
+  if(state.filter && COMBOS[state.idx].length!==state.filter) stepFiltered(1);
+}));
+$('#jumpInput').addEventListener('change',e=>{ const n=parseInt(e.target.value,10); if(n>=1 && n<=COMBOS.length){ go(n-1); } else { toast('Enter a number from 1 to 348'); } });
+$('#prevBtn').addEventListener('click',()=>stepFiltered(-1));
+$('#nextBtn').addEventListener('click',()=>stepFiltered(1));
+$('#randBtn').addEventListener('click',()=>go(randomIdx()));
+$('#heroRandom').addEventListener('click',()=>{ go(randomIdx()); document.getElementById('atelier').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}); });
+$('#rotBtn').addEventListener('click',()=>{ const n=COMBOS[state.idx].length; state.bgIdx=(state.bgIdx+1)%n; renderCurrent(false); });
+$('#swatches').addEventListener('click',e=>{ const b=e.target.closest('[data-copy]'); if(b) copy(b.dataset.copy, b.dataset.copy+' copied'); });
+$('#copyAll').addEventListener('click',()=>{ const t=colorsOf(state.idx).map(c=>c[1].toUpperCase()).join(', '); copy(t,'Color codes copied'); });
+$('#copyLink').addEventListener('click',()=>{ const base=location.href.split('#')[0]; copy(base+'#k-'+(state.idx+1),'Link copied'); });
+$('#sectorBtns').addEventListener('click',e=>{ const b=e.target.closest('button[data-s]'); if(!b) return; state.sector=b.dataset.s; store.set('atelier-sector',state.sector); renderSector(); });
+window.addEventListener('hashchange',()=>{ const h=readHash(); if(h!==null && h!==state.idx) go(h,true,false); });
+document.addEventListener('keydown',e=>{
+  if(e.target.closest('input,textarea')) return;
+  if(e.key==='ArrowRight'){ stepFiltered(1); } else if(e.key==='ArrowLeft'){ stepFiltered(-1); }
+});
+
+/* apply settings */
+function applyConfig(){
+  document.title = 'Color Atelier · ' + CONFIG.firmaAdi;
+  const map = { firma: CONFIG.firmaAdi, ctaBaslik: CONFIG.cta.baslik, ctaAciklama: CONFIG.cta.aciklama, ctaButon: CONFIG.cta.buton };
+  document.querySelectorAll('[data-cfg]').forEach(el=>{ const v=map[el.dataset.cfg]; if(v!==undefined) el.textContent=v; });
+  const root=document.documentElement.style, k=CONFIG.renkler.koyu, v=CONFIG.renkler.vurgu;
+  root.setProperty('--navy', k);
+  root.setProperty('--coral', v);
+  root.setProperty('--on-coral', contrast(k,v) >= contrast(LIGHT,v) ? k : LIGHT);
+  $('#sectorBtns').innerHTML = SECTOR_KEYS.map(key=>'<button type="button" data-s="'+key+'" aria-pressed="false">'+SECTORS[key].etiket+'</button>').join('');
+}
+
+/* contact links */
+function contactHref(){
+  const base=(CONFIG.iletisimLinki||'').trim();
+  if(!base) return '#talk';
+  if(!CONFIG.kombinasyonuLinkeEkle) return base;
+  const [u, frag] = base.split('#');
+  const p=CONFIG.linkParametresi||'combination';
+  return u + (u.includes('?')?'&':'?') + p + '=' + (state.idx+1) + '&colors=' + colorsOf(state.idx).map(c=>c[1].slice(1)).join('-') + (frag!==undefined ? '#'+frag : '');
+}
+function updateContactLinks(){
+  const has=!!(CONFIG.iletisimLinki||'').trim();
+  const external=/^https?:/i.test((CONFIG.iletisimLinki||'').trim());
+  document.querySelectorAll('.js-contact').forEach(a=>{ a.href=contactHref(); if(has&&external){ a.target='_blank'; a.rel='noopener'; } });
+}
+document.addEventListener('click',e=>{
+  const a=e.target.closest('.js-contact');
+  if(a && !(CONFIG.iletisimLinki||'').trim()){ e.preventDefault(); toast('Contact link coming soon'); console.info('[Color Atelier] CONFIG.iletisimLinki is empty.'); }
+});
+
+/* hook: a small banner that rises after a few combinations */
+const seen = new Set();
+let hookClosed = false;
+try{ hookClosed = sessionStorage.getItem('atelier-hook-closed')==='1'; }catch(e){}
+function bumpHook(){
+  seen.add(state.idx);
+  if(!CONFIG.hookEsik || hookClosed || seen.size < CONFIG.hookEsik) return;
+  $('#hookCount').textContent = seen.size;
+  $('#hookbar').hidden = false;
+  document.body.classList.add('has-hook');
+}
+$('#hookClose').addEventListener('click',()=>{
+  hookClosed = true; $('#hookbar').hidden = true; document.body.classList.remove('has-hook');
+  try{ sessionStorage.setItem('atelier-hook-closed','1'); }catch(e){}
+});
+
+/* start: the number in the link if there is one, otherwise the one in settings */
+const fromHash = readHash();
+const startN = Math.min(Math.max(parseInt(CONFIG.baslangicKombinasyonu,10)||1,1),COMBOS.length);
+state.idx = fromHash!==null ? fromHash : startN-1;
+seen.add(state.idx);
+applyConfig(); renderList(); renderSector(); renderCurrent(false);
+</script>
+</body>
+</html>
