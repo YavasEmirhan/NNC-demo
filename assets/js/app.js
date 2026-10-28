@@ -1,20 +1,21 @@
-/* Navy Night Creative — site + voyage scene. Requires three.js r128 (+ postprocessing) loaded before this file. */
-const IMG={agora1:"assets/img/work/agora-01.jpg",agora2:"assets/img/work/agora-02.jpg",anatolia1:"assets/img/work/anatolia-01.jpg",anatolia2:"assets/img/work/anatolia-02.jpg"};
+/* Navy Night Creative: site, Ship's Log, compass and the voyage scene.
+   three.js r128 is loaded on demand from assets/vendor/three/ on desktops with WebGL; phones play assets/video/. */
+const IMG={agora1:"assets/img/work/agora-01.webp",agora2:"assets/img/work/agora-02.webp",anatolia1:"assets/img/work/anatolia-01.webp",anatolia2:"assets/img/work/anatolia-02.webp"};
 const DRAFT="Taslak metin. Görsellerden yazıldı, işletmeyle doğrulanacak.";
 const SERVICES=[
  {id:"social-media",n:"01",name:"Social Media",kicker:"Management, content and performance",lede:"Build a consistent presence and turn content into attention, trust and action.",draft:false,
   groups:[{t:"Management",i:["Instagram, Facebook, TikTok, LinkedIn, X and Google Business Profile","Content strategy, calendars, scheduling and publishing","Profile optimization, community management and reporting"]},{t:"Content",i:["Static posts, carousels, Stories, Reels and TikTok videos","Campaign, seasonal and industry-specific concepts","Platform-ready formats, versioning and performance analysis"]}],note:"",work:["agora","anatolia"]},
- {id:"creative",n:"02",name:"Creative",kicker:"Design, copy and print",lede:"Make every touchpoint look and sound like the same brand, from a single post to a printed catalog.",draft:true,
+ {id:"creative",n:"02",name:"Creative",kicker:"Design, copy, print and production",lede:"From the first concept to the final printed piece, every detail works together.",draft:false,
   groups:[{t:"Design & copy",i:["Campaign graphics, digital ads, presentations and marketing collateral","Menus, catalogs, brochures, posters and product sheets","Website, advertising, product and corporate copy"]},{t:"Print & delivery",i:["Business cards, stationery, event materials and branded merchandise","Supplier sourcing, cost coordination and production management","Quality control and final delivery coordination"]}],note:"",work:["agora","anatolia"]},
- {id:"production",n:"03",name:"Production",kicker:"Photo, video and post-production",lede:"Capture the product, the place and the people, then cut it for every channel you use.",draft:true,
+ {id:"production",n:"03",name:"Production",kicker:"Photography, video and post-production",lede:"One coordinated workflow from planning and shooting to editing and delivery.",draft:false,
   groups:[{t:"On location",i:["Brand, product, food, hospitality, lifestyle and corporate photography","Short-form, promotional, interview and testimonial video","Event coverage, multi-camera recording and on-site content","Drone photography, video and commercial property footage"]},{t:"Post-production",i:["Editing, color correction, sound, captions and motion graphics","Branded intros, outros, highlight videos and event recaps","Long-form to short-form adaptation and multi-format delivery"]}],note:"Same-event social content and archive organization are available when included in the agreed scope.",work:[]},
- {id:"branding",n:"04",name:"Branding",kicker:"Identity and brand development",lede:"Give the business a clear look, a clear voice and a system that keeps both consistent.",draft:true,
+ {id:"branding",n:"04",name:"Branding",kicker:"Identity, voice and brand systems",lede:"A clear, credible identity that stays consistent across digital and physical touchpoints.",draft:false,
   groups:[{t:"Visual identity",i:["Logo, color palette, typography and brand guidelines","Corporate stationery, email signatures and document templates","Presentation, sales and social media identity systems"]},{t:"Brand development",i:["Positioning, brand voice and messaging","Naming support, taglines and storytelling","Brand refresh, rebranding and consistency systems"]}],note:"",work:[]},
- {id:"digital",n:"05",name:"Digital",kicker:"Web, search and advertising",lede:"Get found, give people a clear next step, and measure what happens after the click.",draft:true,
+ {id:"digital",n:"05",name:"Digital",kicker:"Websites, search visibility and advertising",lede:"Connect a strong online presence with clear paths to enquiry and conversion.",draft:false,
   groups:[{t:"Web & search",i:["Responsive websites, landing pages and product or service pages","Forms, analytics, CRM integrations and e-commerce when required","On-page and local SEO, keyword research and Google Business optimization"]},{t:"Advertising",i:["Meta Ads, Instagram and Facebook advertising support","Audience strategy, lead campaigns, creative and advertising copy","Search-friendly content and performance evaluation"]}],note:"Advertising budgets, media spend, software subscriptions and third-party platform costs are separate from NNC service fees.",work:[]},
- {id:"influence",n:"06",name:"Influence & Partnerships",kicker:"Creators and collaborations",lede:"Put the brand in front of the right local audiences through people they already follow.",draft:true,
+ {id:"influence",n:"06",name:"Influence & Partnerships",kicker:"Creators, collaborations and campaign delivery",lede:"Build relevant relationships and coordinate campaigns from discovery through reporting.",draft:false,
   groups:[{t:"Creator campaigns",i:["Influencer and micro-influencer research and shortlists","Outreach, negotiation, content briefs and visit coordination","Reels and Stories, content review, follow-up and evaluation"]},{t:"Partnerships",i:["Local business, brand and creator collaborations","Cross-promotional, community and event campaigns","Strategic partnerships and long-term creator relationships"]}],note:"",work:[]},
- {id:"marketing-business",n:"07",name:"Marketing & Business",kicker:"Growth strategy and U.S. business support",lede:"Plan the growth, and get the paperwork moving so you can launch and operate in the U.S.",draft:true,
+ {id:"marketing-business",n:"07",name:"Marketing & Business",kicker:"Strategy, growth and setup support",lede:"A practical roadmap for marketing, customer acquisition and U.S. operating readiness.",draft:false,
   groups:[{t:"Marketing & growth",i:["Marketing plans, positioning, audience research and competitor analysis","Lead generation, landing page strategy and conversion messaging","Campaign management, audits, consulting and market entry support"]},{t:"U.S. business support",i:["LLC and corporation formation, state registration and EIN application coordination","License research, registered agent and business address coordination","Bank account preparation, documentation and filing reminders","Sales tax processes and coordination with accounting, bookkeeping and tax professionals"]}],note:"NNC provides administrative support and process coordination. Legal, accounting and tax advice is delivered by appropriately qualified third-party professionals when required.",work:[]}
 ];
 const CASES=[
@@ -23,13 +24,13 @@ const CASES=[
   summary:"Product campaign posts for a truck and trailer parts supplier, built around the exact part, the trucks it fits and one clear Shop Now.",
   brief:"Truck parts are bought by fit. Each post had to show the part, the models it fits and the part numbers buyers search for, without turning into a spec sheet.",
   made:"A stone-and-steel campaign look: one hero part per post, an oversized product name, a fitment card with part numbers and the same Shop Now line pointing to the store every time.",
-  deliv:["Social media campaign posts","Creative direction","Campaign design system"]},
+  deliv:["Social media campaign posts","Creative direction","Campaign design system"],palette:["#111315","#4d5963","#72808b","#92a0a9","#b4bfc5"]},
  {id:"anatolia",n:"02",name:"Anatolia Chicago",client:"Anatolia Mediterranean Restaurant",year:"",tags:["Social Media","Content Creation","Graphic Design"],
   imgs:[{src:IMG.anatolia1,alt:"Anatolia Chicago Mixed Kebab design featuring a sharing platter."},{src:IMG.anatolia2,alt:"Anatolia Chicago cocktail design in a warmly lit restaurant."}],
   summary:"Social content for a Mediterranean restaurant in Chicago: low-light food and cocktail designs that make the table feel booked for tonight.",
   brief:"A restaurant feed has two jobs: make people hungry, and make the room look worth the trip.",
   made:"A dark, warmly lit look where the dish or the drink is the only thing in the light, classic lettering for the item name and the Anatolia mark at the foot of every post.",
-  deliv:["Social media content","Menu item designs","Cocktail feature designs"]}
+  deliv:["Social media content","Menu item designs","Cocktail feature designs"],palette:["#030301","#43230d","#704928","#bca684"]}
 ];
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -44,8 +45,8 @@ const root=document.documentElement;
 
 /* ================= THE VOYAGE (three.js) ================= */
 const INTRO=13.2;
-const T3=!!window.THREE;
-const V={ok:false,t0:0,introActive:false,visible:true,raf:0,last:0,offset:{x:0,z:0},trim:{p:0,r:0,h:0}};
+let T3=!!window.THREE;
+const V={ok:false,t0:0,introActive:false,visible:true,raf:0,last:0,offset:{x:0,z:0},trim:{p:0,r:0,h:0},mx:0,my:0,tx:0,ty:0,scrollP:0};
 (function buildCompassTicks(){return;const g=$("#ticks");let s="";for(let d=0;d<360;d+=10){const a=d*Math.PI/180,l=d%90===0?14:d%30===0?9:5;s+=`<line x1="${(Math.sin(a)*76).toFixed(1)}" y1="${(-Math.cos(a)*76).toFixed(1)}" x2="${(Math.sin(a)*(76-l)).toFixed(1)}" y2="${(-Math.cos(a)*(76-l)).toFixed(1)}"/>`}g.innerHTML=s})();
 
 /* one wave function, shared by the GPU (sea surface) and the CPU (boat motion) */
@@ -83,10 +84,11 @@ function rockGeo(r,seed){const g=new THREE.IcosahedronGeometry(r,3);const p=g.at
 let R,S,CAM,COMP=null,BLOOM=null,GRADE=null,water,WU,SKYU,boat,house,lhG,lampPos,glows=[],beams=[],BUs=[],spot,lampLight,stars,sky,rig,radar,mastGlow,deckLight;
 const LH={dist:165,ang:30*Math.PI/180};
 const H1=13*Math.PI/180;
-const MOON=T3?new THREE.Vector3(-.52,.3,-.8).normalize():null;
-const CAMS=!T3?{}:{inside:new THREE.Vector3(0,3.92,1.25),bow:new THREE.Vector3(0,3.95,-5.6),
+let MOON=T3?new THREE.Vector3(-.52,.3,-.8).normalize():null;
+let CAMS=!T3?{}:{inside:new THREE.Vector3(0,3.92,1.25),bow:new THREE.Vector3(0,3.95,-5.6),
   wideL:new THREE.Vector3(-10,9.8,23),wideP:new THREE.Vector3(3.6,11.5,31),ctrl:new THREE.Vector3(3,11,3)};
-const _a=T3?new THREE.Vector3():null,_b=T3?new THREE.Vector3():null,_c=T3?new THREE.Vector3():null;
+let _a=T3?new THREE.Vector3():null,_b=T3?new THREE.Vector3():null,_c=T3?new THREE.Vector3():null;
+function initLazies(){if(MOON)return;T3=true;MOON=new THREE.Vector3(-.52,.3,-.8).normalize();CAMS={inside:new THREE.Vector3(0,3.92,1.25),bow:new THREE.Vector3(0,3.95,-5.6),wideL:new THREE.Vector3(-10,9.8,23),wideP:new THREE.Vector3(3.6,11.5,31),ctrl:new THREE.Vector3(3,11,3)};_a=new THREE.Vector3();_b=new THREE.Vector3();_c=new THREE.Vector3()}
 
 function buildBoat(env){
   const g=new THREE.Group();
@@ -155,6 +157,9 @@ function buildBoat(env){
   const mh=new THREE.Mesh(new THREE.SphereGeometry(.07,10,8),new THREE.MeshBasicMaterial({color:0xfff3d6}));mh.position.copy(mastGlow.position);house.add(mh);
   deckLight=new THREE.PointLight(0xffd9a0,.32,8,2);deckLight.position.set(0,1.8+2.4,-1.4);g.add(deckLight);
   const cabinLight=new THREE.PointLight(0xffc56b,.28,6,2);cabinLight.position.set(0,1.8+3.2,4.6);g.add(cabinLight);
+  /* navigation lights: red to port, green to starboard, white at the stern */
+  const nav=(c,x,y,z,sc,op)=>{const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:gt,color:c,blending:THREE.AdditiveBlending,transparent:true,depthWrite:false,opacity:op}));sp.position.set(x,y,z);sp.scale.set(sc,sc,1);house.add(sp)};
+  nav(0xff5a4a,-1.66,1.8+2.05,-.2,.55,.85);nav(0x4cd68a,1.66,1.8+2.05,-.2,.55,.85);nav(0xfff1d0,0,1.8+2.75,2.85,.5,.8);
   return g}
 
 function buildLighthouse(env){
@@ -209,7 +214,7 @@ function glassMaterial(shared,seed){
     fragmentShader:`uniform float uT,uHaze,uLight,uSeed,uAsp;varying vec2 vUv;
       float h(vec2 p){return fract(sin(dot(p+uSeed*13.17,vec2(127.1,311.7)))*43758.5453);}
       float drops(vec2 uv,float sc,out float rim){vec2 g=uv*sc;vec2 id=floor(g);vec2 f=fract(g)-.5;float r=h(id);vec2 o=(vec2(h(id+3.1),h(id+7.7))-.5)*.55;
-        float s=.05+.16*r*r;vec2 q=(f-o)*vec2(1.,.85);float d=length(q);float on=step(.58,r);
+        float s=.04+.12*r*r;vec2 q=(f-o)*vec2(1.,.85);float d=length(q);float on=step(.72,r);
         float body=smoothstep(s,s*.55,d)*on;float cres=smoothstep(s*.95,s*.7,length(q-vec2(-.25,.3)*s))*smoothstep(s*.25,s*.75,length(q-vec2(.18,-.22)*s))*on;rim=cres;return body;}
       void main(){vec2 uv=vec2(vUv.x*uAsp,vUv.y);
         float r1,r2;float d1=drops(uv,11.,r1);float d2=drops(uv+.37,23.,r2);
@@ -218,8 +223,8 @@ function glassMaterial(shared,seed){
         float edge=smoothstep(0.,.12,vUv.y)*smoothstep(1.,.85,vUv.y);
         float haze=uHaze*(.16+.1*smoothstep(.55,0.,vUv.y))*(.8+.2*sin(uv.x*3.+uT*.2));
         vec3 base=vec3(.55,.62,.7);
-        vec3 glint=vec3(1.,.84,.52)*(r1+r2*.7+trail*.5)*uLight*1.1+vec3(.6,.68,.78)*(r1+r2)*.05;
-        float a=haze+(d1+d2)*.035+(r1+r2)*.22*(.08+uLight)+trail*.08*(.2+uLight);
+        vec3 glint=vec3(1.,.9,.72)*(r1+r2*.7+trail*.5)*uLight*.32+vec3(.6,.68,.78)*(r1+r2)*.05;
+        float a=haze+(d1+d2)*.03+(r1+r2)*.12*(.06+uLight*.45)+trail*.06*(.2+uLight*.5);
         vec3 warm=vec3(.95,.62,.25)*.05*smoothstep(.35,0.,vUv.y);
         gl_FragColor=vec4(base*haze*.6+glint+warm,clamp(a,0.,.85)*edge+warm.r*.4);}`})}
 function screenTex(w,h){const c=document.createElement("canvas");c.width=w;c.height=h;const t=new THREE.CanvasTexture(c);return{c,x:c.getContext("2d"),t}}
@@ -314,18 +319,82 @@ function drawScreens(T,time,st,relLight,fog){
   const vis=(.2+clamp((.017-fog)/(.017-.0028),0,1)*5.8).toFixed(1),sog=(st.speed*1.944).toFixed(1);
   [["HDG",hdg+"°"],["VIS",vis+" NM"],["SOG",sog+" KN"]].forEach(([k,v],i)=>{const y=34+i*48;X2.textAlign="left";X2.fillStyle="rgba(247,245,239,.55)";X2.font="600 18px Anek Latin, Arial, sans-serif";X2.fillText(k,16,y);X2.textAlign="right";X2.fillStyle="#f0ba31";X2.font="700 30px Anek Latin, Arial, sans-serif";X2.fillText(v,W2-16,y+2)});
   r.t.needsUpdate=true}
-/* drifting fog banks in front of the camera */
-let MIST=[];
-function buildMist(){const geo=new THREE.PlaneGeometry(1,1);[[14,.0,1],[32,.37,1.6],[70,.71,2.4]].forEach(([d,seed,sc])=>{
-  const m=new THREE.ShaderMaterial({transparent:true,depthWrite:false,fog:false,uniforms:{uT:{value:0},uA:{value:0},uSeed:{value:seed},uSc:{value:sc},uGold:{value:0}},
-    vertexShader:`varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
-    fragmentShader:NOISE_GLSL+`uniform float uT,uA,uSeed,uSc,uGold;varying vec2 vUv;void main(){vec2 p=vUv*vec2(3.2,1.6)*uSc+vec2(uT*.035+uSeed*9.,uSeed*5.);
-      float n=fbm2(p)*.65+fbm2(p*2.3-uT*.05)*.35;float a=smoothstep(.38,.9,n)*uA;a*=smoothstep(0.,.2,vUv.x)*smoothstep(1.,.8,vUv.x)*smoothstep(0.,.35,vUv.y)*smoothstep(1.,.6,vUv.y);
-      vec3 c=mix(vec3(.12,.2,.29),vec3(.95,.78,.45),uGold*smoothstep(.3,1.,vUv.x));gl_FragColor=vec4(c,a);}`});
-  const q=new THREE.Mesh(geo,m);q.userData.d=d;q.renderOrder=3;S.add(q);MIST.push(q)})}
-function placeMist(time,amount,gold){const hf=Math.tan(CAM.fov*Math.PI/360);MIST.forEach(q=>{const d=q.userData.d;q.visible=amount>.01;if(!q.visible)return;
+/* ---------- cinematic layer: light with volume, fog lit by the beam, drizzle, the logo in the light ---------- */
+let MIST=[],BEAMU=null,RAIN=null,LOGOQ=null;
+/* where the lighthouse beam is, so fog, rain and the logo can glow inside it */
+const BEAM_GLSL=`uniform vec3 uLampP,uAx0,uAx1;uniform float uBTan,uBI;
+float beamAt(vec3 p,vec3 ax){vec3 q=p-uLampP;float a=dot(q,ax);if(a<=0.)return 0.;float r=length(q-ax*a)/(a*uBTan*1.3);return exp(-r*r*2.2)*exp(-a*.004);}
+float beamLit(vec3 p){return ((beamAt(p,uAx0)+beamAt(p,uAx1)*.45)+exp(-length(p-uLampP)*.045)*.6)*uBI;}`;
+/* 3D value noise for drifting fog inside the beam */
+const VOL_GLSL=`float h13(vec3 p){p=fract(p*.1031);p+=dot(p,p.zyx+31.32);return fract((p.x+p.y)*p.z);}
+float n3(vec3 p){vec3 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
+  return mix(mix(mix(h13(i),h13(i+vec3(1.,0.,0.)),f.x),mix(h13(i+vec3(0.,1.,0.)),h13(i+vec3(1.,1.,0.)),f.x),f.y),mix(mix(h13(i+vec3(0.,0.,1.)),h13(i+vec3(1.,0.,1.)),f.x),mix(h13(i+vec3(0.,1.,1.)),h13(i+vec3(1.,1.,1.)),f.x),f.y),f.z);}`;
+/* drifting fog banks in front of the camera; they catch the beam when it passes */
+function buildMist(){const geo=new THREE.PlaneGeometry(1,1);[[9,.13,.8],[16,0,1],[26,.52,1.3],[40,.37,1.7],[70,.71,2.4]].forEach(([d,seed,sc])=>{
+  const m=new THREE.ShaderMaterial({transparent:true,depthWrite:false,fog:false,uniforms:Object.assign({uT:{value:0},uA:{value:0},uSeed:{value:seed},uSc:{value:sc},uGold:{value:0}},BEAMU),
+    vertexShader:`varying vec2 vUv;varying vec3 vWp;void main(){vUv=uv;vec4 w=modelMatrix*vec4(position,1.);vWp=w.xyz;gl_Position=projectionMatrix*viewMatrix*w;}`,
+    fragmentShader:NOISE_GLSL+BEAM_GLSL+`uniform float uT,uA,uSeed,uSc,uGold;varying vec2 vUv;varying vec3 vWp;void main(){vec2 p=vUv*vec2(3.2,1.6)*uSc+vec2(uT*.035+uSeed*9.,uSeed*5.);
+      float n=fbm2(p)*.6+fbm2(p*2.3-uT*.05)*.3+fbm2(p*5.1+uT*.08)*.1;float a=smoothstep(.36,.92,n);
+      a*=smoothstep(0.,.18,vUv.x)*smoothstep(1.,.82,vUv.x)*smoothstep(0.,.3,vUv.y)*smoothstep(1.,.62,vUv.y);
+      float lit=beamLit(vWp);vec3 c=vec3(.11,.18,.26)*(1.+uGold*.4)+vec3(1.,.8,.48)*lit*1.6;
+      gl_FragColor=vec4(c,clamp(a*(uA*(1.+lit*.6)+lit*.25),0.,1.));}`});
+  const q=new THREE.Mesh(geo,m);q.userData.d=d;q.renderOrder=3;q.frustumCulled=false;S.add(q);MIST.push(q)})}
+function placeMist(time,amount,gold){const hf=Math.tan(CAM.fov*Math.PI/360);MIST.forEach(q=>{const d=q.userData.d;q.visible=amount>.01||BEAMU.uBI.value>.01;if(!q.visible)return;
   q.position.copy(CAM.position).add(_a.set(0,0,-d).applyQuaternion(CAM.quaternion));q.quaternion.copy(CAM.quaternion);q.scale.set(d*hf*CAM.aspect*2.8,d*hf*2.2,1);
   q.material.uniforms.uT.value=time;q.material.uniforms.uA.value=amount;q.material.uniforms.uGold.value=gold})}
+/* drizzle: thin streaks around the camera, almost invisible until the beam lights them */
+function buildRain(n){const pos=new Float32Array(n*6),sd=new Float32Array(n*8);
+  for(let i=0;i<n;i++){const x=Math.random(),y=Math.random(),z=Math.random();sd.set([x,y,z,0,x,y,z,1],i*8)}
+  const g=new THREE.BufferGeometry();g.setAttribute("position",new THREE.BufferAttribute(pos,3));g.setAttribute("seed",new THREE.BufferAttribute(sd,4));
+  const U=Object.assign({uT:{value:0},uRain:{value:0},uCam:{value:new THREE.Vector3()},uIn:{value:0}},BEAMU);
+  const m=new THREE.ShaderMaterial({uniforms:U,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,fog:false,
+    vertexShader:`attribute vec4 seed;uniform float uT,uIn;uniform vec3 uCam;varying float vA;varying vec3 vWp;
+      void main(){vec3 B=vec3(44.,26.,44.);vec3 vel=vec3(-2.2,-11.,1.4);vec3 p=seed.xyz*B+vel*uT;p=mod(p-uCam+B*.5,B)-B*.5+uCam;p-=normalize(vel)*seed.w*.6;
+        float dh=length((p-uCam).xz);vA=smoothstep(2.6,4.,dh)*mix(1.,smoothstep(3.2,4.6,dh),uIn)*smoothstep(22.,7.,dh);
+        vWp=p;gl_Position=projectionMatrix*viewMatrix*vec4(p,1.);}`,
+    fragmentShader:BEAM_GLSL+`uniform float uRain;varying float vA;varying vec3 vWp;void main(){float a=vA*uRain*(.045+beamLit(vWp)*1.5);if(a<.002)discard;gl_FragColor=vec4(vec3(1.,.88,.66)*a,1.);}`});
+  const L=new THREE.LineSegments(g,m);L.frustumCulled=false;L.renderOrder=5;RAIN={L,U};return L}
+/* the Navy Night wordmark, hanging in the fog: the beam reveals it letter by letter as it sweeps across */
+function buildLogo(){const c=document.createElement("canvas");c.width=1024;c.height=256;const t=new THREE.CanvasTexture(c);
+  const img=new Image();img.onload=()=>{try{const x=c.getContext("2d");const r=Math.min(c.width*.92/img.width,c.height*.8/img.height),w=img.width*r,h=img.height*r;x.drawImage(img,(c.width-w)/2,(c.height-h)/2,w,h);x.getImageData(0,0,1,1);t.needsUpdate=true;LOGOQ.ready=true}catch(e){}};img.src="assets/img/logo-light.svg";
+  const U={uMap:{value:t},uT:{value:0},uA:{value:0},uLamp:{value:new THREE.Vector3()},uYaw:{value:0}};
+  const m=new THREE.ShaderMaterial({uniforms:U,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,fog:false,
+    vertexShader:`varying vec2 vUv;varying vec3 vWp;void main(){vUv=uv;vec4 w=modelMatrix*vec4(position,1.);vWp=w.xyz;gl_Position=projectionMatrix*viewMatrix*w;}`,
+    fragmentShader:NOISE_GLSL+`uniform sampler2D uMap;uniform float uT,uA,uYaw;uniform vec3 uLamp;varying vec2 vUv;varying vec3 vWp;
+      void main(){vec4 tx=texture2D(uMap,vUv);float lum=max(tx.r,max(tx.g,tx.b))*tx.a;
+        float fy=atan(vWp.z-uLamp.z,vWp.x-uLamp.x);float d=uYaw-fy;d=atan(sin(d),cos(d));
+        float lit=smoothstep(-.035,.0,d)*exp(-max(d,0.)*1.5);
+        float fogn=.55+.45*smoothstep(.2,.75,fbm2(vUv*vec2(9.,2.6)+vec2(uT*.12,uT*.03)));
+        float a=lum*fogn*lit*uA;gl_FragColor=vec4(mix(vec3(1.,.86,.6),tx.rgb,.45)*a*3.,1.);}`});
+  const q=new THREE.Mesh(new THREE.PlaneGeometry(1,.25),m);q.frustumCulled=false;q.renderOrder=4;q.visible=false;LOGOQ={q,U,ready:false};return q}
+/* film pass: depth of field (rack focus), lens fringing, anamorphic flare from the lamp, ACES-style tone curve, grade, vignette, grain */
+const FILM_GLSL=`uniform sampler2D tDiffuse,tDepth;uniform vec2 uRes,uLampUV;uniform float uT,uFocus,uAper,uExpo,uNear,uFar,uLampZ,uLampI,uMaxR;varying vec2 vUv;
+float lz(vec2 uv){float d=texture2D(tDepth,uv).x;return uNear*uFar/(uFar-d*(uFar-uNear));}
+float coc(vec2 uv){return clamp(abs(1./uFocus-1./lz(uv))*uAper,0.,1.);}
+float hh(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}
+vec3 aces(vec3 x){return clamp((x*(2.51*x+.03))/(x*(2.43*x+.59)+.14),0.,1.);}
+void main(){vec2 px=1./uRes;vec3 col=texture2D(tDiffuse,vUv).rgb;
+  float R0=coc(vUv)*uMaxR;
+  if(R0>.6){vec3 acc=col;float ws=1.;
+    for(int i=1;i<28;i++){float fi=float(i);float r=sqrt(fi/27.);vec2 uv=vUv+vec2(cos(fi*2.39996),sin(fi*2.39996))*r*R0*px;
+      float w=clamp(coc(uv)*uMaxR-r*R0+1.,0.,1.);acc+=texture2D(tDiffuse,uv).rgb*w;ws+=w;}
+    col=acc/ws;}
+  vec2 dc=vUv-.5;float e2=dot(dc,dc);vec2 ca=dc*e2*.014;float ek=.6*smoothstep(.05,.3,e2);
+  col.r=mix(col.r,texture2D(tDiffuse,vUv+ca).r,ek);col.b=mix(col.b,texture2D(tDiffuse,vUv-ca).b,ek);
+  if(uLampI>.001){float asp=uRes.x/uRes.y;vec2 d=(vUv-uLampUV)*vec2(asp,1.);
+    float vis=0.;for(int k=0;k<5;k++){vec2 o=vec2(float(k-2)*1.5,mod(float(k),2.)*1.5-.75)*px;vis+=step(uLampZ-3.5,lz(uLampUV+o));}vis/=5.;
+    float st=exp(-abs(d.y)*320.)*exp(-abs(d.x)*2.6)*.5+exp(-abs(d.y)*70.)*exp(-abs(d.x)*7.)*.22+exp(-length(d)*28.)*.35;
+    vec3 fl=mix(vec3(1.,.86,.58),vec3(.82,.87,.94),smoothstep(.05,.7,abs(d.x)))*st;
+    for(int k=1;k<4;k++){float f=float(k);vec2 gp=mix(uLampUV,vec2(1.)-uLampUV,.25+f*.32);float gr=.025+.03*f;fl+=vec3(.9,.72,.42)*smoothstep(gr,gr*.55,length((vUv-gp)*vec2(asp,1.)))*.035/f;}
+    col+=fl*uLampI*vis;}
+  vec3 lin=col*uExpo;vec3 tm=mix(lin/(1.+lin*.18),aces(lin*1.15),.75);
+  float L=dot(tm,vec3(.2126,.7152,.0722));
+  tm=mix(tm,tm*vec3(.9,1.,1.1)+vec3(0.,.004,.012),(1.-smoothstep(0.,.3,L))*.55);
+  tm=mix(tm,tm*vec3(1.07,1.,.88),smoothstep(.4,1.,L)*.45);
+  tm=mix(vec3(L),tm,.9);
+  tm*=mix(.72,1.,smoothstep(1.2,.35,length(dc)*1.3));
+  tm+=(hh(vUv*uRes*.5+fract(uT*7.13)*vec2(91.7,37.3))-.5)*.03*(1.-L*.7);
+  gl_FragColor=vec4(tm,1.);}`;
 
 /* ---------- realism extras: Gerstner sea, env reflections, spray, distant coast ---------- */
 const gf=v=>Number.isInteger(v)?v.toFixed(1):String(v);
@@ -379,14 +448,15 @@ function buildCoast(){const g=new THREE.Group();const seg=260,R0=1300,a0=-2.75,a
 function updateCoast(time,fog){if(!COAST)return;const haze=clamp((fog-.0028)/(.009-.0028),0,1);COAST.U.uHaze.value=haze;}
 
 function initVoyage(){
-  if(!window.THREE)return false;
+  if(!window.THREE)return false;initLazies();
   const canvas=$("#scene");
   try{R=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:"high-performance"})}catch(e){return false}
   if(!R.getContext())return false;
-  const mobile=innerWidth<760;
+  const mobile=matchMedia("(pointer: coarse)").matches&&!window.NNC_HQ;
   R.setPixelRatio(Math.min(devicePixelRatio||1,mobile?1.4:1.6));
   R.setClearColor(0x050f1a,1);
   S=new THREE.Scene();S.fog=new THREE.FogExp2(0x0b1f33,.017);
+  BEAMU={uLampP:{value:new THREE.Vector3()},uAx0:{value:new THREE.Vector3(1,0,0)},uAx1:{value:new THREE.Vector3(-1,0,0)},uBTan:{value:Math.tan(4*Math.PI/180)},uBI:{value:0}};
   CAM=new THREE.PerspectiveCamera(56,1,.1,3000);
   rig=new THREE.Object3D();S.add(rig);
   SKYU={uMoonDir:{value:MOON.clone()},uLampDirS:{value:new THREE.Vector3(1,0,0)},uMoonI:{value:1},uLampGlow:{value:0},uSkyFog:{value:1},uFogC:{value:new THREE.Color(0x0b1f33)}};
@@ -461,6 +531,8 @@ function initVoyage(){
   boat=buildBoat(env);S.add(boat);
   if(!mobile)boat.traverse(o=>{if(o.isMesh&&!(o.material&&o.material.transparent)){o.castShadow=true;o.receiveShadow=true}});
   boat.add(buildInterior());buildMist();
+  if(!mobile)INT.group.traverse(o=>{if(o.isMesh&&o.material&&!o.material.transparent&&!o.material.isShaderMaterial&&!o.material.isMeshBasicMaterial){o.castShadow=true;o.receiveShadow=true}});
+  S.add(buildRain(mobile?500:1100));S.add(buildLogo());
   SPRAY=makeParticles(mobile?140:320,.22,0xd2dde8);WAKEP=makeParticles(mobile?160:380,.3,0xa9b8c8);boat.add(SPRAY.p);boat.add(WAKEP.p);
   S.add(buildCoast());
   lhG=buildLighthouse(env);S.add(lhG);
@@ -469,23 +541,38 @@ function initVoyage(){
   mk(9);mk(26);mk(120);
   lampLight=new THREE.PointLight(0xffd27a,0,45,2);S.add(lampLight);
   spot=new THREE.SpotLight(0xffe2a0,0,520,.075,.6,1);S.add(spot);S.add(spot.target);
-  /* two opposed beams, as a rotating optic throws */
-  const bg=new THREE.ConeGeometry(1,1,56,1,true);bg.translate(0,-.5,0);bg.rotateX(-Math.PI/2);
-  for(let k=0;k<2;k++){const U={uI:{value:0},uT:{value:0},uColor:{value:new THREE.Color(0xf8d27a)}};BUs.push(U);
-    const b=new THREE.Mesh(bg,new THREE.ShaderMaterial({uniforms:U,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,side:THREE.DoubleSide,fog:false,
-      vertexShader:`varying vec2 vUv;varying vec3 vN;varying vec3 vV;void main(){vUv=uv;vec4 mv=modelViewMatrix*vec4(position,1.);vV=-mv.xyz;vN=normalMatrix*normal;gl_Position=projectionMatrix*mv;}`,
-      fragmentShader:`uniform float uI,uT;uniform vec3 uColor;varying vec2 vUv;varying vec3 vN;varying vec3 vV;
-        void main(){float e=abs(dot(normalize(vN),normalize(vV)));float dust=.82+.18*sin(vUv.y*55.-uT*.8+vUv.x*31.)*sin(vUv.y*23.+uT*.5);
-          float a=pow(vUv.y,2.)*pow(e,1.8)*uI*dust;a+=pow(vUv.y,16.)*.7*uI;gl_FragColor=vec4(uColor*a,a);}`}));
-    S.add(b);beams.push(b)}
-  /* post-processing: bloom + a light film grade */
+  if(!mobile){spot.castShadow=true;spot.shadow.mapSize.set(1024,1024);spot.shadow.camera.near=60;spot.shadow.camera.far=320;spot.shadow.bias=-.0006;spot.shadow.normalBias=.02}
+  /* two opposed beams, as a rotating optic throws: ray-marched through drifting fog, so the light has volume */
+  const bg=new THREE.ConeGeometry(1,1,40,1,true);bg.translate(0,-.5,0);bg.rotateX(-Math.PI/2);
+  for(let k=0;k<2;k++){const U={uI:{value:0},uT:{value:0},uK:{value:.85},uColor:{value:new THREE.Color(0xf8d690)},uApex:{value:new THREE.Vector3()},uAxis:{value:new THREE.Vector3(1,0,0)},uTan:{value:Math.tan(4*Math.PI/180)},uLen:{value:360}};BUs.push(U);
+    const b=new THREE.Mesh(bg,new THREE.ShaderMaterial({uniforms:U,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,side:THREE.BackSide,fog:false,
+      vertexShader:`varying vec3 vWp;void main(){vec4 w=modelMatrix*vec4(position,1.);vWp=w.xyz;gl_Position=projectionMatrix*viewMatrix*w;}`,
+      fragmentShader:VOL_GLSL+`uniform float uI,uT,uK,uTan,uLen;uniform vec3 uColor,uApex,uAxis;varying vec3 vWp;
+        void main(){vec3 ro=cameraPosition;vec3 dv=vWp-ro;float tEnd=length(dv);vec3 rd=dv/tEnd;
+          vec3 co=ro-uApex;float c2=1./(1.+uTan*uTan);float da=dot(rd,uAxis),ca=dot(co,uAxis);
+          float A=da*da-c2,B=2.*(da*ca-dot(rd,co)*c2),C=ca*ca-dot(co,co)*c2;float t0=0.;
+          if(!(ca>0.&&C>=0.)){float D=B*B-4.*A*C;if(D<0.)discard;float sq=sqrt(D);float r1=(-B-sq)/(2.*A),r2=(-B+sq)/(2.*A);float tA=min(r1,r2),tB=max(r1,r2);
+            t0=(tA>0.&&dot(co+rd*tA,uAxis)>0.)?tA:tB;t0=max(t0,0.);}
+          float L=tEnd-t0;if(L<.05)discard;
+          float stp=L/22.,jit=fract(sin(dot(gl_FragCoord.xy,vec2(12.9898,78.233))+fract(uT)*91.7)*43758.5453),acc=0.;
+          for(int i=0;i<22;i++){vec3 p=ro+rd*(t0+(float(i)+jit)*stp);vec3 q=p-uApex;float ax=dot(q,uAxis);if(ax<=0.)continue;
+            float r=length(q-uAxis*ax)/(ax*uTan);float prof=exp(-r*r*2.4)*(1.-smoothstep(.85,1.,r));
+            vec3 np=p*.09+vec3(uT*.5,uT*.08,uT*.24);float den=.62+.7*(n3(np)*.55+n3(np*2.3+3.7)*.3+n3(np*5.1+1.3)*.15);
+            acc+=prof*den*exp(-ax/(uLen*.45))*(1.+5./(1.+ax*.12));}
+          float mu=dot(-rd,uAxis),g=.6,hg=(1.-g*g)/pow(1.+g*g-2.*g*mu,1.5);
+          float I=acc*stp*(.25+hg*.12)*uI*uK;I=I/(1.+I*.35);
+          gl_FragColor=vec4(uColor*I,1.);}`}));
+    b.renderOrder=6;S.add(b);beams.push(b)}
+  /* post-processing: bloom, then the film pass (rack focus, lens, flare, tone curve, grade, grain) */
   if(!mobile&&THREE.EffectComposer&&THREE.UnrealBloomPass&&THREE.ShaderPass){
-    try{COMP=new THREE.EffectComposer(R);COMP.addPass(new THREE.RenderPass(S,CAM));
-      BLOOM=new THREE.UnrealBloomPass(new THREE.Vector2(512,512),.6,.45,.9);COMP.addPass(BLOOM);
-      GRADE=new THREE.ShaderPass({uniforms:{tDiffuse:{value:null},uT:{value:0}},
+    try{COMP=new THREE.EffectComposer(R);
+      [COMP.renderTarget1,COMP.renderTarget2].forEach(rt=>{rt.depthBuffer=true;rt.depthTexture=new THREE.DepthTexture();rt.depthTexture.type=THREE.UnsignedIntType});
+      COMP.addPass(new THREE.RenderPass(S,CAM));
+      BLOOM=new THREE.UnrealBloomPass(new THREE.Vector2(512,512),.62,.5,.88);COMP.addPass(BLOOM);
+      GRADE=new THREE.ShaderPass({uniforms:{tDiffuse:{value:null},tDepth:{value:null},uRes:{value:new THREE.Vector2(1,1)},uT:{value:0},uFocus:{value:2},uAper:{value:0},uExpo:{value:1.25},uNear:{value:.1},uFar:{value:3000},
+          uLampUV:{value:new THREE.Vector2(-9,-9)},uLampZ:{value:100},uLampI:{value:0},uMaxR:{value:9}},
         vertexShader:`varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
-        fragmentShader:`uniform sampler2D tDiffuse;uniform float uT;varying vec2 vUv;float h(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}
-          void main(){vec3 c=texture2D(tDiffuse,vUv).rgb;c=c/(1.+c*.18);float v=smoothstep(1.15,.35,length(vUv-.5)*1.25);c*=mix(.62,1.,v);c+=(h(vUv*913.+uT)-.5)*.022;gl_FragColor=vec4(c,1.);}`});
+        fragmentShader:FILM_GLSL});
       COMP.addPass(GRADE)}catch(e){COMP=null}}
   layoutVoyage();
   return true}
@@ -505,11 +592,15 @@ function voyageState(T){
   s.fog=T<4.5?.017:T<8?lerp(.017,.0062,easeOut(seg(T,4.5,8))):lerp(.0062,.0028,ease(seg(T,8,11.5)));
   s.speed=lerp(.7,7,ease(seg(T,7.8,11.5)));s.amp=lerp(1.25,.9,seg(T,7,11.5));
   s.pathI=seg(T,6.6,7.6);s.pathRev=easeOut(seg(T,6.6,9.6));s.wake=lerp(.25,1,seg(T,8.2,11));s.heading=lerp(0,H1,s.course);
+  s.rain=1-seg(T,7.6,10.2);
+  /* focus: on the wheel, rack to the light when it appears, then out to the boat for the wide shot */
+  const rack=ease(seg(T,4.7,6));s.focus=Math.exp(lerp(Math.log(1.7),Math.log(160),rack));if(s.crane>0)s.focus=Math.exp(lerp(Math.log(160),Math.log(30),s.crane));
+  s.aper=lerp(lerp(1.05,.85,rack),0,s.push)+2*s.crane;
   return s}
 function bez(p0,p1,p2,t,out){const u=1-t;return out.set(u*u*p0.x+2*u*t*p1.x+t*t*p2.x,u*u*p0.y+2*u*t*p1.y+t*t*p2.y,u*u*p0.z+2*u*t*p1.z+t*t*p2.z)}
 let lastHdgTxt="",lastVis="";
 function renderVoyage(T,time,dt){
-  const st=voyageState(T);
+  const st=voyageState(T);const sp=V.scrollP||0;st.fog+=sp*sp*.014;
   const fwd={x:-Math.sin(st.heading),z:-Math.cos(st.heading)};
   V.offset.x+=fwd.x*st.speed*dt;V.offset.z+=fwd.z*st.speed*dt;
   WU.uTime.value=time;WU.uOffset.value.set(V.offset.x,V.offset.z);WU.uAmp.value=st.amp;WU.uFwd.value.set(fwd.x,fwd.z);WU.uWake.value=st.wake;WU.uHead.value=st.heading;
@@ -528,17 +619,20 @@ function renderVoyage(T,time,dt){
   house.visible=!(st.push<.3&&st.crane===0);INT.group.visible=st.crane<.15;
   /* the lighthouse */
   const LI=T<4.9?st.flicker:1;
-  glows[0].material.opacity=LI;glows[1].material.opacity=LI*.55;glows[2].material.opacity=LI*(.12+fogK*.55);glows[2].scale.setScalar(lerp(70,170,fogK));
-  lampLight.intensity=LI*.9;WU.uLampI.value=LI;SKYU.uLampGlow.value=LI*clamp(st.fog/.012,.25,1);
+  const SG=T>=INTRO-1.5?sigI(time):0;
+  glows[0].material.opacity=LI;glows[0].scale.setScalar(9*(1+SG*1.1));glows[1].scale.setScalar(26*(1+SG*.7));glows[1].material.opacity=LI*(.55+.45*SG);glows[2].material.opacity=LI*(.12+fogK*.55);glows[2].scale.setScalar(lerp(70,170,fogK));
+  lampLight.intensity=LI*(.9+1.6*SG);WU.uLampI.value=LI;SKYU.uLampGlow.value=LI*clamp(st.fog/.012,.25,1);
   const tx=fwd.x*150,tz=fwd.z*150;
   const yt=Math.atan2(-Math.cos(H1)*150-lampPos.z,-Math.sin(H1)*150-lampPos.x),yCam=Math.atan2(-lampPos.z,-lampPos.x);
   const yaw=T<INTRO?lerp(yCam-1.05,yt,st.sweep):yt+Math.sin(time*.3)*.03;
   const pitch=-.12+Math.sin(time*.45)*.004;
   const bd=_c.set(Math.cos(yaw)*Math.cos(pitch),Math.sin(pitch),Math.sin(yaw)*Math.cos(pitch)).normalize();
   const BI=seg(T,4.9,5.5);
-  beams.forEach((b,i)=>{b.position.copy(lampPos);const d=i?_a.copy(bd).multiplyScalar(-1).setY(bd.y):_a.copy(bd);b.lookAt(_b.copy(lampPos).add(d));const L=i?260:360,Rb=L*Math.tan(4*Math.PI/180);b.scale.set(Rb,Rb,L);
-    BUs[i].uI.value=BI*(i?.45:1)*(.3+fogK*.6);BUs[i].uT.value=time});
-  spot.intensity=BI*1.4;spot.target.position.copy(lampPos).addScaledVector(bd,200);spot.target.updateMatrixWorld();
+  beams.forEach((b,i)=>{b.position.copy(lampPos);const d=i?_a.copy(bd).multiplyScalar(-1).setY(bd.y):_a.copy(bd);b.lookAt(_b.copy(lampPos).add(d));const L=i?260:360,Rb=L*Math.tan(4*Math.PI/180)*1.15;b.scale.set(Rb,Rb,L);
+    BUs[i].uI.value=BI*(i?.45:1)*(.2+fogK*.8)*(1+.8*SG);BUs[i].uT.value=time%100;BUs[i].uApex.value.copy(lampPos);BUs[i].uAxis.value.copy(d).normalize();BUs[i].uLen.value=L});
+  BEAMU.uLampP.value.copy(lampPos);BEAMU.uAx0.value.copy(bd).normalize();BEAMU.uAx1.value.copy(bd).multiplyScalar(-1).setY(bd.y).normalize();BEAMU.uBI.value=BI*(1+.6*SG);
+  const cr0=Math.abs(Math.atan2(Math.sin(yaw-yCam),Math.cos(yaw-yCam))),fl0=T<INTRO?BI*Math.max(0,1-cr0/.11):0;
+  spot.intensity=BI*1.4*(1+fl0*4);spot.target.position.copy(lampPos).addScaledVector(bd,200);spot.target.updateMatrixWorld();
   WU.uBeamDir.value.copy(bd);WU.uBeamI.value=BI;
   const pe=.07;WU.uPathL.value.set(fwd.x*Math.cos(pe),Math.sin(pe),fwd.z*Math.cos(pe));WU.uPathI.value=st.pathI;WU.uPathRev.value=st.pathRev;
   /* camera */
@@ -546,6 +640,7 @@ function renderVoyage(T,time,dt){
   const portrait=CAM.aspect<.85,wide=portrait?CAMS.wideP:CAMS.wideL;
   if(st.crane>0)bez(CAMS.bow,CAMS.ctrl,wide,st.crane,_b);else _b.lerpVectors(CAMS.inside,CAMS.bow,st.push);
   CAM.position.copy(rig.localToWorld(_b.clone()));
+  if(sp>0)CAM.position.y+=sp*sp*16;   /* scrolling away: the camera rises into the fog */
   const fovT=V.baseFov+4*(1-st.push)*(st.crane===0?1:0);if(Math.abs(CAM.fov-fovT)>.01){CAM.fov=fovT;CAM.updateProjectionMatrix()}
   const slide=seg(st.push,0,.25);INT.center.matrix.makeBasis(INT.X,INT.SL,INT.IN).setPosition(_a.copy(INT.fo).addScaledVector(INT.SL,-slide*1.35));
   INT.shared.uT.value=time;INT.shared.uHaze.value=clamp((st.fog-.004)/.013,0,1)*.85+.12;INT.shared.uLight.value=LI*.85;
@@ -556,16 +651,28 @@ function renderVoyage(T,time,dt){
   const lookLocal=new THREE.Vector3(Math.sin(-yawL)*40,lerp(3.0,2.6,st.push),-Math.cos(yawL)*40);
   lookLocal.lerp(portrait?new THREE.Vector3(0,-1,2):new THREE.Vector3(-7,1.6,-26),st.crane);
   CAM.lookAt(rig.localToWorld(lookLocal));
+  /* a hand-held camera, plus a slight look toward the mouse */
+  const hk=(1-st.crane)*.9+.3;const n1=Math.sin(time*1.73)*.55+Math.sin(time*2.91+1.3)*.3+Math.sin(time*5.07+.4)*.15,n2=Math.sin(time*1.31+2)*.55+Math.sin(time*3.67)*.3+Math.sin(time*6.29+1)*.15;
+  const mk=Math.min(1,dt*2.2);V.mx+=(V.tx-V.mx)*mk;V.my+=(V.ty-V.my)*mk;
+  CAM.rotateY(n1*.0032*hk-V.mx*.07);CAM.rotateX(n2*.0026*hk-V.my*.04);CAM.rotateZ(Math.sin(time*.83)*.0022*hk);
   sky.position.copy(CAM.position);stars.position.copy(CAM.position);
-  placeMist(time,clamp((st.fog-.004)/.013,0,1)*.95,LI*.4);
+  placeMist(time,clamp(clamp((st.fog-.004)/.013,0,1)*.95+sp*.8,0,1),LI*.4);
+  if(RAIN){RAIN.U.uT.value=time%400;RAIN.U.uRain.value=T<INTRO+2?st.rain:0;RAIN.U.uCam.value.copy(CAM.position);RAIN.U.uIn.value=INT.group.visible?1:0;RAIN.L.visible=RAIN.U.uRain.value>.001}
+  if(LOGOQ){const show=LOGOQ.ready&&T<INTRO?seg(T,4.95,5.4)*(1-seg(T,7.9,8.7)):0;LOGOQ.q.visible=show>0;
+    if(show>0){const a=yCam+.42;if(CAM.aspect<.85){LOGOQ.q.position.set(-1,10.5,-80);LOGOQ.q.scale.setScalar(25)}else{LOGOQ.q.position.set(lampPos.x+Math.cos(a)*96,10.5,lampPos.z+Math.sin(a)*96);LOGOQ.q.scale.setScalar(36)}LOGOQ.q.lookAt(CAM.position);
+      LOGOQ.U.uA.value=show;LOGOQ.U.uT.value=time%100;LOGOQ.U.uLamp.value.copy(lampPos);LOGOQ.U.uYaw.value=yaw}}
   updateSpray(dt,time,st);updateCoast(time,st.fog);
-  if(COMP){GRADE.uniforms.uT.value=time%10;COMP.render()}else R.render(S,CAM);
+  if(COMP){const U=GRADE.uniforms;U.uT.value=time%10;U.tDepth.value=COMP.readBuffer.depthTexture;U.uRes.value.set(R.domElement.width,R.domElement.height);U.uMaxR.value=9*R.getPixelRatio();
+    U.uFocus.value=st.focus;U.uAper.value=st.aper;U.uExpo.value=lerp(.82,1.18,Math.max(st.push,st.crane));
+    const lp=_a.copy(lampPos).project(CAM);const edge=Math.max(Math.abs(lp.x),Math.abs(lp.y));
+    U.uLampUV.value.set(lp.x*.5+.5,lp.y*.5+.5);U.uLampZ.value=CAM.position.distanceTo(lampPos);U.uLampI.value=lp.z<1&&edge<1.2?LI*(.22+.5*SG+fl0*1.6)*clamp((1.2-edge)*4,0,1):0;
+    COMP.render()}else R.render(S,CAM);
   const needle=T<7.2?Math.sin(time*1.1)*48+Math.sin(time*2.9)*16+Math.sin(time*.37)*30:lerp(Math.sin(time*1.1)*48,-13,seg(T,7.2,8.6))+Math.sin(time*2)*1.2*(1-seg(T,8.6,10));
   INT.card.rotation.z=needle*Math.PI/180;INT.spin.rotation.z=lostYaw*3.2+Math.sin(time*.7)*.05;
   drawScreens(T,time,st,toLight,st.fog);
   /* flash as the beam sweeps across us */
   const cross=Math.abs(Math.atan2(Math.sin(yaw-yCam),Math.cos(yaw-yCam)));const fl=T<INTRO?BI*Math.max(0,1-cross/.11):0;
-  const flEl=$("#flash");flEl.style.opacity=(fl*.85).toFixed(3);
+  const flEl=$("#flash");flEl.style.opacity=(fl*.45).toFixed(3);
   if(fl>0){const sp=lampPos.clone().project(CAM);flEl.style.setProperty("--fx",((sp.x*.5+.5)*100).toFixed(1)+"%");flEl.style.setProperty("--fy",((-sp.y*.5+.5)*100).toFixed(1)+"%")}
   return st}
 
@@ -575,17 +682,22 @@ let logIdx=-1;
 function updateLog(T){let i=-1;LOG.forEach((l,k)=>{if(T>=l[0]+.5)i=k});if(i!==logIdx){logIdx=i;const el=$("#logLine");if(i<0){el.innerHTML="";return}$("#logStamp").textContent=`Ship's log · ${LOG[i][1]}`;el.innerHTML=[...LOG[i][2]].map(c=>`<span>${c===" "?"&nbsp;":esc(c)}</span>`).join("");const sp=$$("span",el);sp.forEach((s,k)=>setTimeout(()=>s.classList.add("on"),k*28))}
   $("#log").style.opacity=T>12.2?Math.max(0,1-(T-12.2)/.8):1}
 
-function setIntro(on){V.introActive=on;root.classList.toggle("intro-on",on);$("#log").hidden=!on;$("#skipIntro").hidden=!on;if(!on){$("#flash").style.opacity="0";onScroll()}}
+function setIntro(on){V.introActive=on;root.classList.toggle("intro-on",on);$("#log").hidden=!on;$("#skipIntro").hidden=!on;$("#sndIntro").hidden=!on;if(!on){$("#flash").style.opacity="0";onScroll()}}
 function startVoyage(fromT){V.t0=performance.now()-fromT*1000;V.offset.x=0;V.offset.z=0;logIdx=-1;setIntro(fromT<INTRO);if(!V.raf&&V.visible)V.raf=requestAnimationFrame(loop)}
-function skipIntro(){if(!V.introActive)return;V.t0=performance.now()-INTRO*1000;setIntro(false)}
+function skipIntro(){if(!V.introActive)return;if(VID.on)return vidLoop();V.t0=performance.now()-INTRO*1000;setIntro(false)}
 function loop(now){if(!V.visible||!onHome()){V.raf=0;return}
-  const dt=Math.min(.05,(now-(V.last||now))/1000);V.last=now;const T=(now-V.t0)/1000;
-  renderVoyage(T,now/1000,dt);
+  const raw=(now-(V.last||now))/1000;
+  /* the intro clock pauses through hitches (shader compiles, a busy tab), so no part of the film is skipped */
+  if(V.introActive&&raw>.25)V.t0+=(raw-.05)*1000;
+  const dt=Math.min(.05,raw);V.last=now;const T=(now-V.t0)/1000;
+  /* keep it smooth: if frames run long, render at a lower resolution */
+  if(dt>0){V.ft=(V.ft||16)*.95+dt*1000*.05;V.fc=(V.fc||0)+1;if(V.fc>90&&V.ft>30&&R.getPixelRatio()>.8){R.setPixelRatio(Math.max(.75,R.getPixelRatio()-.2));layoutVoyage();V.fc=0;V.ft=18}}
+  const st=renderVoyage(T,now/1000,dt);sndUpdate(T,st,now/1000);
   if(V.introActive){updateLog(T);if(T>=INTRO-.6)setIntro(false)}
   V.raf=requestAnimationFrame(loop)}
 
 /* ================= static content ================= */
-$("#workGrid").innerHTML=CASES.map(c=>`<a class="wcard" href="#case-${c.id}"><div class="frame"><img src="${c.imgs[0].src}" alt="${esc(c.imgs[0].alt)}" loading="lazy"><img src="${c.imgs[1].src}" alt="" loading="lazy"></div>
+$("#workGrid").innerHTML=CASES.map(c=>`<a class="wcard" href="#case-${c.id}"><div class="frame"><img src="${c.imgs[0].src}"${ss(c.imgs[0].src,"(max-width: 760px) 100vw, 45vw")} alt="${esc(c.imgs[0].alt)}" width="1000" height="1250" loading="lazy" decoding="async"><img src="${c.imgs[1].src}"${ss(c.imgs[1].src,"(max-width: 760px) 100vw, 45vw")} alt="" width="1000" height="1250" loading="lazy" decoding="async"></div>
   <div class="meta"><div style="display:grid;gap:10px"><span class="label gold">${c.n} · ${esc(c.client)}</span><h3 class="big">${esc(c.name)}</h3><ul class="tags">${c.tags.map(t=>`<li>${esc(t)}</li>`).join("")}</ul></div><span class="label muted"${c.year?"":` data-note="Yıl bilgisi işletmeye sorulacak."`}>${c.year||"Ongoing"}</span></div></a>`).join("");
 $("#svcList").innerHTML=SERVICES.map((s,i)=>`
   <div class="svc${i===0?" open":""}" id="service-${s.id}">
@@ -599,19 +711,17 @@ function setSvc(el,open){el.classList.toggle("open",open);$(".svc-btn",el).setAt
 $$(".svc").forEach(el=>$(".svc-btn",el).addEventListener("click",()=>setSvc(el,!el.classList.contains("open"))));
 $("#foot-svcs").innerHTML=SERVICES.map(s=>`<li><a href="#svc-${s.id}">${esc(s.name)}</a></li>`).join("");
 $("#svc-chips").innerHTML=SERVICES.map(s=>`<label class="chip"><input type="checkbox" name="services" id="c-${s.id}" value="${esc(s.name)}"><span>${esc(s.name)}</span></label>`).join("")+`<label class="chip"><input type="checkbox" name="services" id="c-unsure" value="Not sure yet"><span>Not sure yet</span></label>`;
-/* route lights up as it scrolls in */
-const stps=$$(".stp");
-const rio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const i=stps.indexOf(e.target);setTimeout(()=>e.target.classList.add("lit"),reduce?0:i*180);rio.unobserve(e.target)}}),{threshold:.6});stps.forEach(s=>rio.observe(s));
 
 /* header, nav */
 function setNav(id){$$(".nav a").forEach(a=>a.setAttribute("aria-current",a.dataset.nav===id?"true":"false"))}
-function onScroll(){const y=scrollY;$("#head").classList.toggle("solid",!onHome()||y>innerHeight*.6);
-  if(!onHome())return;const yy=innerHeight*.4;let cur="top";for(const id of ["work","services","contact"]){const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<yy)cur=id}setNav(cur)}
-addEventListener("scroll",()=>{if(V.introActive&&scrollY>40)skipIntro();onScroll()},{passive:true});
+function onScroll(){const y=scrollY;
+  const sf=!onHome()&&$("#view-page .svc-float");if(sf){const ph=$("#view-page .ph"),cb=$("#view-page .cta-band");sf.classList.toggle("show",y>(ph?ph.offsetHeight*.7:400)&&(!cb||cb.getBoundingClientRect().top>innerHeight-60))}const phEl=!onHome()&&$("#view-page .ph-img");$("#head").classList.toggle("solid",onHome()?y>innerHeight*.6:(!phEl||y>40));if(phEl&&!reduce)phEl.style.transform=`translate3d(0,${Math.min(y,innerHeight)*.28}px,0)`;
+  if(!onHome())return;const yy=innerHeight*.4;let cur="top";for(const id of ["work","services","approach","process","journal","clients","compass","contact"]){const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<yy)cur=id}setNav(["approach","process","clients","compass"].includes(cur)?"":cur)}
+addEventListener("scroll",()=>{if(V.introActive&&scrollY>40)skipIntro();onScroll();heroScroll()},{passive:true});
 ["wheel","touchmove"].forEach(ev=>addEventListener(ev,()=>{if(V.introActive)skipIntro()},{passive:true}));
 addEventListener("keydown",e=>{if(V.introActive&&["Escape","ArrowDown","PageDown"," ","Enter"].includes(e.key))skipIntro()});
 $("#skipIntro").onclick=skipIntro;
-$("#replay").onclick=()=>{if(!V.ok){toast("3D isn't available on this device");return}scrollTo({top:0,behavior:"instant"});startVoyage(0)};
+$("#replay").onclick=()=>{scrollTo({top:0,behavior:"instant"});if(VID.on)return vidIntro();if(!V.ok)return;startVoyage(0)};
 
 /* fit the headline */
 function fitHero(){const h=$("#heroH");h.style.fontSize="";const fs=parseFloat(getComputedStyle(h).fontSize);const wrap=h.parentElement;const cs=getComputedStyle(wrap);const maxW=(Math.min(wrap.clientWidth,$("#top").clientWidth)-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight))*(innerWidth>900?.72:1);const w=h.getBoundingClientRect().width;if(w>maxW)h.style.fontSize=(fs*maxW/w*.98).toFixed(1)+"px"}
@@ -624,43 +734,114 @@ $("#lb-close").onclick=()=>lb.close();$("#lb-prev").onclick=()=>{lbI=(lbI-1+lbSe
 lb.addEventListener("keydown",e=>{if(e.key==="ArrowLeft")$("#lb-prev").click();if(e.key==="ArrowRight")$("#lb-next").click()});
 lb.addEventListener("click",e=>{if(e.target.classList.contains("lb-stage")||e.target===lb)lb.close()});
 lb.addEventListener("close",()=>lbReturn&&lbReturn.focus());
-function shot(img,caseId,idx){return `<button class="shot" type="button" data-lb="${caseId}" data-i="${idx}" aria-label="Enlarge: ${esc(img.alt)}"><img src="${img.src}" alt="${esc(img.alt)}" width="960" height="1200"></button>`}
+function ss(src,sizes){return /^data:/.test(src)?"":` srcset="${src.replace(/(\.\w+)$/,"-600$1")} 600w, ${src} 1000w" sizes="${sizes}"`}
+/* sub-page building blocks */
+const HDR={wide:["assets/img/headers/hdr-wide.jpg","assets/img/headers/hdr-wide-1000.jpg"],wheel:["assets/img/headers/hdr-wheel.jpg","assets/img/headers/hdr-wheel-1000.jpg"],bow:["assets/img/headers/hdr-bow.jpg","assets/img/headers/hdr-bow-1000.jpg"]};
+/* absolute URLs: a url() inside a CSS variable would otherwise resolve against the stylesheet's folder */
+const absU=u=>/^(data:|https?:|blob:)/.test(u)?u:new URL(u,document.baseURI).href;
+const phImg=k=>`--ph:url('${absU(HDR[k][0])}');--phs:url('${absU(HDR[k][1])}')`;
+const HDR_LAMP={bow:[.929,.312],wide:[.858,.186]};
+const phBg=k=>`<div class="ph-img" aria-hidden="true" data-hdr="${k}">${HDR_LAMP[k]?'<i class="ph-lamp"></i>':""}</div>`;
+/* put the glow exactly on the lamp in the still, whatever the crop (background: cover, center 42%) */
+function placeLamp(){const el=$("#view-page .ph-img[data-hdr]");if(!el)return;const L=HDR_LAMP[el.dataset.hdr],i=$(".ph-lamp",el);if(!L||!i)return;
+  const w=el.clientWidth,h=el.clientHeight,sc=Math.max(w/2000,h/1000),dw=2000*sc,dh=1000*sc;
+  i.style.left=((w-dw)*.5+L[0]*dw).toFixed(1)+"px";i.style.top=((h-dh)*.42+L[1]*dh).toFixed(1)+"px";i.style.setProperty("--ls",Math.max(.5,sc*1.3).toFixed(3))}
+addEventListener("resize",()=>{if(!onHome())placeLamp()});
+function splitLines(root){$$(".ph h1.big",root).forEach(h=>{if(h.dataset.split)return;h.dataset.split=1;h.innerHTML=h.innerHTML.split(/<br\s*\/?>/i).map((p,i)=>`<span class="ln" style="--i:${i}"><span>${p}</span></span>`).join("")})}
+const capShot=(im,id,j)=>`<figure class="cap-fig">${shot(im,id,j)}<figcaption><span class="label gold">${String(j+1).padStart(2,"0")}</span>${esc(im.alt)}</figcaption></figure>`;
+let SVC_BRG=null,SVC_TO=0;
+const TAG_SVC={"Social Media":"social-media","Content Creation":"social-media","Creative Direction":"creative","Campaign Design":"creative","Graphic Design":"creative"};
+const ROUTE=[["Discover","Understand the business, audience, market and objective. Identify gaps, constraints and immediate opportunities."],["Navigate","Define priorities, scope and success measures. Build a practical roadmap around budget and timing."],["Narrate","Clarify the brand voice, message and campaign story. Make the business value clear."],["Create","Design, write, shoot, edit, build and produce. Coordinate specialists and suppliers under one standard."],["Deliver","Manage approvals, quality control, publishing and final delivery, with clear ownership."],["Improve","Review performance, learn from results and refine the next cycle for sustainable growth."]];
+const routeList=()=>`<ol class="route">${ROUTE.map(([t,p],i)=>`<li class="stp"><span class="label sn">0${i+1}</span><h3 class="h3">${t}</h3><p>${p}</p></li>`).join("")}</ol>`;
+const howWeWork=()=>`<section class="sec"><div class="wrap"><div class="sec-head"><div><span class="label gold eyebrow">One team. One standard.</span><h2 class="big" style="font-size:clamp(2.6rem,6vw,5rem)">How we work</h2></div><p class="muted" style="max-width:36ch">One accountable partner across the full process, from the first conversation to the next cycle of improvement.</p></div>${routeList()}`;
+function svcChart(cur){const ci=SERVICES.indexOf(cur),tgt=CBRG[ci];const from=SVC_BRG==null?tgt-50:SVC_BRG;SVC_TO=from+((tgt-from)%360+540)%360-180;SVC_BRG=SVC_TO;let t="";for(let k=0;k<36;k++){const a=k*Math.PI/18,l=k%9===0?9:4;t+=`<line x1="${(Math.sin(a)*96).toFixed(1)}" y1="${(-Math.cos(a)*96).toFixed(1)}" x2="${(Math.sin(a)*(96-l)).toFixed(1)}" y2="${(-Math.cos(a)*(96-l)).toFixed(1)}"/>`}
+  return `<nav class="svc-chart" aria-label="All seven services"><svg viewBox="-100 -100 200 200" aria-hidden="true"><circle r="96"/><circle class="c2" r="58"/>${t}<g class="hdg-g" style="transform:rotate(${from.toFixed(1)}deg)"><line class="hdg" x1="0" y1="0" x2="0" y2="-58"/></g><circle class="hub" r="4"/></svg>
+    ${SERVICES.map((x,i)=>{const a=CBRG[i]*Math.PI/180;return `<a href="#svc-${x.id}" class="${x===cur?"on":""}" style="left:${(50+Math.sin(a)*38.5).toFixed(2)}%;top:${(50-Math.cos(a)*38.5).toFixed(2)}%" ${x===cur?'aria-current="page"':""} aria-label="${x.n} ${esc(x.name)}">${x.n}<em>${esc(x.name)}</em></a>`}).join("")}</nav>`}
+function shot(img,caseId,idx){return `<button class="shot" type="button" data-lb="${caseId}" data-i="${idx}" aria-label="Enlarge: ${esc(img.alt)}"><img src="${img.src}"${ss(img.src,"(max-width: 760px) 100vw, 50vw")} alt="${esc(img.alt)}" width="960" height="1200" loading="lazy" decoding="async"></button>`}
 function ctaBand(title,svc){return `<section class="cta-band cream"><div class="wrap"><h2 class="big">${title}</h2><a class="btn dark" href="#contact" ${svc?`data-service="${svc}"`:""}>Start a project ↗</a></div></section>`}
-function caseCard(c){return `<a class="rel-card" href="#case-${c.id}"><span class="shot"><img src="${c.imgs[0].src}" alt="" loading="lazy"></span><span class="label gold">${c.tags.join(" · ")}</span><h3 class="h3">${esc(c.name)}</h3></a>`}
-function renderCase(c){const i=CASES.indexOf(c),next=CASES[(i+1)%CASES.length];
- page.innerHTML=`<article><header class="wrap page-hero"><a class="back" href="#work">← All work</a><span class="label gold">Case study · ${c.n}</span><h1 class="big">${esc(c.name).replace(" ","<br>")}</h1>
-    <p class="lede muted" style="max-width:46ch" data-note="${DRAFT}">${esc(c.summary)}</p>
-    <dl class="meta-dl"><div><dt>Client</dt><dd>${esc(c.client)}</dd></div><div><dt>Services</dt><dd>${c.tags.map(esc).join(", ")}</dd></div><div><dt>Year</dt><dd ${c.year?"":`data-note="Yıl bilgisi işletmeye sorulacak."`}>${c.year||"Ongoing"}</dd></div></dl></header>
-  <div class="wrap case-gallery">${c.imgs.map((im,j)=>shot(im,c.id,j)).join("")}</div>
-  <div class="wrap case-body" data-note="${DRAFT}"><section><span class="label gold">The brief</span><p>${esc(c.brief)}</p></section><section><span class="label gold">What we made</span><p>${esc(c.made)}</p></section><section><span class="label gold">Deliverables</span><ul>${c.deliv.map(d=>`<li>${esc(d)}</li>`).join("")}</ul></section></div>
+function caseCard(c){return `<a class="rel-card" href="#case-${c.id}"><span class="shot"><img src="${c.imgs[0].src}"${ss(c.imgs[0].src,"(max-width: 760px) 100vw, 33vw")} alt="" width="1000" height="1250" loading="lazy" decoding="async"></span><span class="label gold">${c.tags.join(" · ")}</span><h3 class="h3">${esc(c.name)}</h3></a>`}
+function renderCase(c){const i=CASES.indexOf(c),next=CASES[(i+1)%CASES.length],im=c.imgs[0];
+ page.innerHTML=`<article>
+  <header class="ph blur" style="--ph:url('${absU(im.src)}')"><div class="ph-img" aria-hidden="true"></div>
+   <div class="wrap ph-in ph-split">
+    <div class="ph-copy"><a class="back" href="#work">← All work</a><span class="label gold">Case study ${c.n}</span><h1 class="big">${esc(c.name).replace(" ","<br>")}</h1>
+     <p class="lede" data-note="${DRAFT}">${esc(c.summary)}</p>
+     <div class="chips">${c.tags.map(t=>TAG_SVC[t]?`<a href="#svc-${TAG_SVC[t]}">${esc(t)}</a>`:`<span>${esc(t)}</span>`).join("")}</div>
+     <dl class="meta-dl"><div><dt>Client</dt><dd>${esc(c.client)}</dd></div>${c.year?`<div><dt>Year</dt><dd>${esc(c.year)}</dd></div>`:""}</dl></div>
+    <figure class="ph-fig"><img src="${im.src}" alt="${esc(im.alt)}" width="960" height="1200"></figure></div></header>
+  <div class="wrap case-gallery cg">${c.imgs.map((x,j)=>capShot(x,c.id,j)).join("")}</div>
+  ${c.palette?`<div class="wrap pal"><span class="label gold">Palette</span><div class="pal-row">${c.palette.map(h=>`<button class="sw" type="button" data-copy="${h.toUpperCase()}" data-msg="${h.toUpperCase()} copied" aria-label="Copy colour ${h.toUpperCase()}"><i style="background:${h}"></i><b>${h.toUpperCase()}</b></button>`).join("")}</div><span class="pal-note">Sampled from the campaign images. Click a colour to copy it.</span></div>`:""}
+  <div class="wrap case-notes" data-note="${DRAFT}">
+   <div><span class="label gold">01</span><h3 class="h3">The brief</h3><p class="muted">${esc(c.brief)}</p></div>
+   <div><span class="label gold">02</span><h3 class="h3">What we made</h3><p class="muted">${esc(c.made)}</p></div>
+   <div><span class="label gold">03</span><h3 class="h3">Deliverables</h3><ul>${c.deliv.map(d=>`<li>${esc(d)}</li>`).join("")}</ul></div></div>
   <div class="wrap"><div class="results review-only" data-note="Sonuç rakamları müşteriden izin alınarak eklenecek. Yoksa bu blok çıkar."><span class="label gold">Results</span><p class="muted">Reach, engagement or sales numbers go here once the client approves them.</p></div></div>
-  <div class="wrap"><div class="next-band"><span class="label muted">Next case</span><a href="#case-${next.id}"><span class="big">${esc(next.name)} →</span></a></div></div></article>${ctaBand("Want work<br>like this?")}`;
+  <a class="next-case" href="#case-${next.id}" style="--ph:url('${absU(next.imgs[0].src)}')"><div class="ph-img" aria-hidden="true"></div><div class="wrap"><span class="label gold">Next case · ${next.n}</span><span class="big">${esc(next.name)} →</span></div></a></article>${ctaBand("Want work<br>like this?")}`;
  setNav("work");document.title=`${c.name} · Navy Night Creative`}
-function renderSvc(s){const rel=s.work.map(id=>CASES.find(c=>c.id===id));
- page.innerHTML=`<article><header class="wrap page-hero"><a class="back" href="#services">← All services</a><span class="label gold">Service ${s.n} of 07 · ${esc(s.kicker)}</span><h1 class="big">${esc(s.name)}</h1>
-    <p class="lede" style="max-width:40ch" ${s.draft?`data-note="Taslak metin, onaylanacak."`:""}>${esc(s.lede)}</p>
-    <div class="hero-ctas"><a class="btn" href="#contact" data-service="${s.id}">Start a ${esc(s.name.toLowerCase())} project ↗</a><a class="arrow-link" href="#work">See our work <span>→</span></a></div></header>
-  <section class="cream"><div class="wrap"><div class="svc-page-groups">${s.groups.map(g=>`<div class="group"><h4>${esc(g.t)}</h4><ul>${g.i.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`).join("")}</div>${s.note?`<p class="muted" style="font-size:14px;padding-bottom:48px">${esc(s.note)}</p>`:`<div style="height:24px"></div>`}</div></section>
-  <section class="related wrap"><h2 class="big" style="font-size:clamp(2.4rem,6vw,4.6rem)">${esc(s.name)}<br><span class="outline">in practice</span></h2>
-    ${rel.length?`<div class="rel-grid">${rel.map(caseCard).join("")}</div>`:`<div class="empty" data-note="Bu hizmet için henüz vaka yok. İş bitince buraya eklenecek."><p>Case studies for ${esc(s.name.toLowerCase())} are on the way. Ask us for recent examples when you get in touch.</p></div>`}
-    <div style="margin-top:56px"><span class="label muted">Other services</span><div class="other-svcs">${SERVICES.filter(x=>x!==s).map(x=>`<a href="#svc-${x.id}">${x.n} ${esc(x.name)}</a>`).join("")}</div></div></section></article>${ctaBand(`Let's talk<br>${esc(s.name.toLowerCase())}.`,s.id)}`;
+function renderSvc(s){const i=SERVICES.indexOf(s),nx=SERVICES[(i+1)%SERVICES.length],rel=s.work.map(id=>CASES.find(c=>c.id===id));
+ page.innerHTML=`<article>
+  <header class="ph" style="${phImg("bow")}">${phBg("bow")}
+   <div class="wrap ph-in ph-split">
+    <div class="ph-copy"><a class="back" href="#services">← All services</a><span class="label gold">Service ${s.n} of 07 · ${esc(s.kicker)}</span><h1 class="big">${esc(s.name)}</h1>
+     <p class="lede">${esc(s.lede)}</p>
+     <div class="hero-ctas"><a class="btn" href="#contact" data-service="${s.id}">Let’s talk about your project ↗</a></div>
+     <div class="chips svc-chips">${SERVICES.map(x=>`<a href="#svc-${x.id}" ${x===s?'aria-current="page"':""}>${x.n} ${esc(x.name)}</a>`).join("")}</div></div>
+    ${svcChart(s)}</div></header>
+  <section class="cream inc"><div class="wrap"><div class="inc-head"><span class="label eyebrow">What’s included</span><h2 class="big">${esc(s.kicker)}</h2></div>
+   <div class="inc-grid">${s.groups.map((g,gi)=>`<div class="inc-col"><h3 class="h3"><span class="label">${"AB"[gi]||""}</span>${esc(g.t)}</h3><ol>${g.i.map((x,k)=>`<li><span class="label">${String(k+1).padStart(2,"0")}</span><p>${esc(x)}</p></li>`).join("")}</ol></div>`).join("")}</div>
+   ${s.note?`<p class="inc-note"><span class="label">Note</span><span>${esc(s.note)}</span></p>`:""}</div></section>
+  ${rel.length?`<section class="related wrap"><span class="label gold eyebrow">Selected work</span><div class="rel-grid">${rel.map(caseCard).join("")}</div></section>`:""}
+  ${howWeWork()}<a class="next-svc" href="#svc-${nx.id}"><span><span class="label muted">Next capability · ${nx.n}</span><span class="big">${esc(nx.name)}</span></span><span class="arw" aria-hidden="true">→</span></a></div></section>
+ <a class="btn svc-float" href="#contact" data-service="${s.id}">Let’s talk about ${esc(s.name)} ↗</a></article>${ctaBand("Let’s talk about<br>your project.",s.id)}`;
+ setTimeout(()=>{const g=$("#view-page .hdg-g");if(g)g.style.transform=`rotate(${SVC_TO.toFixed(1)}deg)`},reduce?0:460);
  setNav("services");document.title=`${s.name} · Navy Night Creative`}
 function renderAbout(){
- page.innerHTML=`<article><header class="wrap page-hero"><a class="back" href="#top">← Home</a><span class="label gold">About Navy Night Creative</span><h1 class="big">One partner.<br><span class="outline">Every marketing</span><br>need<span class="gold">.</span></h1>
-    <p class="lede muted" style="max-width:44ch">We bring strategy, creative execution, production and business support together under one accountable team.</p></header>
-  <div class="wrap about-grid"><div style="display:grid;gap:22px"><svg viewBox="0 0 125.31 461.37" style="width:56px;height:206px" aria-hidden="true"><g fill="#f7f5ef"><path  d="M125.05,461.37H0s.16-3.23.16-3.23l15.04-177.89,7.28-83.31c26.65-5.31,53.28-5.38,79.95.09l22.62,264.33Z"></path><path  d="M79.83,165.91c-21.81-1.48-44.68-.95-66.16,4.92l.02-31.43c0-.73,1.14-1.74,1.68-1.66.68.09,1.42.82,1.91,1.71,3.92-1.06,7.73-2.11,11.83-2.5l.45-7.05c2.42-1.13,5.16-1.33,8.13-1.88.84-13.55.45-26.9.26-40.33l.21-4.51c-2.5.36-4.52.74-6.98,1.75-1.71-3.1,0-7.38-1.22-8.94-.51-.65-1.92-1.01-3-1.49-.95-2.1-1.01-5.19.06-7.19l29.12-25.02c.62-1.64.62-3.55.67-5.24,1.46-.18,2.32-.72,2.45-2.13s-.16-2.29-1.85-2.63c-.99-4.66-.45-9.68,3.73-12.25l.94-15.06.74-.02.88,14.92c4.27,2.66,4.83,7.18,4.04,12.34-1.3.51-1.9.76-2.05,2.14-.2,1.9.61,1.98,2.23,2.69.68,1.22.67,3.27.63,4.86l29.55,25.18c.77,2.33.94,5.25-.06,7.46-1.14.5-2.78.7-3.23,1.42-1.29,2.08.84,5.23-.91,8.95-2.28-.79-4.21-1.33-7.01-1.67l-.03,43.5c1.44,3.2,8.34.96,8.5,3.89l.35,6.2c4.15.5,8.01,1.29,11.93,2.48.54-.56,1.2-1.37,1.71-1.45s1.47.69,2,1.27v31.5c-10.87-2.64-20.79-4.13-31.52-4.71Z"></path><path  d="M73.2,190.12c-7.14-.48-14.27-.48-21.41,0-9.84.85-19.43,1.19-29.41,4.02-.61-7.74-3.64-14.2-9.24-19.99,8.75-3.19,17.42-3.67,26.31-4.91,15.16-1.22,30.64-1.29,45.79,0,8.9,1.25,17.55,1.75,26.67,4.85-5.37,5.72-9.08,12.19-9.36,20.1-9.77-2.62-19.43-3.24-29.35-4.06Z"></path></g></svg><h2 class="big" style="font-size:clamp(2.6rem,6vw,5rem)">Why a<br>lighthouse</h2></div>
+ page.innerHTML=`<article>
+  <header class="ph" style="${phImg("wheel")}">${phBg("wheel")}<div class="wrap ph-in"><a class="back" href="#top">← Home</a><span class="label gold">About Navy Night Creative</span>
+   <h1 class="big">One partner.<br>Every marketing<br>need<span class="gold">.</span></h1><p class="lede">Strategy, branding, content, production and digital — with business support to move you forward.</p></div></header>
+  <section class="cream about-ap"><div class="wrap"><span class="label eyebrow" style="color:var(--gold-ink)">Our approach</span><h2 class="big">Navigate.<br>Narrate.<br>Create<span style="color:var(--gold-deep)">.</span></h2>
+   <p class="ap-intro">We bring strategy, creative execution, production and business support together under one accountable team.</p>
+   <div class="principles"><div><span class="label" style="color:var(--gold-ink)">Navigate</span><p>Research, positioning and a practical path to growth.</p></div><div><span class="label" style="color:var(--gold-ink)">Narrate</span><p>A clear voice, meaningful messaging and a story worth telling.</p></div><div><span class="label" style="color:var(--gold-ink)">Create</span><p>Design, content, photography, video and print that bring it to life.</p></div></div></div></section>
+  <div class="wrap about-grid" style="border-top:0"><div style="display:grid;gap:22px"><svg viewBox="0 0 125.31 461.37" style="width:56px;height:206px" aria-hidden="true"><g fill="#f7f5ef"><path  d="M125.05,461.37H0s.16-3.23.16-3.23l15.04-177.89,7.28-83.31c26.65-5.31,53.28-5.38,79.95.09l22.62,264.33Z"></path><path  d="M79.83,165.91c-21.81-1.48-44.68-.95-66.16,4.92l.02-31.43c0-.73,1.14-1.74,1.68-1.66.68.09,1.42.82,1.91,1.71,3.92-1.06,7.73-2.11,11.83-2.5l.45-7.05c2.42-1.13,5.16-1.33,8.13-1.88.84-13.55.45-26.9.26-40.33l.21-4.51c-2.5.36-4.52.74-6.98,1.75-1.71-3.1,0-7.38-1.22-8.94-.51-.65-1.92-1.01-3-1.49-.95-2.1-1.01-5.19.06-7.19l29.12-25.02c.62-1.64.62-3.55.67-5.24,1.46-.18,2.32-.72,2.45-2.13s-.16-2.29-1.85-2.63c-.99-4.66-.45-9.68,3.73-12.25l.94-15.06.74-.02.88,14.92c4.27,2.66,4.83,7.18,4.04,12.34-1.3.51-1.9.76-2.05,2.14-.2,1.9.61,1.98,2.23,2.69.68,1.22.67,3.27.63,4.86l29.55,25.18c.77,2.33.94,5.25-.06,7.46-1.14.5-2.78.7-3.23,1.42-1.29,2.08.84,5.23-.91,8.95-2.28-.79-4.21-1.33-7.01-1.67l-.03,43.5c1.44,3.2,8.34.96,8.5,3.89l.35,6.2c4.15.5,8.01,1.29,11.93,2.48.54-.56,1.2-1.37,1.71-1.45s1.47.69,2,1.27v31.5c-10.87-2.64-20.79-4.13-31.52-4.71Z"></path><path  d="M73.2,190.12c-7.14-.48-14.27-.48-21.41,0-9.84.85-19.43,1.19-29.41,4.02-.61-7.74-3.64-14.2-9.24-19.99,8.75-3.19,17.42-3.67,26.31-4.91,15.16-1.22,30.64-1.29,45.79,0,8.9,1.25,17.55,1.75,26.67,4.85-5.37,5.72-9.08,12.19-9.36,20.1-9.77-2.62-19.43-3.24-29.35-4.06Z"></path></g></svg><h2 class="big" style="font-size:clamp(2.6rem,6vw,5rem)">Why a<br>lighthouse</h2></div>
     <div style="display:grid;gap:18px" data-note="Taslak metin: marka hikayesi işletmeyle onaylanacak."><p class="lede">A lighthouse doesn't sail the ship. It shows where the rocks are and where the harbor is.</p><p class="muted">That is the job we take on for the brands we work with. Direction comes first: who you are talking to, what you want them to do, and the shortest route there. Then we make the work that gets you there, and we stay on it after it ships.</p></div></div>
-  <section class="cream"><div class="wrap principles"><div><span class="label" style="color:var(--gold-ink)">Navigate</span><p>Research, positioning and a practical path to growth.</p></div><div><span class="label" style="color:var(--gold-ink)">Narrate</span><p>A clear voice, meaningful messaging and a story worth telling.</p></div><div><span class="label" style="color:var(--gold-ink)">Create</span><p>Design, content, photography, video and print that bring it to life.</p></div></div></section>
-  <div class="wrap principles"><div><h3 class="h3">One team</h3><p class="muted">Strategy, creative, production, digital and business support under one roof, so nothing gets lost between agencies.</p></div><div><h3 class="h3">One standard</h3><p class="muted">Specialists and suppliers are coordinated under one standard, with quality control before anything goes live.</p></div><div><h3 class="h3">Clear ownership</h3><p class="muted">One accountable partner from the first conversation to the next cycle of improvement.</p></div></div>
+  ${howWeWork()}</div></section>
+  <section class="sec" style="padding-top:0"><div class="wrap"><div class="sec-head"><div><span class="label gold eyebrow">The NNC service system</span><h2 class="big" style="font-size:clamp(2.6rem,6vw,5rem)">What we do</h2></div><p class="muted" style="max-width:44ch">Seven connected capabilities. One accountable partner for strategy, creative execution, production, digital visibility and business support.</p></div>
+   <div class="sys-grid">${SERVICES.map(x=>`<a href="#svc-${x.id}"><span class="label gold">${x.n}</span><h3 class="h3">${esc(x.name)}</h3><p>${esc(x.kicker)}</p></a>`).join("")}</div></div></section>
+  <section class="sec" style="padding-top:0"><div class="wrap"><span class="label gold eyebrow">People we create with</span><div class="logos" style="margin-top:28px">
+   <a href="#case-agora" aria-label="Agora Truck &amp; Trailer Parts case study"><img src="assets/img/clients/agora.webp" alt="Agora Truck &amp; Trailer Parts" width="520" height="173" loading="lazy" decoding="async"></a>
+   <a href="#case-anatolia" aria-label="Anatolia Mediterranean Restaurant case study"><img src="assets/img/clients/anatolia.webp" alt="Anatolia Mediterranean Restaurant" width="520" height="271" loading="lazy" decoding="async"></a>
+   <a class="next" href="#contact"><span class="label gold">Your brand</span><b>Could be<br>next</b><span class="muted" style="font-size:14px">Start a project →</span></a></div></div></section>
   <div class="wrap review-only" style="padding-bottom:64px" data-note="Ekip isimleri, rolleri ve fotoğrafları işletmeden alınacak."><span class="label gold">The team</span><div class="team-grid"><div>Photo · Name · Role</div><div>Photo · Name · Role</div><div>Photo · Name · Role</div><div>Photo · Name · Role</div></div></div>
   <div class="wrap us-band"><h2 class="big" style="font-size:clamp(2.6rem,6vw,5rem)">Launching<br>in the U.S.?</h2><div style="display:grid;gap:18px"><p class="muted">Alongside marketing, we coordinate the admin work of setting up: LLC formation, EIN application, license research, registered agent and bank account preparation, working with qualified professionals for legal, accounting and tax advice.</p><a class="arrow-link" href="#svc-marketing-business">Marketing &amp; Business <span>→</span></a></div></div></article>${ctaBand("Have an idea?<br>Let's give it direction.")}`;
  setNav("about");document.title="About · Navy Night Creative"}
 let pendingService=null;
-function showPage(fn,arg){if(V.introActive)setIntro(false);homeEl.hidden=true;page.hidden=false;fn(arg);scrollTo({top:0,behavior:"instant"});closeMenu();onScroll()}
-function route(){const h=decodeURIComponent(location.hash.slice(1));
-  if(h.startsWith("case-")){const c=CASES.find(x=>"case-"+x.id===h);if(c)return showPage(renderCase,c)}
-  if(h.startsWith("svc-")){const s=SERVICES.find(x=>"svc-"+x.id===h);if(s)return showPage(renderSvc,s)}
+function showPage(fn,arg){if(V.introActive)setIntro(false);homeEl.hidden=true;page.hidden=false;fn(arg);splitLines(page);page.classList.remove("page-in");void page.offsetWidth;page.classList.add("page-in");scrollTo({top:0,behavior:"instant"});closeMenu();rvScan(page);requestAnimationFrame(placeLamp);onScroll()}
+let curView=null;
+function viewKey(h){if(window.NNC_404&&!h)return"lost";if(h.startsWith("case-")||h.startsWith("svc-")||h.startsWith("log")||h==="about"||h==="lost")return h;return"home"}
+/* page transition between views; scrolling inside the home page stays a plain scroll */
+const PT=$("#pt"),PT_MS=760;
+function ptBeam(){return PT.firstElementChild.animate([{transform:"translateX(110vw) skewX(-14deg)"},{transform:"translateX(-60vw) skewX(-14deg)"}],{duration:PT_MS,easing:"cubic-bezier(.45,0,.25,1)"})}
+function ptRun(swap){PT.hidden=false;ptBeam();
+  const a=PT.animate([{opacity:0},{opacity:1,offset:.42},{opacity:1,offset:.56},{opacity:0}],{duration:PT_MS,easing:"cubic-bezier(.5,0,.3,1)"});
+  setTimeout(swap,PT_MS*.44);a.onfinish=()=>{PT.hidden=true}}
+function ptReveal(){PT.hidden=false;ptBeam();PT.animate([{opacity:1},{opacity:1,offset:.25},{opacity:0}],{duration:PT_MS*.8,easing:"ease-out"}).onfinish=()=>{PT.hidden=true}}
+function route(){const key=viewKey(decodeURIComponent(location.hash.slice(1))),prev=curView;curView=key;
+  if(prev===null||prev===key||reduce)return doRoute();ptRun(doRoute)}
+/* links that leave this page (Ship's Log pages on GitHub Pages) get the same beam before the browser navigates */
+document.addEventListener("click",e=>{const a=e.target.closest("a[href]");if(!a||reduce||e.defaultPrevented||e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||a.target||a.hasAttribute("download"))return;
+  let u;try{u=new URL(a.href,location.href)}catch(_){return}if(u.origin!==location.origin||u.pathname===location.pathname||!/^https?:/.test(u.protocol))return;
+  e.preventDefault();PT.hidden=false;ptBeam();try{sessionStorage.setItem("nnc-pt","1")}catch(_){}
+  PT.animate([{opacity:0},{opacity:1}],{duration:PT_MS*.45,easing:"cubic-bezier(.5,0,.3,1)",fill:"forwards"}).onfinish=()=>{location.href=a.href}});
+addEventListener("pageshow",e=>{if(e.persisted){PT.getAnimations().forEach(x=>x.cancel());PT.hidden=true}});
+try{if(sessionStorage.getItem("nnc-pt")){sessionStorage.removeItem("nnc-pt");if(!reduce)ptReveal()}}catch(_){}
+function doRoute(){const h=decodeURIComponent(location.hash.slice(1));
+  if(window.NNC_404&&!h)return showPage(renderLost);
+  if(h==="lost")return showPage(renderLost);
+  if(h.startsWith("case-")){const c=CASES.find(x=>"case-"+x.id===h);return c?showPage(renderCase,c):showPage(renderLost)}
+  if(h.startsWith("svc-")){const s=SERVICES.find(x=>"svc-"+x.id===h);return s?showPage(renderSvc,s):showPage(renderLost)}
   if(h==="about")return showPage(renderAbout);
+  if(h==="log")return showPage(renderLog);
+  if(h.startsWith("log-")){const a=ARTICLES.find(x=>"log-"+x.slug===h);return a?showPage(renderArticle,a):showPage(renderLost)}
   const was=homeEl.hidden;page.hidden=true;page.innerHTML="";homeEl.hidden=false;document.title="Navy Night Creative — Ideas With Direction";closeMenu();
   if(was){layout();if(V.ok&&!V.raf&&V.visible)V.raf=requestAnimationFrame(loop)}
   if(h.startsWith("service-")){const el=document.getElementById(h);if(el)setSvc(el,true)}
@@ -678,11 +859,11 @@ $("#burger").onclick=()=>{mnav.hidden=false;$("#burger").setAttribute("aria-expa
 $("#mclose").onclick=()=>{closeMenu();$("#burger").focus()};
 mnav.addEventListener("click",e=>{if(e.target.closest("a"))closeMenu()});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!mnav.hidden){closeMenu();$("#burger").focus()}});
-document.addEventListener("click",e=>{const b=e.target.closest("[data-copy]");if(b)copyText(b.dataset.copy,"Email copied")});
+document.addEventListener("click",e=>{const b=e.target.closest("[data-copy]");if(b)copyText(b.dataset.copy,b.dataset.msg||"Email copied")});
 
 /* planner */
-const form=$("#brief"),stepsEls=$$(".pstep",form),bar=$$(".steps-bar li",form);let cur=0;
-function showStep(i){cur=i;stepsEls.forEach((s,j)=>s.hidden=j!==i);bar.forEach((b,j)=>{b.classList.toggle("cur",j===i);b.classList.toggle("done",j<i)});$("#p-back").hidden=i===0;$("#p-next").hidden=i===2;$("#p-send").hidden=i!==2}
+const form=$("#brief"),stepsEls=$$(".pstep",form),bar=["What you need","Scope","About you"];let cur=0;
+function showStep(i){cur=i;stepsEls.forEach((s,j)=>s.hidden=j!==i);$("#stepCount").textContent="Step "+(i+1)+" of 3 · "+bar[i];$("#p-back").hidden=i===0;$("#p-next").hidden=i===2;$("#p-send").hidden=i!==2}
 function setErr(id,msg,field){$("#"+id).textContent=msg;if(field)field.setAttribute("aria-invalid",msg?"true":"false")}
 function validate(i){let first=null;
   if(i===0){const ok=$$('input[name="services"]:checked',form).length>0;setErr("err-svc",ok?"":"Pick at least one service, or choose Not sure yet.");if(!ok)first=$('input[name="services"]',form)}
@@ -707,15 +888,161 @@ const draft=store.get("nnc-brief");if(draft){restore(draft);$("#saved").textCont
 /* review notes */
 root.classList.remove("review");store.del("nnc-review");
 
+
+/* ================= the lighthouse as a brand system ================= */
+const MINI_LH=`<span class="mini-lh"><span class="mb"></span><span class="lamp"></span><svg viewBox="0 0 125.31 461.37" aria-hidden="true"><g fill="currentColor"><path  d="M125.05,461.37H0s.16-3.23.16-3.23l15.04-177.89,7.28-83.31c26.65-5.31,53.28-5.38,79.95.09l22.62,264.33Z"></path><path  d="M79.83,165.91c-21.81-1.48-44.68-.95-66.16,4.92l.02-31.43c0-.73,1.14-1.74,1.68-1.66.68.09,1.42.82,1.91,1.71,3.92-1.06,7.73-2.11,11.83-2.5l.45-7.05c2.42-1.13,5.16-1.33,8.13-1.88.84-13.55.45-26.9.26-40.33l.21-4.51c-2.5.36-4.52.74-6.98,1.75-1.71-3.1,0-7.38-1.22-8.94-.51-.65-1.92-1.01-3-1.49-.95-2.1-1.01-5.19.06-7.19l29.12-25.02c.62-1.64.62-3.55.67-5.24,1.46-.18,2.32-.72,2.45-2.13s-.16-2.29-1.85-2.63c-.99-4.66-.45-9.68,3.73-12.25l.94-15.06.74-.02.88,14.92c4.27,2.66,4.83,7.18,4.04,12.34-1.3.51-1.9.76-2.05,2.14-.2,1.9.61,1.98,2.23,2.69.68,1.22.67,3.27.63,4.86l29.55,25.18c.77,2.33.94,5.25-.06,7.46-1.14.5-2.78.7-3.23,1.42-1.29,2.08.84,5.23-.91,8.95-2.28-.79-4.21-1.33-7.01-1.67l-.03,43.5c1.44,3.2,8.34.96,8.5,3.89l.35,6.2c4.15.5,8.01,1.29,11.93,2.48.54-.56,1.2-1.37,1.71-1.45s1.47.69,2,1.27v31.5c-10.87-2.64-20.79-4.13-31.52-4.71Z"></path><path  d="M73.2,190.12c-7.14-.48-14.27-.48-21.41,0-9.84.85-19.43,1.19-29.41,4.02-.61-7.74-3.64-14.2-9.24-19.99,8.75-3.19,17.42-3.67,26.31-4.91,15.16-1.22,30.64-1.29,45.79,0,8.9,1.25,17.55,1.75,26.67,4.85-5.37,5.72-9.08,12.19-9.36,20.1-9.77-2.62-19.43-3.24-29.35-4.06Z"></path></g></svg></span>`;
+/* NNC's light signature: two short flashes every six seconds */
+function sigI(t){const ph=((t%6)+6)%6;let v=0;for(const f of [0,.55]){const l=ph-f;if(l>=0&&l<.22)v=Math.max(v,Math.sin(Math.PI*l/.22))}return v}
+/* 404: lost at sea */
+let lostRaf=0;
+function renderLost(){cancelAnimationFrame(lostRaf);
+  page.innerHTML=`<section class="lost"><canvas id="lostC" aria-hidden="true"></canvas><div class="lost-lh" aria-hidden="true"><svg viewBox="0 0 125.31 461.37"><g fill="currentColor"><path  d="M125.05,461.37H0s.16-3.23.16-3.23l15.04-177.89,7.28-83.31c26.65-5.31,53.28-5.38,79.95.09l22.62,264.33Z"></path><path  d="M79.83,165.91c-21.81-1.48-44.68-.95-66.16,4.92l.02-31.43c0-.73,1.14-1.74,1.68-1.66.68.09,1.42.82,1.91,1.71,3.92-1.06,7.73-2.11,11.83-2.5l.45-7.05c2.42-1.13,5.16-1.33,8.13-1.88.84-13.55.45-26.9.26-40.33l.21-4.51c-2.5.36-4.52.74-6.98,1.75-1.71-3.1,0-7.38-1.22-8.94-.51-.65-1.92-1.01-3-1.49-.95-2.1-1.01-5.19.06-7.19l29.12-25.02c.62-1.64.62-3.55.67-5.24,1.46-.18,2.32-.72,2.45-2.13s-.16-2.29-1.85-2.63c-.99-4.66-.45-9.68,3.73-12.25l.94-15.06.74-.02.88,14.92c4.27,2.66,4.83,7.18,4.04,12.34-1.3.51-1.9.76-2.05,2.14-.2,1.9.61,1.98,2.23,2.69.68,1.22.67,3.27.63,4.86l29.55,25.18c.77,2.33.94,5.25-.06,7.46-1.14.5-2.78.7-3.23,1.42-1.29,2.08.84,5.23-.91,8.95-2.28-.79-4.21-1.33-7.01-1.67l-.03,43.5c1.44,3.2,8.34.96,8.5,3.89l.35,6.2c4.15.5,8.01,1.29,11.93,2.48.54-.56,1.2-1.37,1.71-1.45s1.47.69,2,1.27v31.5c-10.87-2.64-20.79-4.13-31.52-4.71Z"></path><path  d="M73.2,190.12c-7.14-.48-14.27-.48-21.41,0-9.84.85-19.43,1.19-29.41,4.02-.61-7.74-3.64-14.2-9.24-19.99,8.75-3.19,17.42-3.67,26.31-4.91,15.16-1.22,30.64-1.29,45.79,0,8.9,1.25,17.55,1.75,26.67,4.85-5.37,5.72-9.08,12.19-9.36,20.1-9.77-2.62-19.43-3.24-29.35-4.06Z"></path></g></svg></div>
+    <div class="wrap lost-in"><span class="label gold">Error 404 · Position unknown</span><h1 class="big">Lost<br>at sea<span class="gold">.</span></h1>
+    <p class="lede muted">The page you were looking for has drifted off course. Follow the light back.</p><a class="btn lost-btn" id="lostBtn" href="#top">Back to harbour ↗</a></div></section>`;
+  setNav("");document.title="Lost at sea · Navy Night Creative";
+  const sec=$(".lost",page),cv=$("#lostC"),x=cv.getContext("2d"),lh=$(".lost-lh",page),btn=$("#lostBtn");let W,H,lamp,hor,t0=performance.now(),ang=.6;
+  const size=()=>{const r=sec.getBoundingClientRect(),d=Math.min(2,devicePixelRatio||1);W=r.width;H=r.height;cv.width=W*d;cv.height=H*d;x.setTransform(d,0,0,d,0,0);const l=lh.getBoundingClientRect();lamp={x:l.left-r.left+l.width/2,y:l.top-r.top+l.height*.224};hor=l.bottom-r.top};
+  size();addEventListener("resize",size);
+  const SP=.12;
+  const frame=now=>{if(!page.contains(cv)){removeEventListener("resize",size);return}
+    const t=(now-t0)/1000,r=sec.getBoundingClientRect(),b=btn.getBoundingClientRect();const bx=b.left-r.left+b.width/2,by=b.top-r.top+b.height/2;
+    const target=Math.atan2(by-lamp.y,bx-lamp.x);const search=Math.PI+Math.sin(t*.9)*.75+Math.sin(t*2.1)*.12;
+    const settle=reduce?1:Math.min(1,Math.max(0,(t-5.2)/1.4));const want=search+(((target-search+Math.PI*3)%(Math.PI*2))-Math.PI)*settle;
+    ang=reduce?target:ang+(want-ang)*.08;const sg=sigI(t);
+    x.clearRect(0,0,W,H);const g0=x.createLinearGradient(0,0,0,H);g0.addColorStop(0,"#03090f");g0.addColorStop(.6,"#0b1f33");g0.addColorStop(1,"#061321");x.fillStyle=g0;x.fillRect(0,0,W,H);
+    for(let k=0;k<26;k++){const d=(k+(t*.25)%1)/26;const y=hor+Math.pow(d,1.8)*(H-hor+30);x.strokeStyle=`rgba(247,245,239,${.04+d*.08})`;x.beginPath();for(let xx=0;xx<=W;xx+=14){const yy=y+Math.sin(xx*.01*(1.4-d)+t*(1+d)+k)*(1+d*5);xx?x.lineTo(xx,yy):x.moveTo(xx,yy)}x.stroke()}
+    const L=Math.hypot(W,H)*1.3;[[1,.2],[.55,.28],[.25,.4]].forEach(([k,al])=>{const sp=SP*k;const gr=x.createRadialGradient(lamp.x,lamp.y,0,lamp.x,lamp.y,W*.9);gr.addColorStop(0,`rgba(240,186,49,${al*(1+sg*.6)})`);gr.addColorStop(.45,`rgba(240,186,49,${al*.3})`);gr.addColorStop(1,"rgba(240,186,49,0)");x.fillStyle=gr;x.beginPath();x.moveTo(lamp.x,lamp.y);x.lineTo(lamp.x+Math.cos(ang-sp)*L,lamp.y+Math.sin(ang-sp)*L);x.lineTo(lamp.x+Math.cos(ang+sp)*L,lamp.y+Math.sin(ang+sp)*L);x.closePath();x.fill()});
+    for(let i=0;i<5;i++){const fx=((t*12*(i+1)+i*300)%(W+600))-300;const fg=x.createRadialGradient(fx,hor-40+i*30,0,fx,hor-40+i*30,260);fg.addColorStop(0,"rgba(30,52,76,.22)");fg.addColorStop(1,"rgba(30,52,76,0)");x.fillStyle=fg;x.fillRect(0,0,W,H)}
+    const lg=x.createRadialGradient(lamp.x,lamp.y,0,lamp.x,lamp.y,70*(1+sg*.8));lg.addColorStop(0,"rgba(255,230,160,.85)");lg.addColorStop(1,"rgba(240,186,49,0)");x.fillStyle=lg;x.beginPath();x.arc(lamp.x,lamp.y,70*(1+sg*.8),0,6.283);x.fill();
+    let df=Math.atan2(Math.sin(ang-target),Math.cos(ang-target));btn.classList.toggle("lit",Math.abs(df)<SP*1.1);
+    if(!reduce)lostRaf=requestAnimationFrame(frame)};
+  lostRaf=requestAnimationFrame(frame)}
+
+
+/* ================= Ship's Log ================= */
+const ARTICLES=[{"slug": "google-business-profile-fixes", "tag": "Digital", "date": "2026-10-20", "read": "4 min read", "title": "Five fixes for your Google Business Profile this week", "dek": "For a restaurant, shop or repair business, the Google Business Profile is often the first thing people see. Five small fixes make it complete, current and easy to trust.", "body": [{"p": "When someone searches for a business like yours, the profile on Google Search and Maps usually shows up before your website does. It answers the first questions people have: are you open, where are you, what do others say. Here are five fixes you can make in an afternoon."}, {"h": "1. Choose the most specific primary category"}, {"p": "The primary category tells Google what you are. Pick the most specific one that fits, such as \"Turkish restaurant\" rather than \"Restaurant\", then add secondary categories for anything else you offer."}, {"h": "2. Make your hours match reality"}, {"p": "Wrong hours cost visits and invite bad reviews. Update regular hours, set special hours for holidays ahead of time, and check them again after any change in staffing or season."}, {"h": "3. Add real photos, and keep adding them"}, {"p": "Show the storefront as people see it from the street, the inside, the team and your best products or dishes. Replace photos that no longer match what customers will find when they arrive."}, {"h": "4. Reply to every review"}, {"p": "Thank people for good reviews by name and mention something specific. For critical ones, stay calm, keep it short and offer to continue the conversation directly. Future customers read the replies as much as the reviews."}, {"h": "5. Fill in services and post updates"}, {"p": "List your main products or services with a one-line description each. Use posts for offers, events and news so the profile looks looked-after rather than abandoned."}, {"p": "None of these takes more than an hour. Done together, they turn a bare listing into a profile that answers questions before people have to ask."}]}, {"slug": "posting-calendar", "tag": "Social Media", "date": "2026-10-13", "read": "3 min read", "title": "Why a posting calendar beats posting more", "dek": "People rarely remember how often you posted. They remember whether your feed felt consistent and worth following. A simple calendar gets you there with less effort.", "body": [{"p": "Many businesses treat social media as a daily scramble: something has to go up today, so whatever is at hand goes up. The result is a feed that looks busy but says very little. A calendar fixes that, and it usually means less work, not more."}, {"h": "Start with themes, not posts"}, {"p": "Choose three or four recurring themes that matter to your customers. For a restaurant that might be signature dishes, the people in the kitchen, events and guest moments. Every post belongs to one theme, so the feed tells a clear story over time."}, {"h": "Plan a month, produce in batches"}, {"p": "Map the month on one page: which theme goes on which day, and which dates matter, such as holidays, launches and local events. Then shoot and write in batches. One focused session can cover weeks of content."}, {"h": "A simple weekly rhythm"}, {"ul": ["Early week: a product, dish or service, shown well.", "Midweek: behind the scenes, the people and the process.", "End of week: customers, community or an offer for the weekend."]}, {"h": "Leave room for the moment"}, {"p": "A calendar is a plan, not a cage. Keep a slot free each week for something timely, like a busy night, a new arrival or a local event, so the feed still feels alive."}, {"h": "Review once a month"}, {"p": "Look at which posts were saved, shared or brought in messages, not only likes. Do more of what worked and drop what didn't. Over a few months the calendar gets sharper and the results follow."}]}, {"slug": "brand-photo-shoot-prep", "tag": "Production", "date": "2026-10-06", "read": "4 min read", "title": "How to prepare for a brand photo shoot", "dek": "Good shoots are decided before the camera comes out. A little preparation means better pictures, a shorter day and photos you will still be using a year from now.", "body": [{"p": "A photo shoot is an investment, and most of its value is set in the days before it. Here is how we prepare with clients so the day runs smoothly and every picture has a job."}, {"h": "Start from where the photos will live"}, {"p": "List the places the images will be used: website header, menu or catalog, social posts, Stories, ads. Each has its own shape, so the shot list should include both horizontal and vertical versions of the important pictures."}, {"h": "Write a shot list"}, {"p": "Turn that list into specific shots: the storefront, the hero product from three angles, the team at work, a detail of the materials. A shot list keeps the day focused and makes sure nothing important is forgotten."}, {"h": "Prepare the space and the products"}, {"ul": ["Clean and declutter every area that will be in frame.", "Choose the best-looking items and keep spares ready.", "For restaurants, shoot before service when the light and the kitchen are calm."]}, {"h": "Brief the people"}, {"p": "Decide who will appear and share simple wardrobe guidance: solid colors, no large logos, clothes that fit the brand. Collect permission from anyone who will be recognizable in the published photos."}, {"h": "After the shoot"}, {"p": "Select the strongest frames, edit them to one consistent look and organize the archive with clear names and folders. A well-kept library means the team can find the right photo in seconds, long after the shoot day."}]}];
+const fmtDate=d=>new Date(d+"T12:00:00").toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+const logHref=a=>window.NNC_STATIC_LOG?`log/${a.slug}.html`:`#log-${a.slug}`;
+function jrCard(a){return `<a class="jr-card" href="${logHref(a)}"><div class="jr-meta label"><span>${esc(a.tag)}</span><span>${fmtDate(a.date)}</span></div><h3 class="h3">${esc(a.title)}</h3><p>${esc(a.dek)}</p><span class="jr-more">Read entry <span>→</span></span></a>`}
+$("#jrGrid").innerHTML=ARTICLES.map(jrCard).join("");
+function artBody(a){return a.body.map(b=>b.h?`<h2>${esc(b.h)}</h2>`:b.ul?`<ul>${b.ul.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:`<p>${esc(b.p)}</p>`).join("")}
+function renderLog(){page.innerHTML=`<article><header class="ph short" style="${phImg("wide")}">${phBg("wide")}<div class="wrap ph-in"><a class="back" href="#journal">← Home</a><span class="label gold">Ship's Log</span><h1 class="big">Notes from<br>the bridge</h1><p class="lede">Short, practical notes on marketing for local and growing businesses.</p></div></header><div style="height:clamp(32px,6vh,64px)"></div>
+  <div class="wrap jr-list">${ARTICLES.map(a=>`<a class="jr-row" href="${logHref(a)}"><span class="label gold">${fmtDate(a.date)}</span><div><h2 class="h3">${esc(a.title)}</h2><p>${esc(a.dek)}</p></div><span class="label muted">${esc(a.tag)}</span></a>`).join("")}</div></article>${ctaBand("Want this done<br>for you?")}`;
+  setNav("journal");document.title="Ship's Log · Navy Night Creative"}
+function renderArticle(a){const i=ARTICLES.indexOf(a),more=ARTICLES.filter(x=>x!==a).slice(0,2);
+  page.innerHTML=`<article><header class="ph short" style="${phImg("wide")}">${phBg("wide")}<div class="wrap ph-in"><a class="back" href="#log">← Ship's Log</a><span class="label gold">${esc(a.tag)}</span><h1 class="big" style="font-size:clamp(2.6rem,6.4vw,5.4rem);max-width:18ch">${esc(a.title)}</h1><p class="lede">${esc(a.dek)}</p>
+    <div class="art-meta label"><span>${fmtDate(a.date)}</span><span>${esc(a.read)}</span><span>Navy Night Creative</span></div></div></header>
+    <div class="wrap"><div class="art art-body">${artBody(a)}</div></div>
+    <section class="cream" style="padding-block:clamp(56px,9vh,100px)"><div class="wrap"><span class="label eyebrow">More from the log</span><div class="jr-grid" style="grid-template-columns:repeat(2,minmax(0,1fr))">${more.map(jrCard).join("")}</div></div></section></article>${ctaBand("Let's put this<br>to work.")}`;
+  setNav("journal");document.title=`${a.title} · Navy Night Creative`}
+
+/* ================= Compass: find your heading ================= */
+const CQ=[
+ {q:"What would make the biggest difference this quarter?",o:[["More people finding us on Google and Maps",{digital:3}],["A steady, professional social media presence",{"social-media":3}],["A brand that looks as good as what we sell",{branding:3}],["Better photos and video of our product or place",{production:3}],["Launching or growing a business in the U.S.",{"marketing-business":3}]]},
+ {q:"How is your social media today?",o:[["We barely post",{"social-media":2,creative:1}],["We post, but without a plan",{"social-media":2}],["Consistent, but growth has stalled",{influence:2,"social-media":1}],["Strong, and we want new audiences",{influence:2,digital:1}]]},
+ {q:"And your website?",o:[["We don't have one yet",{digital:3}],["It's outdated or slow on phones",{digital:2}],["It looks fine but brings few enquiries",{digital:2,"marketing-business":1}],["It works well",{}]]},
+ {q:"Do you have recent photos and video?",o:[["Not really",{production:3}],["Phone photos only",{production:2}],["Some, but they feel dated",{production:1,creative:1}],["Yes, professionally shot",{}]]},
+ {q:"Your logo, colors and tone of voice are…",o:[["Not really defined yet",{branding:3}],["Defined, but used inconsistently",{branding:1,creative:2}],["Clear and consistent",{}]]}
+];
+const CBRG=SERVICES.map((s,i)=>Math.round(i*360/SERVICES.length));
+const cmp={step:0,ans:[]};
+(function dial(){let s="";for(let d=0;d<360;d+=5){const a=d*Math.PI/180,l=d%45===0?12:6;s+=`<line x1="${(Math.sin(a)*112).toFixed(1)}" y1="${(-Math.cos(a)*112).toFixed(1)}" x2="${(Math.sin(a)*(112-l)).toFixed(1)}" y2="${(-Math.cos(a)*(112-l)).toFixed(1)}" stroke-opacity="${d%45===0?.5:.22}"/>`}$("#cmpTicks").innerHTML=s;
+  $("#cmpLabels").innerHTML=SERVICES.map((sv,i)=>{const a=CBRG[i]*Math.PI/180;return `<text x="${(Math.sin(a)*78).toFixed(1)}" y="${(-Math.cos(a)*78+3).toFixed(1)}" text-anchor="middle" data-i="${i}">${sv.n}</text>`}).join("")})();
+function cmpScores(){const sc={};SERVICES.forEach(s=>sc[s.id]=0);cmp.ans.forEach((a,qi)=>{if(a==null)return;Object.entries(CQ[qi].o[a][1]).forEach(([k,v])=>sc[k]+=v)});return SERVICES.map((s,i)=>({s,i,v:sc[s.id]})).sort((a,b)=>b.v-a.v||a.i-b.i)}
+function cmpPoint(i){$("#cmpNeedle").style.transform=`rotate(${i==null?0:CBRG[i]}deg)`;$("#cmpHdg").textContent=i==null?"Heading ---°":`Heading ${String(CBRG[i]).padStart(3,"0")}° · ${SERVICES[i].name}`;$$("#cmpLabels text").forEach(tx=>tx.classList.toggle("on",+tx.dataset.i===i))}
+function cmpRender(){const card=$("#cmpCard");
+  if(cmp.step<CQ.length){const q=CQ[cmp.step];
+    card.innerHTML=`<span class="label gold">Question ${cmp.step+1} of ${CQ.length}</span><h3 class="cmp-q">${esc(q.q)}</h3>
+      <div class="cmp-opts" role="group" aria-label="${esc(q.q)}">${q.o.map((o,i)=>`<button class="cmp-opt" type="button" data-o="${i}" aria-pressed="${cmp.ans[cmp.step]===i}">${esc(o[0])}</button>`).join("")}</div>
+      <div class="cmp-nav"><button type="button" id="cmpBack" ${cmp.step?"":"hidden"}>← Back</button><span></span></div>`;return}
+  const r=cmpScores(),top=r[0].v>0?r[0]:r.find(x=>x.s.id==="social-media"),also=r.filter(x=>x!==top&&x.v>0).slice(0,2);cmpPoint(top.i);
+  card.innerHTML=`<div class="cmp-res" style="display:grid;gap:18px"><span class="label gold">Your heading · ${String(CBRG[top.i]).padStart(3,"0")}°</span><h3 class="big">${esc(top.s.name)}</h3><p class="lede">${esc(top.s.lede)}</p>
+    ${also.length?`<div style="display:grid;gap:10px"><span class="label muted">Also on your course</span><div class="cmp-also">${also.map(x=>`<a href="#svc-${x.s.id}">${esc(x.s.name)}</a>`).join("")}</div></div>`:""}
+    <div class="hero-ctas" style="margin-top:6px"><button class="btn" type="button" id="cmpBrief">Start a brief with this ↗</button><a class="arrow-link" href="#svc-${top.s.id}">Explore ${esc(top.s.name)} <span>→</span></a></div>
+    <div class="cmp-nav"><button type="button" id="cmpAgain">↺ Retake</button><span class="label">A starting point, not a diagnosis.</span></div></div>`;
+  $("#cmpBrief").onclick=()=>{[top,...also].forEach(x=>{const cb=$("#c-"+x.s.id);if(cb)cb.checked=true});form.dispatchEvent(new Event("input"));showStep(0);location.hash="#contact";if(location.hash==="#contact")route()}}
+$("#cmpCard").addEventListener("click",e=>{const o=e.target.closest(".cmp-opt");if(o){cmp.ans[cmp.step]=+o.dataset.o;const r=cmpScores();cmpPoint(r[0].v>0?r[0].i:null);$$(".cmp-opt",$("#cmpCard")).forEach(b=>b.setAttribute("aria-pressed",b===o));setTimeout(()=>{cmp.step++;cmpRender()},260);return}
+  if(e.target.id==="cmpBack"){cmp.step=Math.max(0,cmp.step-1);cmpRender()}
+  if(e.target.id==="cmpAgain"){cmp.step=0;cmp.ans=[];cmpPoint(null);cmpRender()}});
+cmpRender();
+
+/* ================= gentle reveal on scroll (home page) ================= */
+let rvo=null;
+const RV=[".sec-head",".mani-in > *",".work-grid > *","#svcList > *",".ap-card",".stp",".jr-grid > *",".logos > *",".cmp-in > *",".contact-in > *",
+  ".inc-col",".inc-note",".cap-fig",".pal",".case-notes > div",".sys-grid > a",".rel-grid > *",".principles > div",".about-grid > div",".us-band > *",".next-svc",".next-case .wrap",".jr-row",".art-body > *"];
+function rvScan(root){if(!rvo||!root)return;RV.forEach(sel=>$$(sel,root).forEach(el=>{if("rv" in el.dataset)return;el.dataset.rv="";
+  const i=[...el.parentElement.children].filter(x=>x.matches(sel)).indexOf(el);el.style.setProperty("--rd",(Math.min(i,5)*.09).toFixed(2)+"s");rvo.observe(el)}))}
+if(!reduce&&"IntersectionObserver" in window){document.documentElement.classList.add("rv-on");
+  rvo=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");rvo.unobserve(e.target)}}),{rootMargin:"0px 0px -8% 0px",threshold:.12});rvScan(homeEl)}
+
+/* ================= hero video (phones and devices without WebGL) ================= */
+const VID={on:false,intro:"assets/video/voyage-intro.mp4",loop:"assets/video/voyage-loop.mp4",raf:0};
+/* VP9 WebM where supported (Chrome, Firefox, Android: about half the size); H.264 MP4 elsewhere (Safari). */
+try{if(document.createElement("video").canPlayType('video/webm; codecs="vp9"')){VID.intro=VID.intro.replace(/\.mp4$/,".webm");VID.loop=VID.loop.replace(/\.mp4$/,".webm")}}catch(e){}
+function vidTick(){const v=$("#heroVid");if(!VID.on)return;{const vt=V.introActive?v.currentTime:INTRO+30;sndUpdate(vt,voyageState(vt),performance.now()/1000)}if(!VID.warm&&v.currentTime>4){VID.warm=1;try{fetch(VID.loop).catch(()=>{})}catch(e){}}if(V.introActive){updateLog(v.currentTime);if(v.currentTime>=INTRO-.6)setIntro(false)}VID.raf=requestAnimationFrame(vidTick)}
+function vidIntro(){const v=$("#heroVid");v.loop=false;v.src=VID.intro;logIdx=-1;setIntro(true);v.currentTime=0;v.play().catch(()=>{setIntro(false)});cancelAnimationFrame(VID.raf);VID.raf=requestAnimationFrame(vidTick);v.onended=()=>vidLoop()}
+function vidLoop(){const v=$("#heroVid");setIntro(false);v.onended=null;v.loop=true;v.src=VID.loop;v.play().catch(()=>{})}
+function startVideoMode(deep){VID.on=true;root.classList.add("video-mode");const v=$("#heroVid");v.hidden=false;v.preload="auto";
+  if(reduce){v.removeAttribute("src");setIntro(false);return}if(deep)vidLoop();else vidIntro()}
+
+/* ================= sound: made in the browser, off until the visitor turns it on ================= */
+const SND={ctx:null,on:false,n:null,lastT:-1};
+function sndBuild(){const C=new (window.AudioContext||window.webkitAudioContext)();SND.ctx=C;
+  const nb=C.createBuffer(1,C.sampleRate*3,C.sampleRate),d=nb.getChannelData(0);let b0=0,b1=0,b2=0;
+  for(let i=0;i<d.length;i++){const w=Math.random()*2-1;b0=.99765*b0+w*.099;b1=.963*b1+w*.2965;b2=.57*b2+w*1.0526;d[i]=(b0+b1+b2+w*.1848)*.11}
+  const noise=()=>{const s=C.createBufferSource();s.buffer=nb;s.loop=true;s.start(0,Math.random()*2.5);return s};
+  const filt=(type,f,q)=>{const b=C.createBiquadFilter();b.type=type;b.frequency.value=f;b.Q.value=q||.7;return b};
+  const gain=v=>{const g=C.createGain();g.gain.value=v;return g};
+  const master=gain(0);master.connect(C.destination);
+  const muffle=filt("lowpass",900,.3);muffle.connect(master);         /* inside the wheelhouse the sea is muffled */
+  const seaF=filt("lowpass",480),seaG=gain(0);noise().connect(seaF).connect(seaG).connect(muffle);
+  const windF=filt("bandpass",700,.7),windG=gain(0);noise().connect(windF).connect(windG).connect(muffle);
+  const rainF=filt("highpass",2600),rainG=gain(0);noise().connect(rainF).connect(rainG).connect(muffle);
+  const eF=filt("lowpass",160,2),eG=gain(0);eF.connect(eG).connect(master);
+  const o1=C.createOscillator(),o2=C.createOscillator();o1.type=o2.type="sawtooth";o1.frequency.value=36;o2.frequency.value=54.3;o1.connect(eF);o2.connect(eF);o1.start();o2.start();
+  SND.n={master,muffle,seaF,seaG,windF,windG,rainG,eF,eG,o1,o2}}
+/* a distant foghorn when the light is found */
+function sndHorn(){const C=SND.ctx,t=C.currentTime;const g=C.createGain();g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.15,t+.35);g.gain.setValueAtTime(.15,t+2.1);g.gain.exponentialRampToValueAtTime(.0008,t+4.2);
+  const f=C.createBiquadFilter();f.type="lowpass";f.frequency.value=520;f.Q.value=1.2;f.connect(g);g.connect(SND.n.muffle);
+  const dl=C.createDelay(1),fb=C.createGain();dl.delayTime.value=.27;fb.gain.value=.32;g.connect(dl);dl.connect(fb).connect(dl);dl.connect(SND.n.muffle);
+  [[92,"square",.5],[138.5,"sawtooth",.3],[184.2,"sawtooth",.12]].forEach(([hz,tp,v])=>{const o=C.createOscillator();o.type=tp;o.frequency.setValueAtTime(hz*.985,t);o.frequency.linearRampToValueAtTime(hz,t+.4);const og=C.createGain();og.gain.value=v;o.connect(og).connect(f);o.start(t);o.stop(t+4.4)})}
+function sndUpdate(T,st,time){if(!SND.on||!SND.n||!st)return;const N=SND.n,t=SND.ctx.currentTime,k=.15;
+  const inside=(1-(st.push||0))*(1-(st.crane||0)),spd=clamp(st.speed/7,0,1),swell=.5+.5*Math.sin(time*.55)+.25*Math.sin(time*1.37);
+  N.muffle.frequency.setTargetAtTime(lerp(14000,850,inside),t,.3);
+  N.seaG.gain.setTargetAtTime(.1+.07*swell+.05*spd,t,k);N.seaF.frequency.setTargetAtTime(380+260*swell+200*spd,t,k);
+  N.windG.gain.setTargetAtTime(.035+.03*clamp((st.fog-.003)/.014,0,1)+.015*Math.sin(time*.31),t,k);N.windF.frequency.setTargetAtTime(560+240*Math.sin(time*.23),t,k);
+  N.rainG.gain.setTargetAtTime(.05*(st.rain||0)*(T<INTRO+2?1:0),t,k);
+  N.eG.gain.setTargetAtTime(.05+.07*spd,t,k);N.o1.frequency.setTargetAtTime(34+12*spd,t,.4);N.o2.frequency.setTargetAtTime(51.3+18*spd,t,.4);N.eF.frequency.setTargetAtTime(140+120*spd,t,.4);
+  if(T>=5.1&&SND.lastT<5.1&&T<6.5)sndHorn();SND.lastT=T}
+function sndToggle(){if(!SND.ctx){try{sndBuild()}catch(e){return}}SND.on=!SND.on;const C=SND.ctx,N=SND.n;
+  if(SND.on){C.resume();N.master.gain.setTargetAtTime(.9,C.currentTime,.6)}else{N.master.gain.setTargetAtTime(0,C.currentTime,.25);setTimeout(()=>{if(!SND.on)C.suspend()},900)}
+  $$(".snd").forEach(b=>{b.setAttribute("aria-pressed",SND.on?"true":"false");$(".snd-l",b).textContent=SND.on?"Sound on":"Sound off"})}
+$$(".snd").forEach(b=>b.addEventListener("click",sndToggle));
+document.addEventListener("visibilitychange",()=>{if(!SND.ctx)return;if(document.hidden)SND.ctx.suspend();else if(SND.on)SND.ctx.resume()});
+/* leaving the hero: the picture lags behind the page and sinks into fog */
+function heroScroll(){if(reduce||!onHome())return;const h=$("#top").clientHeight||innerHeight,p=clamp(scrollY/h,0,1);V.scrollP=p;$("#top").style.setProperty("--sp",p.toFixed(3));
+  const el=VID.on?$("#heroVid"):$("#scene");if(!el)return;el.style.transform=p>0?`translate3d(0,${(Math.min(scrollY,h)*.42).toFixed(1)}px,0) scale(${(1+p*.06).toFixed(4)})`:"";
+  if(VID.on)el.style.filter=p>.02?`blur(${(p*5).toFixed(2)}px)`:""}
+
 /* ================= boot ================= */
-V.ok=initVoyage();
-if(!V.ok){root.classList.add("no-gl");setIntro(false)}
-else{
+const THREE_SRC=window.NNC_THREE_SRC||["https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"].concat(["shaders/CopyShader.js","shaders/LuminosityHighPassShader.js","postprocessing/EffectComposer.js","postprocessing/RenderPass.js","postprocessing/ShaderPass.js","postprocessing/UnrealBloomPass.js"].map(p=>"https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/"+p));
+function loadScripts(list){return list.reduce((p,src)=>p.then(()=>new Promise((res,rej)=>{const s=document.createElement("script");s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s)})),Promise.resolve())}
+/* WebGL with a real GPU. Software renderers (SwiftShader, llvmpipe: no GPU acceleration) would stutter, so they get the video instead. */
+function webglOK(){try{const c=document.createElement("canvas"),g=window.WebGLRenderingContext&&(c.getContext("webgl")||c.getContext("experimental-webgl"));if(!g)return false;
+const d=g.getExtension("WEBGL_debug_renderer_info"),r=d?String(g.getParameter(d.UNMASKED_RENDERER_WEBGL)):"";const ext=g.getExtension("WEBGL_lose_context");if(ext)ext.loseContext();
+return !/swiftshader|llvmpipe|softpipe|software|basic render/i.test(r)}catch(e){return false}}
+const deepLink=(location.hash.slice(1)&&location.hash!=="#top")||window.NNC_404;
+const wantVideo=!window.NNC_FORCE_3D&&(window.NNC_FORCE_VIDEO||matchMedia("(pointer: coarse)").matches||!webglOK()||reduce);
+if(matchMedia("(pointer: fine)").matches){addEventListener("pointermove",e=>{if(e.pointerType!=="mouse")return;V.tx=e.clientX/innerWidth*2-1;V.ty=e.clientY/innerHeight*2-1},{passive:true});document.addEventListener("mouseleave",()=>{V.tx=0;V.ty=0})}
+function boot3D(){V.ok=initVoyage();
+if(!V.ok){startVideoMode(deepLink);return}
+{
   new IntersectionObserver(es=>{V.visible=es[0].isIntersecting;if(V.visible&&!V.raf&&onHome()&&!reduce)V.raf=requestAnimationFrame(loop)}).observe($("#top"));
   document.addEventListener("visibilitychange",()=>{if(document.hidden){cancelAnimationFrame(V.raf);V.raf=0}else if(V.visible&&onHome()&&!reduce){V.last=0;V.raf=requestAnimationFrame(loop)}});
-  const deep=location.hash.slice(1)&&location.hash!=="#top"&&location.hash!=="#review";
-  if(reduce){V.t0=performance.now()-INTRO*1000-5000;setIntro(false);renderVoyage(INTRO+5,0,0)}
-  else startVoyage(deep?INTRO:0);
-}
+  /* compile every shader and render one frame before the clock starts */
+  try{if(LOGOQ)LOGOQ.q.visible=true;R.compile(S,CAM);renderVoyage(deepLink?INTRO:0,performance.now()/1000,1/60)}catch(e){}
+  requestAnimationFrame(()=>{V.last=0;startVoyage(deepLink?INTRO:0)});
+}}
+if(wantVideo)startVideoMode(deepLink);else loadScripts(THREE_SRC).then(boot3D).catch(()=>startVideoMode(deepLink));
 fitHero();route();onScroll();
 if(document.fonts)document.fonts.ready.then(()=>fitHero());
