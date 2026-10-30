@@ -1,0 +1,50 @@
+/* Hero-specific finishing layer: keeps the cinematic treatment crisp across DPRs. */
+.hero,
+.hero-vid,
+#scene {
+  background-color: #030a12;
+}
+
+#scene,
+.hero-vid {
+  image-rendering: auto;
+  backface-visibility: hidden;
+  transform-origin: 50% 50%;
+}
+
+.vignette {
+  background:
+    linear-gradient(180deg, rgba(1, 6, 11, 0.24), transparent 24%, transparent 74%, rgba(1, 6, 11, 0.28)),
+    radial-gradient(ellipse at 50% 45%, transparent 62%, rgba(2, 8, 14, 0.48) 100%);
+}
+
+@media (max-width: 600px) {
+  .intro-on .log {
+    bottom: calc(5vh + 86px);
+    max-width: calc(100vw - var(--gl) - var(--gr));
+  }
+
+  .intro-on .snd-intro {
+    right: auto;
+    left: var(--gl);
+    bottom: calc(5vh + 20px);
+  }
+
+  .intro-on .skip-intro {
+    right: var(--gr);
+    bottom: calc(5vh + 20px);
+  }
+}
+
+@media (max-width: 380px) {
+  .intro-on .snd-intro {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+  }
+
+  .intro-on .skip-intro {
+    padding-inline: 14px;
+    font-size: 10px;
+  }
+}
+

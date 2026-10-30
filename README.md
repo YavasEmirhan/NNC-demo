@@ -1,6 +1,6 @@
 # Navy Night Creative: "The Voyage"
 
-Navy Night Creative için hazırlanan site. Açılışta bir yolculuk sahnesi var: sisin içinde kaptan köşkünden ileri bakıyoruz, sağda fener yanıp rotamızı aydınlatıyor, kamera camdan çıkıp tekneyi geniş planda gösteriyor. Masaüstünde bu sahne gerçek zamanlı 3D çalışır, telefonlarda aynı sahnenin önceden kaydedilmiş videosu oynar.
+Navy Night Creative için hazırlanan site. Açılışta bir yolculuk sahnesi var: sisin içinde kaptan köşkünden ileri bakıyoruz, sağda fener yanıp rotamızı aydınlatıyor, kamera camdan çıkıp tekneyi geniş planda gösteriyor. Sahne güçlü bilgisayar ve telefonlarda gerçek zamanlı 3D çalışır; düşük donanım, veri tasarrufu ve WebGL yokluğu için önceden kaydedilmiş video fallback'i vardır.
 
 Altında marka sayfası var: işler, hizmetler, yaklaşım, rota, Ship's Log (yazılar), müşteriler, "Find your heading" pusula testi ve 3 adımlı proje formu. Vaka, hizmet, About ve yazı sayfaları da var.
 
@@ -62,11 +62,11 @@ Repo adı `KULLANICI.github.io` ise (kök site), `404.html` içindeki ilk `<scri
 
 ## Site nasıl çalışıyor
 
-- **Açılış:** Fare ile kullanılan ve WebGL'i olan bilgisayarlarda three.js o an yüklenir ve sahne canlı çalışır. Telefon ve tabletlerde (dokunmatik), WebGL olmayan ya da ekran kartı hızlandırması kapalı bilgisayarlarda `assets/video/` içindeki video oynar; altyazılar videoyla eş zamanlıdır. Chrome, Firefox ve Android WebM, Safari MP4 alır. Hareket azaltma ayarı açıksa sadece kapak görseli gösterilir.
-- **Sinema katmanı (canlı 3D):** Fener hüzmesi sisin içinden geçen hacimli bir ışık olarak çizilir; sis, çisenti ve logo bu ışıkta parlar. Kamera elde tutulmuş gibi hafifçe sallanır. Odak önce dümene, fener görününce uzağa kayar. Fener lambası yatay bir sinema lensi parlaması bırakır. Görüntünün tonu ve grenli film dokusu `FILM_GLSL` içinde ayarlanır. Bilgisayar yavaş kalırsa sahne kendini otomatik olarak düşük çözünürlüğe alır.
+- **Açılış:** WebGL'i olan yeterince güçlü bilgisayar, telefon ve tabletlerde three.js sahnesi canlı çalışır. Veri tasarrufu açık, düşük donanımlı veya WebGL'siz cihazlarda `assets/video/` içindeki video fallback'i oynar; altyazılar videoyla eş zamanlıdır. Chrome, Firefox ve Android WebM, Safari MP4 alır. Hareket azaltma ayarı açıksa sadece kapak görseli gösterilir.
+- **Sinema katmanı (canlı 3D):** Fener hüzmesi sisin içinden geçen hacimli bir ışık olarak çizilir; sis, çisenti ve logo bu ışıkta parlar. Kamera elde tutulmuş gibi hafifçe sallanır. Odak önce dümene, fener görününce uzağa kayar. Fener lambası kontrollü bir yatay lens parlaması bırakır. Render 30 fps sinema ritminde çalışır; HiDPI ölçeği cihazın bellek ve çekirdek sayısına göre seçilir. Sahne uzun süre yavaş kalırsa çözünürlük kademeli düşer, performans toparlandığında tekrar yükselir. Netliği korumak için gren, kromatik sapma, bloom ve alan derinliği sınırlıdır.
 - **Fener ışığında logo:** Hüzme rotaya dönerken Navy Night yazısı sisin içinde harf harf belirir. Yeri `renderVoyage` içinde `LOGOQ` satırındadır.
 - **Fareyle bakış:** Masaüstünde fare hareket ettikçe kamera çok az o yöne bakar.
-- **Kaydırınca geçiş:** Aşağı kaydırdıkça kamera yükselir, görüntü sise gömülür ve lacivert bölüme bağlanır. Telefonda video bulanıklaşarak aynı etkiyi verir.
+- **Kaydırınca geçiş:** Aşağı kaydırdıkça kamera yükselir, görüntü sise gömülür ve lacivert bölüme bağlanır. Video fallback'inde görüntü bulanıklaşarak aynı etkiyi verir.
 - **Ses:** Rüzgar, dalga, motor ve çisenti sesleri ile fener göründüğünde uzaktan bir sis düdüğü tarayıcıda kodla üretilir; ses dosyası yoktur. Varsayılan olarak kapalıdır; açılışta ve hero'nun altında "Sound" düğmesiyle açılır. Kaptan köşkünün içindeyken sesler boğuk gelir, kamera dışarı çıkınca açılır.
 - **Açılış her ziyarette oynar.** "Skip intro" ile geçilebilir; aşağı kaydırmak veya bir tuşa basmak da açılışı atlar. Bir sayfaya doğrudan link ile gelinirse (ör. `#work`) açılış oynamaz.
 - **Işık imzası, Fl(2) 6s:** Fener her 6 saniyede iki kısa parlama yapar. Ritim `app.js` içinde `sigI()`, CSS'te `@keyframes sig` ile tanımlı; değişecekse ikisi birlikte değişmeli.
