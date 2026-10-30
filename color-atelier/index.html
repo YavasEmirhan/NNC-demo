@@ -122,6 +122,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .checks h3{font-size:15px;margin-bottom:10px}
 .pairs{display:grid;gap:6px}
 .pair{display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:center;font-size:14px}
+.pair .aa::before{content:"Aa"}
 .pair .aa{height:32px;border-radius:6px;display:grid;place-items:center;font-weight:800;font-size:15px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
 .pair .ratio{font-family:var(--f-mono);font-size:13px;color:var(--muted)}
 .verdict{font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap}
@@ -163,7 +164,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .mark i+i{border-radius:0 3px 3px 0;opacity:.6}
 .web nav .navlinks{display:flex;gap:18px}
 .web-hero{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:28px;align-items:center}
-.web-hero h4{margin:0;font-weight:800;font-size:clamp(24px,3.2vw,38px);line-height:1.1;letter-spacing:-.02em;text-wrap:balance}
+.web-hero .h{margin:0;font-weight:800;font-size:clamp(24px,3.2vw,38px);line-height:1.1;letter-spacing:-.02em;text-wrap:balance}
 .web-hero p{margin:14px 0 20px;font-size:15px;font-weight:500;max-width:42ch;font-family:var(--f-body)}
 .pbtn{display:inline-block;background:var(--a);color:var(--at);border-radius:999px;padding:11px 20px;font-weight:800;font-size:14px}
 .pbtn-o{display:inline-block;margin-left:8px;color:var(--t);border-radius:999px;padding:10px 18px;font-weight:700;font-size:14px;box-shadow:inset 0 0 0 1.5px var(--t)}
@@ -190,7 +191,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .ig-top .av{width:24px;height:24px;border-radius:50%;background:var(--a)}
 .ig-img{aspect-ratio:1;background:var(--s);color:var(--ts);padding:22px;display:grid;align-content:space-between;position:relative;overflow:hidden}
 .ig-img .tag{justify-self:start;background:var(--a);color:var(--at);font-size:12px;font-weight:800;padding:5px 10px;border-radius:999px}
-.ig-img h4{margin:0;font-size:24px;line-height:1.15;font-weight:800;letter-spacing:-.01em;position:relative}
+.ig-img .h{margin:0;font-size:24px;line-height:1.15;font-weight:800;letter-spacing:-.01em;position:relative}
 .ig-img .corner{position:absolute;right:-56px;top:-56px;width:140px;height:140px;border-radius:50%;background:var(--b)}
 .ig-img .sig{position:relative;font-size:11px;font-weight:700}
 .ig-bot{height:30px;display:flex;gap:10px;align-items:center;padding:0 12px}
@@ -212,7 +213,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .phone{width:100%;max-width:220px;background:#0B0F19;border-radius:30px;padding:8px}
 .screen{background:var(--b);color:var(--t);border-radius:23px;padding:22px 14px 16px;display:grid;gap:12px;min-height:380px;align-content:start}
 .screen .sbiz{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:800}
-.screen h5{margin:0;font-size:18px;font-weight:800;line-height:1.15}
+.screen .h{margin:0;font-size:18px;font-weight:800;line-height:1.15}
 .screen .q{font-size:11px;font-weight:700;font-family:var(--f-body)}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chips span{font-size:11px;font-weight:700;padding:6px 9px;border-radius:999px;box-shadow:inset 0 0 0 1.2px var(--t)}
@@ -229,6 +230,8 @@ footer{color:var(--muted);font-size:13px}
 footer .wrap{padding-block:24px 36px;display:grid;gap:8px}
 footer p{margin:0;max-width:90ch}
 footer a{color:inherit}
+/* comfortable tap targets on phones */
+@media (max-width:760px){nav[aria-label="Navy Night Creative"] a{display:inline-flex;align-items:center;min-height:44px;padding:0 4px}footer a{display:inline-block;padding:6px 0}}
 
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--navy);color:var(--on-navy);padding:10px 18px;border-radius:999px;font-weight:700;font-size:14px;opacity:0;pointer-events:none;transition:.2s;z-index:20}
 .toast.show{opacity:1;transform:translate(-50%,0)}
@@ -442,7 +445,7 @@ body.has-hook footer .wrap{padding-bottom:140px}
               <div class="web">
                 <nav><span class="logo"><span class="mark"><i></i><i></i></span><span data-t="biz"></span></span><span class="navlinks" data-t="nav"></span></nav>
                 <div class="web-hero">
-                  <div><h4 data-t="webH"></h4><p data-t="webP"></p><span class="pbtn" data-t="btn"></span><span class="pbtn-o" data-t="btn2"></span></div>
+                  <div><p class="h" data-t="webH"></p><p data-t="webP"></p><span class="pbtn" data-t="btn"></span><span class="pbtn-o" data-t="btn2"></span></div>
                   <div class="web-art" aria-hidden="true"></div>
                 </div>
                 <div class="web-row" data-t="row"></div>
@@ -466,7 +469,7 @@ body.has-hook footer .wrap{padding-bottom:140px}
             <div class="post-stage">
               <div class="ig">
                 <div class="ig-top"><span class="av"></span><span data-t="handle"></span></div>
-                <div class="ig-img"><span class="corner" aria-hidden="true"></span><span class="tag" data-t="tag"></span><h4 data-t="post"></h4><span class="sig" data-t="biz"></span></div>
+                <div class="ig-img"><span class="corner" aria-hidden="true"></span><span class="tag" data-t="tag"></span><p class="h" data-t="post"></p><span class="sig" data-t="biz"></span></div>
                 <div class="ig-bot" aria-hidden="true"><i></i><i></i><i></i></div>
               </div>
             </div>
@@ -486,7 +489,7 @@ body.has-hook footer .wrap{padding-bottom:140px}
             <div class="phone-stage">
               <div class="phone"><div class="screen">
                 <div class="sbiz"><span class="mark"><i></i><i></i></span><span data-t="biz"></span></div>
-                <h5 data-t="phTitle"></h5>
+                <p class="h" data-t="phTitle"></p>
                 <div class="q" data-t="q1"></div><div class="chips" data-t="c1"></div>
                 <div class="q" data-t="q2"></div><div class="chips" data-t="c2"></div>
                 <div class="info" data-t="info"></div>
@@ -672,7 +675,7 @@ function renderList(){
     const b=document.createElement('button');
     b.type='button'; b.dataset.i=i;
     b.setAttribute('aria-pressed', i===state.idx);
-    b.setAttribute('aria-label', 'Combination '+(i+1));
+    b.setAttribute('aria-label', 'Combination '+pad(i+1));
     b.innerHTML='<span class="no">'+pad(i+1)+'</span><span class="sw">'+combo.map(ci=>'<i style="background:'+COLORS[ci][1]+'"></i>').join('')+'</span>';
     li.appendChild(b); frag.appendChild(li);
   });
@@ -715,7 +718,7 @@ function renderCurrent(animate){
     const a=hexes[i], b=hexes[j];
     const [bgc,fgc] = lum(a)>lum(b)?[a,b]:[b,a];
     const r=contrast(a,b); const [cls,txt]=verdict(r);
-    rows.push({r,html:'<div class="pair"><span class="aa" style="background:'+bgc+';color:'+fgc+'">Aa</span><span><span class="ratio">'+r.toFixed(2)+' : 1</span><br>'+cols[i][0]+' and '+cols[j][0]+'</span><span class="verdict '+cls+'">'+txt+'</span></div>'});
+    rows.push({r,html:'<div class="pair"><span class="aa" aria-hidden="true" style="background:'+bgc+';color:'+fgc+'"></span><span><span class="ratio">'+r.toFixed(2)+' : 1</span><br>'+cols[i][0]+' and '+cols[j][0]+'</span><span class="verdict '+cls+'">'+txt+'</span></div>'});
   }
   rows.sort((x,y)=>y.r-x.r);
   $('#pairs').innerHTML = rows.map(x=>x.html).join('');
