@@ -17,6 +17,7 @@ assets/css/style.css        Tüm stiller
 assets/js/app.js            Site mantığı, pusula testi, Ship's Log, 3D sahne
 assets/data/articles.json   Ship's Log yazılarının tek kaynağı
 assets/video/               Açılış ve döngü videoları (WebM + MP4) ve kapak görseli
+assets/img/hero/            Masaüstü ve mobil için fotogerçekçi final planları
 assets/img/                 Logo, fener, proje görselleri, müşteri logoları
 assets/vendor/three/        three.js r128 ve parlama efekti dosyaları (MIT lisanslı, projeye dahil)
 tools/build-log.py          Ship's Log sayfalarını, sitemap.xml ve robots.txt'yi üreten araç
@@ -62,7 +63,8 @@ Repo adı `KULLANICI.github.io` ise (kök site), `404.html` içindeki ilk `<scri
 
 ## Site nasıl çalışıyor
 
-- **Açılış:** WebGL'i olan yeterince güçlü bilgisayar, telefon ve tabletlerde three.js sahnesi canlı çalışır. Veri tasarrufu açık, düşük donanımlı veya WebGL'siz cihazlarda `assets/video/` içindeki video fallback'i oynar; altyazılar videoyla eş zamanlıdır. Chrome, Firefox ve Android WebM, Safari MP4 alır. Hareket azaltma ayarı açıksa sadece kapak görseli gösterilir.
+- **Açılış:** WebGL'i olan yeterince güçlü bilgisayar, telefon ve tabletlerde three.js sahnesi canlı çalışır. Veri tasarrufu açık, düşük donanımlı veya WebGL'siz cihazlarda `assets/video/` içindeki video fallback'i oynar; altyazılar videoyla eş zamanlıdır. Chrome, Firefox ve Android WebM, Safari MP4 alır. Hareket azaltma ayarı açıksa doğrudan fotogerçekçi final planı gösterilir.
+- **Fotogerçekçi final planı:** Hikâye ve kamera hareketi canlı 3D/video olarak ilerler; son 1,8 saniyede sisin içinde `assets/img/hero/` altındaki cihaz-özel final planına geçer. Masaüstü 16:9, mobil 9:16 ayrı kompozisyondur; mobil görsel masaüstünün kırpılmış hali değildir. Final tamamen görünür olduğunda arkadaki 3D render durur ve Replay ile yeniden başlar.
 - **Sinema katmanı (canlı 3D):** Fener hüzmesi sisin içinden geçen hacimli bir ışık olarak çizilir; sis, çisenti ve logo bu ışıkta parlar. Kamera elde tutulmuş gibi hafifçe sallanır. Odak önce dümene, fener görününce uzağa kayar. Fener lambası kontrollü bir yatay lens parlaması bırakır. Render 30 fps sinema ritminde çalışır; HiDPI ölçeği cihazın bellek ve çekirdek sayısına göre seçilir. Sahne uzun süre yavaş kalırsa çözünürlük kademeli düşer, performans toparlandığında tekrar yükselir. Netliği korumak için gren, kromatik sapma, bloom ve alan derinliği sınırlıdır.
 - **Fener ışığında logo:** Hüzme rotaya dönerken Navy Night yazısı sisin içinde harf harf belirir. Yeri `renderVoyage` içinde `LOGOQ` satırındadır.
 - **Fareyle bakış:** Masaüstünde fare hareket ettikçe kamera çok az o yöne bakar.
